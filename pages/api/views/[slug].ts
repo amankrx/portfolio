@@ -39,8 +39,7 @@ export default async function handler(
       }
       return res.status(200).json({ total: views.views.toString() })
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (e: any) {
-    return res.status(500).json({ message: e })
+  } catch {
+    return res.status(500).json({ message: "Internal server error" })
   }
 }
