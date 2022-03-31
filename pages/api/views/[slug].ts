@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import prisma from "lib/prisma"
+import prisma from "../../../lib/prisma"
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,33 +9,37 @@ export default async function handler(
     const slug = req.query.slug.toString()
 
     if (req.method === "POST") {
-      const newOrUpdatedViews = await prisma.views.upsert({
+      const newOrUpdatedViews = await prisma.view_counter.upsert({
         where: { slug },
         create: {
           slug,
         },
         update: {
-          count: {
+          views: {
             increment: 1,
           },
         },
       })
 
       return res.status(200).json({
-        total: newOrUpdatedViews.count.toString(),
+        total: newOrUpdatedViews.views.toString(),
       })
     }
 
     if (req.method === "GET") {
-      const views = await prisma.views.findUnique({
+      const views = await prisma.view_counter.findUnique({
         where: {
           slug,
         },
       })
-
-      return res.status(200).json({ total: views.count.toString() })
+      if (!views) {
+        return res.status(404).json({
+          message: "View not found",
+        })
+      }
+      return res.status(200).json({ total: views.views.toString() })
     }
-  } catch (e) {
-    return res.status(500).json({ message: e.message })
+  } catch {
+    return res.status(500).json({ message: "An error occurred" })
   }
 }

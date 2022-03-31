@@ -14,6 +14,7 @@ import moment from "moment"
 import MobileLayout from "../../layouts/MobileLayout"
 import SideLayout from "../../layouts/SideLayout"
 import TableOfContents from "../../components/TableOfContents"
+import ViewCounter from "../../components/ViewCounter"
 
 interface MDXPost {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
@@ -42,6 +43,9 @@ export default function PostPage({ post }: { post: MDXPost }) {
                 {moment(post.meta.date).format("MMMM DD, YYYY")}
               </Box>
               <Box fontSize="sm">{post.meta.readingTime} min read</Box>
+              <Box fontSize="sm">
+                <ViewCounter slug={post.meta.slug} />
+              </Box>
             </Box>
           </Flex>
           <hr />

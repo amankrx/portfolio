@@ -5,15 +5,13 @@ generator client {
   provider = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
-
 datasource db {
   provider = "mysql"
   url = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
-model db_counter {
+model view_counter {
   slug  String @id @db.VarChar(128)
   views BigInt @default(1)
-  likes BigInt @default(0)
 }
