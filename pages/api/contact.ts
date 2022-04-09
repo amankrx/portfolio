@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer"
-import DETAILS from "../../lib/personalDetails"
+import DETAILS from "../../src/lib/personalDetails"
 import dotenv from "dotenv"
 import { NextApiRequest, NextApiResponse } from "next"
 

@@ -1,6 +1,6 @@
-import { getRecentPosts, PostMeta } from "../../lib/blogAPI"
-import BlogListPage from "../../components/BlogList"
-import Meta from "../../components/Meta"
+import { getRecentPosts, PostMeta } from "../../src/lib/blogAPI"
+import BlogListPage from "../../src/components/BlogList"
+import Meta from "../../src/components/Meta"
 
 export default function Home({ posts }: { posts: PostMeta[] }) {
   return (

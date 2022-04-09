@@ -1,6 +1,6 @@
-import HomePage from "../components/Home"
-import Meta from "../components/Meta"
-import { getRecentPosts, PostMeta } from "../lib/blogAPI"
+import HomePage from "../src/components/Home"
+import Meta from "../src/components/Meta"
+import { getRecentPosts, PostMeta } from "../src/lib/blogAPI"
 
 const Home = ({ posts }: { posts: PostMeta[] }) => {
   return (

@@ -1,9 +1,9 @@
 import { ChakraProvider } from "@chakra-ui/react"
-import Layout from "../layouts/Layout"
+import Layout from "../src/layouts/Layout"
 import { MDXProvider } from "@mdx-js/react"
-import MDXComponents from "../components/MDXComponents"
+import MDXComponents from "../src/components/MDXComponents"
 import type { AppProps } from "next/app"
-import theme from "../themes/theme"
+import theme from "../src/themes/theme"
 import "../styles/global.css"
 
 function MyApp({ Component, pageProps }: AppProps) {

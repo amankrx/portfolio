@@ -1,7 +1,7 @@
 import type { NextPage } from "next"
-import Meta from "../components/Meta"
+import Meta from "../src/components/Meta"
 
-import ContactPage from "../components/Contact"
+import ContactPage from "../src/components/Contact"
 
 const Contact: NextPage = () => {
   return (
