@@ -14,7 +14,7 @@ interface Props {
 
 const TableOfContents = ({ children }: Props) => {
   const activeId = useScrollSpy(
-    children.map(({ id }) => `[id="${id.replaceAll("#", "")}"]`),
+    children.map(({ id }) => `[id="${id ? id.replaceAll("#", "") : ""}"]`),
     {
       rootMargin: "0% 0% -80% 0%",
     }
