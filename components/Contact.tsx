@@ -1,7 +1,6 @@
-import { Box, Flex, useColorModeValue } from "@chakra-ui/react"
+import { Box, Container, useColorModeValue } from "@chakra-ui/react"
 import ContactForm from "./ContactForm"
 import DETAILS from "../lib/personalDetails"
-import MobileLayout from "../layouts/MobileLayout"
 
 const mailTo =
   "mailto:" +
@@ -15,27 +14,25 @@ const mailTo =
 
 const ContactPage = () => {
   return (
-    <Flex>
-      <MobileLayout>
-        <Box>
-          <h1>/contact</h1>
-          <p>
-            Got any questions or have any work opportunities? Feel free to send
-            an email to me at <a href={mailTo}>{DETAILS.email}</a> or fill out
-            the form below.
-          </p>
-          <Box
-            padding={8}
-            borderWidth={1}
-            borderColor={useColorModeValue("gray.200", "gray.700")}
-            borderRadius={12}
-            mt={4}
-          >
-            <ContactForm />
-          </Box>
+    <Container maxW={"3xl"}>
+      <Box>
+        <h1>/contact</h1>
+        <p>
+          Got any questions or have any work opportunities? Feel free to send an
+          email to me at <a href={mailTo}>{DETAILS.email}</a> or fill out the
+          form below.
+        </p>
+        <Box
+          padding={8}
+          borderWidth={1}
+          borderColor={useColorModeValue("gray.200", "gray.700")}
+          borderRadius={12}
+          mt={4}
+        >
+          <ContactForm />
         </Box>
-      </MobileLayout>
-    </Flex>
+      </Box>
+    </Container>
   )
 }
 

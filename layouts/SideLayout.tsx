@@ -1,19 +1,19 @@
 import { ReactNode } from "react"
-import { Box, Container, useMediaQuery } from "@chakra-ui/react"
+import { Box, useMediaQuery } from "@chakra-ui/react"
 
 // Display the layout if the width is less than 768px
 const SideLayout = ({ children }: { children: ReactNode }) => {
   const [isMobile] = useMediaQuery("(max-width: 1280px)")
   if (!isMobile) {
     return (
-      <Container maxW={"xs"} pos="relative">
-        <Box pos="sticky" top={4}>
+      <Box maxW={"xs"} pos="relative" ml={8}>
+        <Box pos="sticky" top={16}>
           {children}
         </Box>
-      </Container>
+      </Box>
     )
   } else {
-    return <Container display="none" pos="relative"></Container>
+    return <Box display="none" pos="relative"></Box>
   }
 }
 

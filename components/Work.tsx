@@ -1,10 +1,10 @@
 import React from "react"
-import { Box } from "@chakra-ui/react"
+import { Box, Container } from "@chakra-ui/react"
 import DETAILS from "../lib/personalDetails"
 
 const WorkPage = () => {
   return (
-    <Box>
+    <Container maxW={"3xl"}>
       <h1>/work</h1>
       <h2>Work Experience:</h2>
       <Box>
@@ -24,7 +24,7 @@ const WorkPage = () => {
           </Box>
         ))}
       </Box>
-    </Box>
+    </Container>
   )
 }
 

@@ -31,9 +31,7 @@ const MDXComponents = {
   a: ({ href, children }: any) => {
     return (
       <Link href={href} passHref>
-        <Text as="a" color="brand">
-          {children}
-        </Text>
+        <Text as="a">{children}</Text>
       </Link>
     )
   },
@@ -76,7 +74,11 @@ const MDXComponents = {
     return <OrderedList>{children}</OrderedList>
   },
   li: ({ children }: any) => {
-    return <ListItem fontSize={"lg"}>{children}</ListItem>
+    return (
+      <ListItem fontSize={"lg"} mt={2}>
+        {children}
+      </ListItem>
+    )
   },
 }
 

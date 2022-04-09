@@ -1,34 +1,34 @@
 import React from "react"
-import { Box } from "@chakra-ui/react"
-import DETAILS from "../lib/personalDetails"
+import { Container } from "@chakra-ui/react"
 
 const AboutPage = () => {
   return (
-    <Box>
+    <Container maxW={"3xl"}>
       <h1>/about</h1>
       <h2>About Me:</h2>
-      <Box>
-        <p>
-          Hi, I&apos;m {DETAILS.firstName} {DETAILS.lastName}. I&apos;m a
-          software engineer with a passion for building things that people love.
-        </p>
-        <p>
-          I&apos;m currently working at{" "}
-          <a href="https://www.pivotal.io/">Pivotal</a> as a{" "}
-          <a href="https://www.pivotal.io/careers/engineering/">
-            Software Engineer
-          </a>
-          .
-        </p>
-        <p>
-          I&apos;m a{" "}
-          <a href="https://www.linkedin.com/in/amanshahid/">
-            <i>full-stack</i>
-          </a>{" "}
-          developer with a passion for building things that people love.
-        </p>
-      </Box>
-    </Box>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus odit,
+        officiis tempore nobis aut obcaecati quae eius illum temporibus minus
+        non deleniti vel. Ducimus, quod? Eius deleniti dolor velit consequatur!
+      </p>
+      <h2>Lorem Ipsum</h2>
+      <h3>Lorem Ipsum</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum vero quod
+        nihil fugiat, vitae dolore inventore facere laboriosam, explicabo
+        consequuntur mollitia accusamus non magnam dolorum corrupti doloribus
+        ipsam et beatae?
+      </p>
+      <h3>Lorem Ipsum</h3>
+      <h4>Lorem Ipsum</h4>
+      <blockquote>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim incidunt,
+        quo voluptatem veritatis tempora repellendus ipsa adipisci numquam et
+        quia. Voluptatibus dolores nemo repudiandae dolorum laboriosam. Possimus
+        delectus facilis sapiente?
+      </blockquote>
+      <h4>Lorem Ipsum</h4>
+    </Container>
   )
 }
 

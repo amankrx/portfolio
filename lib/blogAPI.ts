@@ -51,16 +51,31 @@ export function getHeadings(source: string) {
     return line.match(/^###*\s/)
   })
 
+  const slugify = (str: string) =>
+    str
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+
   // Transform the string '## Some text' into an object
   // with the shape '{ text: 'Some text', level: 2 }'
   return headingLines.map((raw) => {
     const text = raw.replace(/^###*\s/, "")
-    // I only care about h2 and h3.
-    // If I wanted more levels, I'd need to count the
-    // number of #s.
-    const level = raw.slice(0, 3) === "###" ? 3 : 2
+    let level = 0
+    if (raw.slice(0, 4) === "####") {
+      level = 4
+    } else if (raw.slice(0, 3) === "###") {
+      level = 3
+    } else if (raw.slice(0, 2) === "##") {
+      level = 2
+    } else if (raw.slice(0, 1) === "#") {
+      level = 1
+    }
+    const id = `#${slugify(text)}`
 
-    return { text, level }
+    return { text, id, level }
   })
 }
 

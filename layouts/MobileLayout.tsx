@@ -1,19 +1,19 @@
 import { ReactNode } from "react"
-import { Container, useMediaQuery } from "@chakra-ui/react"
+import { useMediaQuery, Box } from "@chakra-ui/react"
 
 const MobileLayout = ({ children }: { children: ReactNode }) => {
   const [isMobile] = useMediaQuery("(max-width: 1280px)")
   if (!isMobile) {
     return (
-      <Container maxW={"4xl"} pos="relative">
+      <Box maxW={"4xl"} pos="relative">
         {children}
-      </Container>
+      </Box>
     )
   } else {
     return (
-      <Container maxW={"full"} pos="relative">
+      <Box maxW={"full"} pos="relative" mx={0}>
         {children}
-      </Container>
+      </Box>
     )
   }
 }

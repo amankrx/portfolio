@@ -1,6 +1,6 @@
 import React from "react"
 import type { GetStaticProps, GetStaticPaths } from "next"
-import { Box, Heading, Center, Flex, Container } from "@chakra-ui/react"
+import { Box, Flex, Container } from "@chakra-ui/react"
 import Meta from "../../components/Meta"
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote"
 import { serialize } from "next-mdx-remote/serialize"
@@ -9,17 +9,17 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeHighlight from "rehype-highlight"
 import remarkGfm from "remark-gfm"
 import { getPostFromSlug, getSlugs, PostMeta } from "../../lib/blogAPI"
-import "highlight.js/styles/github-dark.css"
+import "highlight.js/styles/monokai-sublime.css"
 import moment from "moment"
 import MobileLayout from "../../layouts/MobileLayout"
 import SideLayout from "../../layouts/SideLayout"
 import TableOfContents from "../../components/TableOfContents"
-import ViewCounter from "../../components/ViewCounter"
+import BlogHeader from "../../components/BlogHeader"
 
 interface MDXPost {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
   meta: PostMeta
-  headings: { text: string; level: number }[]
+  headings: { text: string; id: string; level: number }[]
 }
 
 export default function PostPage({ post }: { post: MDXPost }) {
@@ -31,31 +31,20 @@ export default function PostPage({ post }: { post: MDXPost }) {
         keywords={post.meta.keywords}
       />
       <Box as="article" mx="auto">
-        <Box as="header" mb={8}>
-          <Center mb={8}>
-            <Heading as="h1" size="2xl">
-              {post.meta.title}
-            </Heading>
-          </Center>
-          <Flex justify="space-between" align="center">
-            <Box>
-              <Box as="time" fontSize="sm">
-                {moment(post.meta.date).format("MMMM DD, YYYY")}
-              </Box>
-              <Box fontSize="sm">{post.meta.readingTime} min read</Box>
-              <Box fontSize="sm">
-                <ViewCounter slug={post.meta.slug} />
-              </Box>
-            </Box>
-          </Flex>
-          <hr />
-        </Box>
+        <BlogHeader
+          title={post.meta.title}
+          date={moment(post.meta.date).format("MMMM D, YYYY")}
+          tags={post.meta.tags}
+          readingTime={post.meta.readingTime}
+          slug={post.meta.slug}
+          excerpt={post.meta.excerpt}
+          keywords={post.meta.keywords}
+        />
         <Flex>
           <MobileLayout>
             <MDXRemote {...post.source} components={{}} />
           </MobileLayout>
           <SideLayout>
-            <h3>Table of Contents</h3>
             <TableOfContents>{post.headings}</TableOfContents>
           </SideLayout>
         </Flex>

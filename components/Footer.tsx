@@ -1,4 +1,11 @@
-import { ButtonGroup, IconButton, Flex, Text, Box } from "@chakra-ui/react"
+import {
+  ButtonGroup,
+  IconButton,
+  Flex,
+  Text,
+  Box,
+  useColorModeValue,
+} from "@chakra-ui/react"
 import * as React from "react"
 import { FaGithub, FaLinkedin, FaTwitter, FaGitlab } from "react-icons/fa"
 
@@ -44,7 +51,11 @@ const Footer = () => (
         ))}
       </ButtonGroup>
     </Flex>
-    <Text fontSize={["xs", "sm"]} color="subtle" align="center">
+    <Text
+      fontSize={["xs", "sm"]}
+      align="center"
+      color={useColorModeValue("textMediumLight", "textMediumDark")}
+    >
       &copy; {new Date().getFullYear()} Aman Kumar. Made with{" "}
       <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
         NextJS
