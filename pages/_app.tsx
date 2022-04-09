@@ -4,6 +4,7 @@ import { MDXProvider } from "@mdx-js/react"
 import MDXComponents from "../components/MDXComponents"
 import type { AppProps } from "next/app"
 import theme from "../themes/theme"
+import "../styles/global.css"
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

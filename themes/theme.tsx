@@ -20,6 +20,7 @@ const theme = extendTheme({
   styles: {
     global: (props: StyleProps) => ({
       body: {
+        scrollBehavior: "smooth",
         h1: {
           color: "brand",
           fontFamily: "Noto Serif",
