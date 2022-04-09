@@ -20,7 +20,6 @@ const theme = extendTheme({
   styles: {
     global: (props: StyleProps) => ({
       body: {
-        scrollBehavior: "smooth",
         h1: {
           color: "brand",
           fontFamily: "Noto Serif",
@@ -30,7 +29,7 @@ const theme = extendTheme({
           textAlign: "center",
         },
         h2: {
-          color: mode("purple.600", "brandTextH2")(props),
+          color: mode("brand", "brandTextH2")(props),
           fontSize: ["1.8rem", "2.4rem", "2.8rem"],
           mt: ["2rem", "3rem"],
           a: {
