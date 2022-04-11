@@ -39,7 +39,7 @@ export default async function handler(
       }
       return res.status(200).json({ total: views.views.toString() })
     }
-  } catch {
-    return res.status(500).json({ message: "Internal server error" })
+  } catch (error) {
+    return res.status(500).json({ message: error })
   }
 }
