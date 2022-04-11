@@ -22,16 +22,14 @@ const HomePage = ({ posts }: { posts: PostMeta[] }) => {
         Hey, I&apos;m {DETAILS.firstName} {DETAILS.lastName}!
       </h1>
       <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum
-        deserunt beatae aliquid ipsum facilis consequuntur enim alias sint
-        eveniet praesentium sunt inventore velit, fugit ad reprehenderit ratione
-        amet laboriosam delectus.
+        I&apos;m a 21-year-old aspiring software engineer, currently pursuing my
+        BTech in Computer Science and Engineering from Indian Institute of
+        Information Technology, Nagpur.
       </p>
       <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum
-        deserunt beatae aliquid ipsum facilis consequuntur enim alias sint
-        eveniet praesentium sunt inventore velit, fugit ad reprehenderit ratione
-        amet laboriosam delectus.
+        I&apos;m currently working on my projects and looking for new
+        opportunities. I&apos;m passionate about learning new technologies,
+        contributing to open-source and solving algorithmic problems.
       </p>
       <hr />
       <Heading as="h2" size="xl">
