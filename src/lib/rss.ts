@@ -16,10 +16,10 @@ export async function generateRSS() {
   const feed = new Feed({
     title: "Aman Kumar's Blog",
     description:
-      "Beginner friendly developer content, with a focus on React, TypeScript, Next.js and Styled-components",
+      "Aman Kumar's development blog. Currently, I'm writing about my journey through the Google Summer of Code program.",
     id: baseUrl,
     link: baseUrl,
-    copyright: `All rights reserved ${new Date().getFullYear()}, Aman Kumar`,
+    copyright: `All rights given ${new Date().getFullYear()}, Aman Kumar`,
     updated: new Date(),
     generator: "Feed for Node.js",
     feedLinks: {
@@ -36,7 +36,6 @@ export async function generateRSS() {
       id: `${baseUrl}/blog/${post.meta.slug}`,
       link: `${baseUrl}/blog/${post.meta.slug}`,
       description: post.meta.excerpt,
-      content: post.content,
       author: [author],
       contributor: [author],
       date: new Date(moment(post.meta.date).format("YYYY-MM-DD")),
