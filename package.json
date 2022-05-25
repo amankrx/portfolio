@@ -17,6 +17,7 @@
     "@emotion/styled": "^11",
     "axios": "^0.26.1",
     "dotenv": "^16.0.0",
+    "feed": "^4.2.2",
     "formik": "^2.2.9",
     "framer-motion": "^6",
     "gray-matter": "^4.0.3",
