@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react"
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
 import { BsMoonStarsFill, BsSun } from "react-icons/bs"
+import { FiRss } from "react-icons/fi"
 import { useRouter } from "next/router"
 import NextLink from "next/link"
 import Image from "next/image"
@@ -120,6 +121,19 @@ const Navbar = () => {
           >
             {colorMode === "light" ? <BsMoonStarsFill /> : <BsSun />}
           </Button>
+          <NextLink href="https://amankrx.com/rss/feed.xml" passHref>
+            <Link
+              aria-label="RSS Feed"
+              bg="transparent"
+              _hover={{
+                bg: "transparent",
+              }}
+              _focus={{ boxShadow: "none" }}
+              w="fit-content"
+            >
+              <FiRss />
+            </Link>
+          </NextLink>
         </Flex>
       </Flex>
 
