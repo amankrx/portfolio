@@ -3,6 +3,7 @@ import fs from "fs"
 import { Feed } from "feed"
 
 import { getRecentPosts } from "./blogAPI"
+import moment from "moment"
 
 export async function generateRSS() {
   const baseUrl = "https://www.amankrx.com"
@@ -38,7 +39,7 @@ export async function generateRSS() {
       content: post.content,
       author: [author],
       contributor: [author],
-      date: new Date(post.meta.date),
+      date: new Date(moment(post.meta.date).format("YYYY-MM-DD")),
     })
   })
   fs.mkdirSync("./public/rss", { recursive: true })
