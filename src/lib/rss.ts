@@ -36,6 +36,7 @@ export async function generateRSS() {
       id: `${baseUrl}/blog/${post.meta.slug}`,
       link: `${baseUrl}/blog/${post.meta.slug}`,
       description: post.meta.excerpt,
+      content: post.content,
       author: [author],
       contributor: [author],
       date: new Date(moment(post.meta.date).format("YYYY-MM-DD")),
