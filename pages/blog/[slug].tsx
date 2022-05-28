@@ -23,34 +23,62 @@ interface MDXPost {
 }
 
 export default function PostPage({ post }: { post: MDXPost }) {
-  return (
-    <Container maxW="7xl">
-      <Meta
-        title={post.meta.title}
-        description={post.meta.excerpt}
-        keywords={post.meta.keywords}
-      />
-      <Box as="article" mx="auto">
-        <BlogHeader
+  if (post.meta.readingTime <= 5) {
+    return (
+      <Container maxW="3xl">
+        <Meta
           title={post.meta.title}
-          date={moment(post.meta.date).format("MMMM D, YYYY")}
-          tags={post.meta.tags}
-          readingTime={post.meta.readingTime}
-          slug={post.meta.slug}
-          excerpt={post.meta.excerpt}
+          description={post.meta.excerpt}
           keywords={post.meta.keywords}
         />
-        <Flex>
-          <MobileLayout>
-            <MDXRemote {...post.source} components={{}} />
-          </MobileLayout>
-          <SideLayout>
-            <TableOfContents>{post.headings}</TableOfContents>
-          </SideLayout>
-        </Flex>
-      </Box>
-    </Container>
-  )
+        <Box as="article" mx="auto">
+          <BlogHeader
+            title={post.meta.title}
+            date={moment(post.meta.date).format("MMMM D, YYYY")}
+            tags={post.meta.tags}
+            readingTime={post.meta.readingTime}
+            slug={post.meta.slug}
+            excerpt={post.meta.excerpt}
+            keywords={post.meta.keywords}
+          />
+          <Flex>
+            <MobileLayout>
+              <MDXRemote {...post.source} components={{}} />
+            </MobileLayout>
+          </Flex>
+        </Box>
+      </Container>
+    )
+  } else {
+    return (
+      <Container maxW="7xl">
+        <Meta
+          title={post.meta.title}
+          description={post.meta.excerpt}
+          keywords={post.meta.keywords}
+        />
+        <Box as="article" mx="auto">
+          <BlogHeader
+            title={post.meta.title}
+            date={moment(post.meta.date).format("MMMM D, YYYY")}
+            tags={post.meta.tags}
+            readingTime={post.meta.readingTime}
+            slug={post.meta.slug}
+            excerpt={post.meta.excerpt}
+            keywords={post.meta.keywords}
+          />
+          <Flex>
+            <MobileLayout>
+              <MDXRemote {...post.source} components={{}} />
+            </MobileLayout>
+            <SideLayout>
+              <TableOfContents>{post.headings}</TableOfContents>
+            </SideLayout>
+          </Flex>
+        </Box>
+      </Container>
+    )
+  }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {

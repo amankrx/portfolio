@@ -68,14 +68,14 @@ const MDXComponents = {
     return <Tfoot>{children}</Tfoot>
   },
   ul: ({ children }: any) => {
-    return <UnorderedList>{children}</UnorderedList>
+    return <UnorderedList my={3}>{children}</UnorderedList>
   },
   ol: ({ children }: any) => {
-    return <OrderedList>{children}</OrderedList>
+    return <OrderedList my={3}>{children}</OrderedList>
   },
   li: ({ children }: any) => {
     return (
-      <ListItem fontSize={"lg"} mt={2}>
+      <ListItem fontSize={"lg"} mt={2} ml={2}>
         {children}
       </ListItem>
     )
