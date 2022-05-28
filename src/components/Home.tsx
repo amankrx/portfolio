@@ -22,9 +22,9 @@ const HomePage = ({ posts }: { posts: PostMeta[] }) => {
         Hey, I&apos;m {DETAILS.firstName} {DETAILS.lastName}!
       </h1>
       <p>
-        I&apos;m a 21-year-old aspiring software engineer, currently pursuing my
-        BTech in Computer Science and Engineering from Indian Institute of
-        Information Technology, Nagpur.
+        I&apos;m a {new Date().getFullYear() - 2000}-year-old aspiring software
+        engineer, currently pursuing my BTech in Computer Science and
+        Engineering from Indian Institute of Information Technology, Nagpur.
       </p>
       <p>
         I&apos;m currently working on my projects and looking for new
