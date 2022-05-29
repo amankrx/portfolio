@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 .vscode
+
+public/rss/feed.xml
+public/rss/feed.json
+public/rss/atom.xml
