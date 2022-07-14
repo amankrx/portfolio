@@ -1,6 +1,6 @@
 import fs from "fs"
-import { MDXRemote } from "next-mdx-remote"
-import ReactDOMServer from "react-dom/server"
+// import { MDXRemote } from "next-mdx-remote"
+// import ReactDOMServer from "react-dom/server"
 import { Feed } from "feed"
 import { serialize } from "next-mdx-remote/serialize"
 import { getRecentPosts } from "./blogAPI"
@@ -32,14 +32,15 @@ export async function generateRSS() {
   })
 
   posts.forEach(async (post) => {
-    const mdxSource = await serialize(post.content)
-    const mdx = <MDXRemote {...mdxSource} components={{}} />
-    const html = ReactDOMServer.renderToStaticMarkup(mdx)
+    const mdxSource = serialize(post.content)
+    // const mdx = <MDXRemote {...mdxSource} components={{}} />
+    // const html = ReactDOMServer.renderToStaticMarkup(mdx)
+    console.log(mdxSource)
     feed.addItem({
       title: post.meta.title,
       id: `${baseUrl}/blog/${post.meta.slug}`,
       link: `${baseUrl}/blog/${post.meta.slug}`,
-      description: html,
+      description: post.content,
       author: [author],
       contributor: [author],
       date: new Date(moment(post.meta.date).format("YYYY-MM-DD")),
