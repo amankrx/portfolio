@@ -4,10 +4,21 @@
         <title>Aman Kumar's Blog</title>
         <link>https://www.amankrx.com</link>
         <description>Aman Kumar's development blog. Currently, I'm writing about my journey through the Google Summer of Code program.</description>
-        <lastBuildDate>Sun, 29 May 2022 06:09:46 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 17 Sep 2022 11:42:59 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <copyright>All rights given 2022, Aman Kumar</copyright>
+        <item>
+            <title><![CDATA[GSoC 2022 with GNOME: Final Report]]></title>
+            <link>https://www.amankrx.com/blog/gsoc-final-report</link>
+            <guid>https://www.amankrx.com/blog/gsoc-final-report</guid>
+            <pubDate>Mon, 12 Sep 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[
+In this Google Summer of Code 2022, I worked on the database migration and managing user model for the GNOME Health Application.
+Porting the User data from the GSettings to the Tracker database. MR[174](https://gitlab.gnome.org/World/Health/-/merge_requests/174)
+]]></description>
+            <author>amankr1619@gmail.com (Aman Kumar)</author>
+        </item>
         <item>
             <title><![CDATA[Beginning my GSoC'22 journey with GNOME]]></title>
             <link>https://www.amankrx.com/blog/gnome-gsoc-intro</link>

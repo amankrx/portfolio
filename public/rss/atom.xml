@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.amankrx.com</id>
     <title>Aman Kumar's Blog</title>
-    <updated>2022-05-29T06:09:46.319Z</updated>
+    <updated>2022-09-17T11:42:59.388Z</updated>
     <generator>Feed for Node.js</generator>
     <author>
         <name>Aman Kumar</name>
@@ -13,6 +13,26 @@
     <link rel="self" href="https://www.amankrx.com/rss/atom.xml"/>
     <subtitle>Aman Kumar's development blog. Currently, I'm writing about my journey through the Google Summer of Code program.</subtitle>
     <rights>All rights given 2022, Aman Kumar</rights>
+    <entry>
+        <title type="html"><![CDATA[GSoC 2022 with GNOME: Final Report]]></title>
+        <id>https://www.amankrx.com/blog/gsoc-final-report</id>
+        <link href="https://www.amankrx.com/blog/gsoc-final-report"/>
+        <updated>2022-09-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[
+In this Google Summer of Code 2022, I worked on the database migration and managing user model for the GNOME Health Application.
+Porting the User data from the GSettings to the Tracker database. MR[174](https://gitlab.gnome.org/World/Health/-/merge_requests/174)
+]]></summary>
+        <author>
+            <name>Aman Kumar</name>
+            <email>amankr1619@gmail.com</email>
+            <uri>https://www.amankrx.com</uri>
+        </author>
+        <contributor>
+            <name>Aman Kumar</name>
+            <email>amankr1619@gmail.com</email>
+            <uri>https://www.amankrx.com</uri>
+        </contributor>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Beginning my GSoC'22 journey with GNOME]]></title>
         <id>https://www.amankrx.com/blog/gnome-gsoc-intro</id>

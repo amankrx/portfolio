@@ -10,6 +10,17 @@
     },
     "items": [
         {
+            "id": "https://www.amankrx.com/blog/gsoc-final-report",
+            "url": "https://www.amankrx.com/blog/gsoc-final-report",
+            "title": "GSoC 2022 with GNOME: Final Report",
+            "summary": "\nIn this Google Summer of Code 2022, I worked on the database migration and managing user model for the GNOME Health Application.\nPorting the User data from the GSettings to the Tracker database. MR[174](https://gitlab.gnome.org/World/Health/-/merge_requests/174)\n",
+            "date_modified": "2022-09-12T00:00:00.000Z",
+            "author": {
+                "name": "Aman Kumar",
+                "url": "https://www.amankrx.com"
+            }
+        },
+        {
             "id": "https://www.amankrx.com/blog/gnome-gsoc-intro",
             "url": "https://www.amankrx.com/blog/gnome-gsoc-intro",
             "title": "Beginning my GSoC'22 journey with GNOME",
