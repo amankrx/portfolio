@@ -1,0 +1,71 @@
+{
+  "personal": {
+    "first_name": "Aman",
+    "last_name": "Kumar",
+    "title": "Software Developer",
+    "email": "aman@amankrx.com",
+    "location": "Bengaluru, India",
+    "bio": "A passionate developer focused on creating impactful web applications",
+    "avatar": "/images/avatar.jpg",
+    "dateOfBirth": "2000-05-16"
+  },
+  "social": [
+    {
+      "platform": "GitHub",
+      "url": "https://github.com/yourusername",
+      "icon": "FaGithub"
+    },
+    {
+      "platform": "LinkedIn",
+      "url": "https://linkedin.com/in/amankrx",
+      "icon": "FaLinkedin"
+    },
+    {
+      "platform": "Twitter",
+      "url": "https://twitter.com/amankrx",
+      "icon": "FaTwitter"
+    },
+    {
+      "platform": "Mail",
+      "url": "mailto:aman@amankrx.com",
+      "icon": "Mail"
+    }
+  ],
+  "skills": [
+    {
+      "category": "Frontend",
+      "items": ["React", "Next.js", "TypeScript", "Tailwind CSS"]
+    },
+    {
+      "category": "Backend",
+      "items": ["Node.js", "Express", "PostgreSQL", "MongoDB"]
+    }
+  ],
+  "experience": [
+    {
+      "company": "Example Corp",
+      "position": "Senior Developer",
+      "startDate": "2022-01",
+      "endDate": "Present",
+      "description": "Leading development of web applications",
+      "technologies": ["React", "Node.js", "TypeScript"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University Name",
+      "degree": "Bachelor's",
+      "field": "Computer Science",
+      "graduationDate": "2020"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Project Name",
+      "description": "Project description",
+      "technologies": ["React", "Next.js", "TypeScript"],
+      "link": "https://project-url.com",
+      "github": "https://github.com/username/project"
+    }
+  ]
+}

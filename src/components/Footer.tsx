@@ -1,79 +1,69 @@
-import {
-  ButtonGroup,
-  IconButton,
-  Flex,
-  Text,
-  Box,
-  useColorModeValue,
-} from "@chakra-ui/react"
-import * as React from "react"
-import { FaGithub, FaLinkedin, FaTwitter, FaGitlab } from "react-icons/fa"
+// components/Footer.tsx
+'use client';
 
-const Links = [
-  {
-    name: "Github",
-    link: "https://github.com/amankrx",
-    icon: <FaGithub />,
-  },
-  {
-    name: "LinkedIn",
-    link: "https://www.linkedin.com/in/amankrx/",
-    icon: <FaLinkedin />,
-  },
-  {
-    name: "Twitter",
-    link: "https://twitter.com/amankrx",
-    icon: <FaTwitter />,
-  },
-  {
-    name: "Gitlab",
-    link: "https://twitter.com/amankrx",
-    icon: <FaGitlab />,
-  },
-]
+import Link from 'next/link';
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { Rss, Mail } from 'lucide-react';
+import { useProfile } from '@/context/ProfileContext';
 
-const Footer = () => (
-  <Box as="footer" role="contentinfo" py={{ base: "12", md: "16" }}>
-    <Flex justify="center" direction="row" align="center">
-      <ButtonGroup variant="ghost">
-        {Links.map((link) => (
-          <IconButton
-            key={link.name}
-            as="a"
-            href={link.link}
-            _hover={{
-              bg: "transparent",
-              color: "brand",
-            }}
-            aria-label={link.name}
-            icon={link.icon}
-          />
-        ))}
-      </ButtonGroup>
-    </Flex>
-    <Text
-      fontSize={["xs", "sm"]}
-      align="center"
-      color={useColorModeValue("textMediumLight", "textMediumDark")}
-    >
-      &copy; {new Date().getFullYear()} Aman Kumar. Made with{" "}
-      <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
-        NextJS
-      </a>{" "}
-      and{" "}
-      <a href="https://chakra-ui.com/" target="_blank" rel="noreferrer">
-        Chakra UI
-      </a>
-      . View Source on{" "}
-      <a
-        href="https://github.com/amankrx/portfolio"
-        target="_blank"
-        rel="noreferrer"
-      >
-        GitHub
-      </a>
-    </Text>
-  </Box>
-)
+// Create a map of platform names to icon components
+const SOCIAL_ICONS = {
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  Mail,
+  Rss,
+} as const;
 
-export default Footer
+export default function Footer() {
+  const { profile } = useProfile();
+
+  const renderIcon = (iconName: keyof typeof SOCIAL_ICONS) => {
+    const Icon = SOCIAL_ICONS[iconName];
+    return Icon ? <Icon className="h-5 w-5" /> : null;
+  };
+
+  return (
+    <footer className="w-full border-t bg-background">
+      <div className="mx-auto max-w-7xl px-4 py-6">
+        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          {/* Copyright */}
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()}{' '}
+            {`${profile.personal.first_name} ${profile.personal.last_name}`}.
+            All rights reserved.
+          </p>
+
+          {/* Social Links and RSS */}
+          <div className="flex items-center gap-4">
+            {profile.social.map((link) => (
+              <Link
+                key={link.platform}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.platform}
+                className="text-muted-foreground transition-colors duration-200 hover:text-foreground hover:scale-110"
+              >
+                {renderIcon(link.icon as keyof typeof SOCIAL_ICONS)}
+              </Link>
+            ))}
+
+            {/* RSS Link - Separated from social links */}
+            <div className="ml-2 border-l pl-2">
+              <Link
+                href="/rss.xml"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="RSS Feed"
+                className="text-muted-foreground transition-colors duration-200 hover:text-foreground hover:scale-110"
+              >
+                <Rss className="h-5 w-5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

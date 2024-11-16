@@ -1,164 +1,98 @@
+// components/Navbar.tsx
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Menu, Package2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
-  Box,
-  Flex,
-  HStack,
-  Link,
-  IconButton,
-  Button,
-  useDisclosure,
-  Stack,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react"
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
-import { BsMoonStarsFill, BsSun } from "react-icons/bs"
-import { FiRss } from "react-icons/fi"
-import { useRouter } from "next/router"
-import NextLink from "next/link"
-import Image from "next/image"
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import ThemeSwitcher from '@/components/ThemeSwitcher';
+import { useEffect, useState } from 'react';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import { useProfile } from '@/context/ProfileContext';
 
-const NAV_LINKS = [
-  {
-    name: "blog",
-    link: "/blog",
-  },
-  {
-    name: "about",
-    link: "/about",
-  },
-  {
-    name: "work",
-    link: "/work",
-  },
-  {
-    name: "contact",
-    link: "/contact",
-  },
-]
+export default function Navbar() {
+  const [currentPath, setCurrentPath] = useState<string | null>(null);
+  const pathName = usePathname();
+  const { profile } = useProfile();
 
-const Navbar = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { colorMode, toggleColorMode } = useColorMode()
-  const router = useRouter()
-  const color = useColorModeValue("textDark", "textLight")
+  useEffect(() => {
+    setCurrentPath(pathName);
+  }, [pathName]);
+
+  const isActive = (path: string) =>
+    currentPath === path
+      ? 'text-foreground font-semibold border-b-2 border-primary'
+      : 'text-muted-foreground hover:text-foreground transition-colors';
+
+  const links = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/work', label: 'Work' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/blog', label: 'Blog' },
+  ];
 
   return (
-    <Box
-      as="nav"
-      pos="sticky"
-      top="0"
-      bg={useColorModeValue("bgLight", "bgDark")}
-      zIndex={1}
-    >
-      <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-        <IconButton
-          size={"md"}
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          bg="transparent"
-          _hover={{
-            bg: "transparent",
-          }}
-          _focus={{ boxShadow: "none" }}
-          aria-label={"Open Menu"}
-          display={{ md: "none" }}
-          onClick={isOpen ? onClose : onOpen}
-        />
-        <HStack spacing={8} alignItems={"center"}>
-          <NextLink href="/" passHref>
-            <Link
-              _hover={{
-                textDecoration: "none",
-              }}
-              color="brand"
-              fontWeight="bold"
-              fontSize="1.4rem"
-              pb={1}
-              mt={2}
-              fontFamily="Noto Serif"
-              _focus={{ boxShadow: "none" }}
-            >
-              <Image
-                src={useColorModeValue(
-                  "/brand/brandDark.svg",
-                  "/brand/brandLight.svg"
-                )}
-                alt="Logo"
-                width="68px"
-                height="23px"
-                objectFit="contain"
-              />
-            </Link>
-          </NextLink>
-          <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
-            {NAV_LINKS.map((link) => (
-              <NextLink key={link.name} href={link.link} passHref>
-                <Link
-                  px={2}
-                  py={1}
-                  _hover={{
-                    textDecoration: "none",
-                    color: "brand",
-                  }}
-                  _focus={{ boxShadow: "none" }}
-                  color={router.pathname === link.link ? "brand" : color}
-                >
-                  {link.name}
-                </Link>
-              </NextLink>
-            ))}
-          </HStack>
-        </HStack>
-        <Flex alignItems={"center"}>
-          <Button
-            aria-label="Toggle Color Mode"
-            onClick={toggleColorMode}
-            bg="transparent"
-            _hover={{
-              bg: "transparent",
-            }}
-            _focus={{ boxShadow: "none" }}
-            w="fit-content"
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:px-6">
+        <nav className="hidden items-center space-x-8 md:flex">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-base font-semibold tracking-tight hover:text-foreground"
           >
-            {colorMode === "light" ? <BsMoonStarsFill /> : <BsSun />}
-          </Button>
-          <NextLink href="https://amankrx.com/rss/feed.xml" passHref>
+            <Package2 className="h-5 w-5" />
+            <span>{profile.personal.first_name}</span>
+          </Link>
+          {links.slice(1).map(({ href, label }) => (
             <Link
-              aria-label="RSS Feed"
-              bg="transparent"
-              _hover={{
-                bg: "transparent",
-              }}
-              _focus={{ boxShadow: "none" }}
-              w="fit-content"
+              key={href}
+              href={href}
+              className={`${isActive(href)} py-1 text-sm tracking-wide`}
             >
-              <FiRss />
+              {label}
             </Link>
-          </NextLink>
-        </Flex>
-      </Flex>
+          ))}
+        </nav>
 
-      {isOpen ? (
-        <Box pb={4} display={{ md: "none" }}>
-          <Stack as={"nav"} spacing={4}>
-            {NAV_LINKS.map((link) => (
-              <NextLink key={link.name} href={link.link} passHref>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-9 w-9 shrink-0 md:hidden"
+            >
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-[280px]">
+            <VisuallyHidden>
+              <SheetTitle>Navigation</SheetTitle>
+            </VisuallyHidden>
+            <nav className="mt-6 grid gap-4">
+              {links.map(({ href, label }) => (
                 <Link
-                  px={2}
-                  py={1}
-                  _hover={{
-                    textDecoration: "none",
-                  }}
-                  _focus={{ boxShadow: "none" }}
+                  key={href}
+                  href={href}
+                  className={`block px-2 py-1 text-sm ${isActive(href)}`}
                 >
-                  {link.name}
+                  {label}
                 </Link>
-              </NextLink>
-            ))}
-          </Stack>
-        </Box>
-      ) : null}
-    </Box>
-  )
-}
+              ))}
+            </nav>
+          </SheetContent>
+        </Sheet>
 
-export default Navbar
+        <div className="flex items-center gap-4">
+          <ThemeSwitcher />
+        </div>
+      </div>
+    </header>
+  );
+}
