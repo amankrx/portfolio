@@ -43,7 +43,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.platform}
-                className="text-muted-foreground transition-colors duration-200 hover:text-foreground hover:scale-110"
+                className="text-muted-foreground transition-colors duration-200 hover:scale-110 hover:text-foreground"
               >
                 {renderIcon(link.icon as keyof typeof SOCIAL_ICONS)}
               </Link>
@@ -56,7 +56,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="RSS Feed"
-                className="text-muted-foreground transition-colors duration-200 hover:text-foreground hover:scale-110"
+                className="text-muted-foreground transition-colors duration-200 hover:scale-110 hover:text-foreground"
               >
                 <Rss className="h-5 w-5" />
               </Link>

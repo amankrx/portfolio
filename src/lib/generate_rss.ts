@@ -1,8 +1,9 @@
 import { Feed } from 'feed';
 import fs from 'fs';
 import { Profile } from '@/types/profile';
+import { Post } from '@/types/post';
 
-export async function generateRssFeed(posts: any[], profile: Profile) {
+export async function generateRssFeed(posts: Post[], profile: Profile) {
   const site_url = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
   const feed = new Feed({
@@ -22,11 +23,11 @@ export async function generateRssFeed(posts: any[], profile: Profile) {
 
   posts.forEach((post) => {
     feed.addItem({
-      title: post.title,
-      id: `${site_url}/blog/${post.slug}`,
-      link: `${site_url}/blog/${post.slug}`,
-      description: post.excerpt,
-      date: new Date(post.date),
+      title: post.meta.title,
+      id: `${site_url}/blog/${post.meta.slug}`,
+      link: `${site_url}/blog/${post.meta.slug}`,
+      description: post.meta.excerpt,
+      date: new Date(post.meta.date),
       content: post.content,
     });
   });
