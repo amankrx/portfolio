@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
@@ -7,6 +6,8 @@ import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { ProfileProvider } from '@/context/ProfileContext';
 import React from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -20,8 +21,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Your Portfolio & Blog',
-  description: 'Personal portfolio and blog showcasing my work and thoughts',
+  title: 'Aman Kumar - Developer Portfolio',
+  description:
+    'Personal portfolio and blog of Aman Kumar showcasing projects, articles, and more.',
 };
 
 export default function RootLayout({
@@ -31,6 +33,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Head>
+        {/* Title with Logo */}
+        <title>
+          <Image src="/logo/dark.png" alt="Logo" width={50} height={50} />
+          {' Aman Kumar - Developer Portfolio'}
+        </title>
+        {/* Favicon for Light Mode */}
+        <link
+          rel="icon"
+          href="/logo/light.png"
+          media="(prefers-color-scheme: light)"
+          type="image/png"
+        />
+        {/* Favicon for Dark Mode */}
+        <link
+          rel="icon"
+          href="/logo/dark.png"
+          media="(prefers-color-scheme: dark)"
+          type="image/png"
+        />
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >

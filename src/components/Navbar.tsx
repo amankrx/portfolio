@@ -1,9 +1,9 @@
-// components/Navbar.tsx
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, Package2 } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -14,12 +14,12 @@ import {
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import { useEffect, useState } from 'react';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { useProfile } from '@/context/ProfileContext';
+import { useTheme } from 'next-themes';
 
 export default function Navbar() {
   const [currentPath, setCurrentPath] = useState<string | null>(null);
   const pathName = usePathname();
-  const { profile } = useProfile();
+  const { theme } = useTheme(); // Get current theme from next-themes
 
   useEffect(() => {
     setCurrentPath(pathName);
@@ -41,15 +41,19 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:px-6">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src={theme === 'dark' ? '/logo/dark.png' : '/logo/light.png'}
+            alt="Aman Kumar Logo"
+            className="h-8"
+          />
+          <span className="sr-only">Aman Kumar</span>
+        </Link>
+
+        {/* Navigation */}
         <nav className="hidden items-center space-x-8 md:flex">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-base font-semibold tracking-tight hover:text-foreground"
-          >
-            <Package2 className="h-5 w-5" />
-            <span>{profile.personal.first_name}</span>
-          </Link>
-          {links.slice(1).map(({ href, label }) => (
+          {links.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
@@ -60,6 +64,7 @@ export default function Navbar() {
           ))}
         </nav>
 
+        {/* Mobile Menu */}
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -89,6 +94,7 @@ export default function Navbar() {
           </SheetContent>
         </Sheet>
 
+        {/* Theme Switcher */}
         <div className="flex items-center gap-4">
           <ThemeSwitcher />
         </div>
