@@ -8,13 +8,13 @@ export default async function BlogPage() {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-4xl font-bold mb-8">Blog Posts</h1>
+      <h1 className="mb-8 text-4xl font-bold">Blog Posts</h1>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <Link href={`/blog/${post.slug}`} key={post.slug}>
-            <Card className="h-full hover:shadow-lg transition-shadow">
+            <Card className="h-full transition-shadow hover:shadow-lg">
               <CardHeader>
-                <CardTitle>{post.title}</CardTitle>
+                <CardTitle className="text-primary">{post.title}</CardTitle>
                 <div className="flex gap-2 text-sm text-muted-foreground">
                   <span>{new Date(post.date).toLocaleDateString()}</span>
                   {post.readingTime && <span>·</span>}
@@ -24,11 +24,11 @@ export default async function BlogPage() {
               <CardContent>
                 <p className="text-muted-foreground">{post.description}</p>
                 {post.tags && (
-                  <div className="flex gap-2 mt-4">
+                  <div className="mt-4 flex gap-2">
                     {post.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="bg-secondary text-secondary-foreground px-2 py-1 rounded-md text-sm"
+                        className="rounded-md bg-secondary px-2 py-1 text-sm text-secondary-foreground"
                       >
                         {tag}
                       </span>
