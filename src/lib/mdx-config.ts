@@ -1,13 +1,11 @@
-// src/lib/mdx-config.ts
+import type { MDXRemoteProps } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeMathJax from 'rehype-mathjax';
-import { MDXRemoteProps } from 'next-mdx-remote/rsc';
 
-// Define types for rehype-pretty-code options
 interface PrettyCodeNode {
   children: Array<{ type: string; value: string }>;
   properties: {
@@ -41,7 +39,6 @@ const prettyCodeOptions: PrettyCodeOptions = {
   filterMetaString: (string) => string.replace(/language-/, ''),
 };
 
-// Use MDXRemoteProps instead of SerializeOptions
 export const mdxOptions: MDXRemoteProps['options'] = {
   parseFrontmatter: true,
   mdxOptions: {

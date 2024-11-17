@@ -47,6 +47,8 @@ export default function Navbar() {
             src={theme === 'dark' ? '/logo/dark.png' : '/logo/light.png'}
             alt="Aman Kumar Logo"
             className="h-8"
+            width={32}
+            height={32}
           />
           <span className="sr-only">Aman Kumar</span>
         </Link>

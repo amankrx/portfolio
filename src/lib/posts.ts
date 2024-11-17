@@ -5,7 +5,7 @@ import matter from 'gray-matter';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import type { Post } from '@/types/post';
 import readingTime from 'reading-time';
-import { MDXComponents } from '@/lib/mdx-components';
+import { useMDXComponents } from '@/lib/mdx-components';
 import { mdxOptions } from './mdx-config';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts');
@@ -20,7 +20,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
     const { content: compiledContent } = await compileMDX({
       source: content,
-      components: MDXComponents,
+      components: useMDXComponents,
       options: mdxOptions,
     });
 
