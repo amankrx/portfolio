@@ -1,5 +1,6 @@
+/* File: globals.css */
 [data-rehype-pretty-code-figure] pre {
-  @apply px-0;
+  @apply px-0 border-0 border-none;
 }
 
 [data-rehype-pretty-code-figure] code {
@@ -34,73 +35,117 @@
   @apply border-b-2 p-1 shadow-none;
 }
 
-.subheading-anchor {
-  @apply no-underline hover:underline;
+/* Code caption - it should be centered and should take 80% of the width */
+[data-rehype-pretty-code-figure] figcaption {
+  @apply text-center w-full;
+  max-width: 80%;
+  margin: 0.75em auto;
+  color: #666;
+  font-size: 0.8em;
 }
 
-.prose a {
-  @apply text-primary hover:text-primary/80 no-underline;
+[data-rehype-pretty-code-figure] > div {
+  position: relative;
 }
 
-.prose h2 {
-  @apply text-3xl font-bold tracking-tight mt-10 first:mt-0;
+[data-rehype-pretty-code-figure] > div::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
 }
 
-.prose h3 {
-  @apply text-2xl font-bold tracking-tight mt-8;
+[data-rehype-pretty-code-figure] > div[data-filename]::before {
+  content: attr(data-filename) ' (' attr(data-language) ')';
 }
 
-.prose img {
-  @apply rounded-lg border;
+[data-rehype-pretty-code-title] {
+  @apply bg-zinc-700 text-zinc-200 rounded-t-lg py-2 px-3 font-semibold text-sm;
 }
 
-.prose blockquote {
-  @apply border-l-4 border-primary;
+figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title])
+  pre {
+  @apply !rounded-t-none;
 }
 
-.prose ul {
-  @apply my-6 ml-6 list-disc;
-}
+/*!* Additional prose and styling *!*/
+/*.subheading-anchor {*/
+/*  @apply no-underline hover:underline;*/
+/*}*/
 
-.prose ol {
-  @apply my-6 ml-6 list-decimal;
-}
+/*.prose a {*/
+/*  @apply text-primary hover:text-primary/80 no-underline;*/
+/*}*/
 
-.prose
-  :where(blockquote p:first-of-type):not(
-    :where([class~='not-prose'] *)
-  )::before,
-.prose
-  :where(blockquote p:first-of-type):not(
-    :where([class~='not-prose'] *)
-  )::after {
-  content: '';
-}
+/*.prose h2 {*/
+/*  @apply text-3xl font-bold tracking-tight mt-10 first:mt-0;*/
+/*}*/
 
-.prose p {
-  @apply leading-7 [&:not(:first-child)]:mt-6;
-}
+/*.prose h3 {*/
+/*  @apply text-2xl font-bold tracking-tight mt-8;*/
+/*}*/
 
-.prose pre {
-  @apply rounded-lg border bg-muted p-4;
-}
+/*.prose img {*/
+/*  @apply rounded-lg border;*/
+/*}*/
 
-.prose h2,
-.prose h3 {
-  scroll-margin-top: 100px;
-}
+/*.prose blockquote {*/
+/*  @apply border-l-4 border-primary;*/
+/*}*/
 
-.prose h2 {
-  @apply mb-4 text-2xl font-bold first:mt-0;
-}
+/*.prose ul {*/
+/*  @apply my-6 ml-6 list-disc;*/
+/*}*/
 
-.prose h3 {
-  @apply mb-4 text-xl font-semibold;
-}
+/*.prose ol {*/
+/*  @apply my-6 ml-6 list-decimal;*/
+/*}*/
 
-@media (max-width: 1280px) {
-  .prose h2,
-  .prose h3 {
-    scroll-margin-top: 80px;
-  }
-}
+/*.prose*/
+/*  :where(blockquote p:first-of-type):not(*/
+/*    :where([class~='not-prose'] *)*/
+/*  )::before,*/
+/*.prose*/
+/*  :where(blockquote p:first-of-type):not(*/
+/*    :where([class~='not-prose'] *)*/
+/*  )::after {*/
+/*  content: '';*/
+/*}*/
+
+/*.prose p {*/
+/*  @apply leading-7 [&:not(:first-child)]:mt-6;*/
+/*}*/
+
+/*.prose pre {*/
+/*  @apply rounded-lg border bg-muted p-4;*/
+/*}*/
+
+/*.prose h2,*/
+/*.prose h3 {*/
+/*  scroll-margin-top: 100px;*/
+/*}*/
+
+/*.prose h2 {*/
+/*  @apply mb-4 text-2xl font-bold first:mt-0;*/
+/*}*/
+
+/*.prose h3 {*/
+/*  @apply mb-4 text-xl font-semibold;*/
+/*}*/
+
+/*@media (max-width: 1280px) {*/
+/*  .prose h2,*/
+/*  .prose h3 {*/
+/*    scroll-margin-top: 80px;*/
+/*  }*/
+/*}*/
+
+/*@media (max-width: 640px) {*/
+/*  .prose {*/
+/*    font-size: 1rem;*/
+/*    line-height: 1.65;*/
+/*  }*/
+/*}*/

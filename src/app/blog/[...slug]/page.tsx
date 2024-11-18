@@ -86,7 +86,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
               <Separator className="h-px bg-primary/10" />
 
-              <div className="prose max-w-none dark:prose-invert">
+              <div className="prose prose-lg max-w-none dark:prose-invert">
                 <MDXContent code={post.body} />
               </div>
 

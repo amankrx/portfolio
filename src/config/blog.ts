@@ -3,7 +3,7 @@
 import { BlogConfig } from '@/types/blog';
 
 export const blogConfig: BlogConfig = {
-  postsPerPage: 5,
+  postsPerPage: 6,
   maxDescriptionLength: 160,
   ogImageSize: {
     width: 1200,
