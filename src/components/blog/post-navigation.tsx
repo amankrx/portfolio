@@ -1,34 +1,25 @@
-// src/components/blog/post-navigation.tsx
-import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/components/ui/button';
+import { ChevronLeft } from 'lucide-react';
 
 interface PostNavigationProps {
-  showDesktopNav?: boolean;
+  className?: string;
 }
 
-export function PostNavigation({ showDesktopNav = true }: PostNavigationProps) {
+export function PostNavigation({ className }: PostNavigationProps) {
   return (
-    <>
-      {showDesktopNav && (
-        <Link
-          href="/blog"
-          className="absolute left-[-200px] top-14 hidden xl:inline-flex"
-        >
-          <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            See all posts
-          </Button>
-        </Link>
-      )}
-      <div className="flex items-center space-x-2 xl:hidden">
-        <Button variant="ghost" className="gap-2" asChild>
-          <Link href="/blog">
-            <ArrowLeft className="h-4 w-4" />
-            See all posts
-          </Link>
-        </Button>
-      </div>
-    </>
+    <div className={cn('flex justify-start w-full', className)}>
+      <Link
+        href="/blog"
+        className={cn(
+          buttonVariants({ variant: 'ghost' }),
+          'gap-2 text-muted-foreground hover:text-primary'
+        )}
+      >
+        <ChevronLeft className="h-4 w-4" />
+        See all posts
+      </Link>
+    </div>
   );
 }

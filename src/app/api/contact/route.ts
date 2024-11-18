@@ -1,24 +1,8 @@
 // app/api/contact/route.ts
 import { NextResponse } from 'next/server';
 import { sendEmail } from '@/lib/email';
-import * as z from 'zod';
-
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(3, 'Name must be at least 3 characters')
-    .max(30, 'Name must be less than 30 characters')
-    .regex(/^[a-zA-Z\s]*$/, 'Name can only contain letters and spaces'),
-  email: z
-    .string()
-    .email('Please enter a valid email address')
-    .min(5, 'Email must be at least 5 characters')
-    .max(50, 'Email must be less than 50 characters'),
-  message: z
-    .string()
-    .min(10, 'Message must be at least 10 characters')
-    .max(300, 'Message must be less than 300 characters'),
-});
+import { formSchema } from '@/lib/form-schema';
+import { z } from 'zod';
 
 export async function POST(request: Request) {
   try {

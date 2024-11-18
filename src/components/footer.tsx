@@ -1,10 +1,10 @@
-// components/Footer.tsx
+// components/footer.tsx
 'use client';
 
 import Link from 'next/link';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { Rss, Mail } from 'lucide-react';
-import { useProfile } from '@/context/ProfileContext';
+import { useProfile } from '@/context/profile-context';
 
 // Create a map of platform names to icon components
 const SOCIAL_ICONS = {

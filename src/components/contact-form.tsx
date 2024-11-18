@@ -1,9 +1,8 @@
-// components/ContactForm.tsx
+// components/contact-form.tsx
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { useState } from 'react';
 import { Loader2, Send, User, Mail, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -18,25 +17,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(3, 'Name must be at least 3 characters')
-    .max(30, 'Name must be less than 30 characters')
-    .regex(/^[a-zA-Z\s]*$/, 'Name can only contain letters and spaces'),
-  email: z
-    .string()
-    .email('Please enter a valid email address')
-    .min(5, 'Email must be at least 5 characters')
-    .max(50, 'Email must be less than 50 characters'),
-  message: z
-    .string()
-    .min(10, 'Message must be at least 10 characters')
-    .max(300, 'Message must be less than 300 characters'),
-});
-
-type FormData = z.infer<typeof formSchema>;
+import { formSchema, FormData } from '@/lib/form-schema';
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);

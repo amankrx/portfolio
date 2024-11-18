@@ -29,7 +29,7 @@ export function PostCard({ post }: PostCardProps) {
             {title}
           </Link>
           {tags && tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-3">
+            <div className="mt-3 flex flex-wrap gap-2">
               {tags.map((tag) => (
                 <Tag key={tag} tag={tag} />
               ))}
@@ -39,7 +39,7 @@ export function PostCard({ post }: PostCardProps) {
       </CardHeader>
       <CardContent>
         {description && (
-          <p className="text-muted-foreground leading-relaxed">{description}</p>
+          <p className="leading-relaxed text-muted-foreground">{description}</p>
         )}
       </CardContent>
       <CardFooter className="flex items-center justify-between border-t pt-6">

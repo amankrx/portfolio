@@ -1,4 +1,4 @@
-// components/ThemeProvider.tsx
+// components/theme-provider.tsx
 
 'use client';
 

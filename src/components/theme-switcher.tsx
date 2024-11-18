@@ -1,4 +1,4 @@
-// components/ThemeSwitcher.tsx
+// components/theme-switcher.tsx
 'use client';
 
 import * as React from 'react';
@@ -7,16 +7,14 @@ import { motion } from 'framer-motion';
 
 export default function ThemeSwitcher() {
   const [mounted, setMounted] = React.useState(false);
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, theme, setTheme } = useTheme();
 
   React.useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem('theme') || 'system';
-    setTheme(savedTheme);
-  }, [setTheme]);
+  }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    const newTheme = theme === 'dark' || theme === 'system' ? 'light' : 'dark';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
   };
@@ -34,8 +32,8 @@ export default function ThemeSwitcher() {
       <motion.div
         className="relative h-full w-full"
         animate={{
-          scale: theme === 'dark' ? 1 : 0,
-          rotate: theme === 'dark' ? 0 : 180,
+          scale: resolvedTheme === 'dark' ? 1 : 0,
+          rotate: resolvedTheme === 'dark' ? 0 : 180,
         }}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
       >
@@ -58,8 +56,8 @@ export default function ThemeSwitcher() {
       <motion.div
         className="absolute inset-0 p-1.5"
         animate={{
-          scale: theme === 'light' ? 1 : 0,
-          rotate: theme === 'light' ? 0 : -180,
+          scale: resolvedTheme === 'light' ? 1 : 0,
+          rotate: resolvedTheme === 'light' ? 0 : -180,
         }}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
       >

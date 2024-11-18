@@ -9,7 +9,7 @@ interface BlogSidebarProps {
 }
 
 export async function BlogSidebar({ searchParams }: BlogSidebarProps) {
-  const params = await searchParams;
+  const params = searchParams;
   const tagParam = params?.tag;
   const selectedTag = typeof tagParam === 'string' ? tagParam : undefined;
 
@@ -18,7 +18,7 @@ export async function BlogSidebar({ searchParams }: BlogSidebarProps) {
 
   return (
     <aside className="col-span-12 lg:col-span-4">
-      <Card className="sticky top-8">
+      <Card className="sticky top-24">
         <CardHeader>
           <CardTitle>Tags</CardTitle>
         </CardHeader>

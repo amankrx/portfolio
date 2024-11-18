@@ -11,18 +11,20 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import ThemeSwitcher from '@/components/ThemeSwitcher';
+import ThemeSwitcher from '@/components/theme-switcher';
 import { useEffect, useState } from 'react';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { useTheme } from 'next-themes';
 
 export default function Navbar() {
   const [currentPath, setCurrentPath] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
   const pathName = usePathname();
-  const { theme } = useTheme(); // Get current theme from next-themes
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     setCurrentPath(pathName);
+    setMounted(true);
   }, [pathName]);
 
   const isActive = (path: string) =>
@@ -38,13 +40,17 @@ export default function Navbar() {
     { href: '/blog', label: 'Blog' },
   ];
 
+  if (!mounted) return null;
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src={theme === 'dark' ? '/logo/dark.png' : '/logo/light.png'}
+            src={
+              resolvedTheme === 'light' ? '/logo/light.png' : '/logo/dark.png'
+            }
             alt="Aman Kumar Logo"
             className="h-8"
             width={32}

@@ -9,6 +9,7 @@ import { Separator } from '@/components/ui/separator';
 import { PostHeader } from '@/components/blog/post-header';
 import { PostNavigation } from '@/components/blog/post-navigation';
 import { PostFooter } from '@/components/blog/post-footer';
+import TableOfContents from '@/components/blog/table-of-contents';
 
 interface PostPageProps {
   params: Promise<{
@@ -61,10 +62,6 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams() {
-  return posts.map((post) => ({ slug: post.slugAsParams.split('/') }));
-}
-
 export default async function PostPage({ params }: PostPageProps) {
   const post = await getPostFromParams(params);
 
@@ -73,27 +70,37 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <article className="container relative max-w-3xl py-6 lg:py-10">
-      <PostNavigation />
+    <div className="container relative py-6 lg:py-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <PostNavigation className="mb-8" />
 
-      <div className="flex flex-col space-y-10">
-        <PostHeader
-          title={post.title}
-          date={post.date}
-          tags={post.tags}
-          description={post.description}
-        />
+        <div className="grid grid-cols-1 items-start justify-center gap-8 lg:grid-cols-[minmax(auto,800px)_240px]">
+          <article>
+            <div className="flex flex-col space-y-10">
+              <PostHeader
+                title={post.title}
+                date={post.date}
+                tags={post.tags}
+                description={post.description}
+              />
 
-        <Separator className="bg-primary/10 h-px" />
+              <Separator className="h-px bg-primary/10" />
 
-        <div className="prose dark:prose-invert max-w-none">
-          <MDXContent code={post.body} />
+              <div className="prose max-w-none dark:prose-invert">
+                <MDXContent code={post.body} />
+              </div>
+
+              <Separator className="h-px bg-primary/10" />
+
+              <PostFooter title={post.title} slug={post.slugAsParams} />
+            </div>
+          </article>
+
+          <aside className="relative z-0 hidden h-full lg:block">
+            <TableOfContents />
+          </aside>
         </div>
-
-        <Separator className="bg-primary/10 h-px" />
-
-        <PostFooter title={post.title} slug={post.slugAsParams} />
       </div>
-    </article>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-// context/ProfileContext.tsx
+// context/profile-context.tsx
 'use client';
 
 import React, { createContext, useContext, ReactNode } from 'react';

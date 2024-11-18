@@ -10,16 +10,18 @@ export const metadata: Metadata = {
 };
 
 interface BlogPageProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
+  const resolvedSearchParams = await searchParams;
+
   return (
     <section className="container max-w-6xl py-10">
       <BlogHeader />
-      <div className="grid grid-cols-1 gap-10 mt-8 lg:grid-cols-12">
-        <BlogContent searchParams={searchParams} />
-        <BlogSidebar searchParams={searchParams} />
+      <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-12">
+        <BlogContent searchParams={resolvedSearchParams} />
+        <BlogSidebar searchParams={resolvedSearchParams} />
       </div>
     </section>
   );

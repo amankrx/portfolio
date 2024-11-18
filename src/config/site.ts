@@ -1,14 +1,14 @@
 // src/config/site.ts
 
 export const siteConfig = {
-  name: 'JollyBlog',
-  url: 'https://example.com',
-  description: 'Nextjs 14 blog using velite, tailwind and shadcn',
-  author: 'JollyCoding',
+  name: "Aman's Blog",
+  url: 'https://amankrx.com/blog',
+  description: "Aman's technical blog",
+  author: 'Aman Kumar',
   links: {
-    twitter: 'https://twitter.com/jollyshopland',
-    github: 'https://github.com/jolbol1',
-    personalSite: 'https://jamesshopland.com',
+    twitter: 'https://twitter.com/amankrx',
+    github: 'https://github.com/amankrx',
+    personalSite: 'https://amankrx.com',
   },
 };
 

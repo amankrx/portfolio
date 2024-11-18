@@ -5,7 +5,7 @@ import { Github, Twitter, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Link from 'next/link';
-import { useProfile } from '@/context/ProfileContext';
+import { useProfile } from '@/context/profile-context';
 
 const technologies = [
   { name: 'Rust', level: 'Advanced' },

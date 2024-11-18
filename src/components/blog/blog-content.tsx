@@ -13,7 +13,7 @@ interface BlogContentProps {
 export async function BlogContent({ searchParams }: BlogContentProps) {
   // Filter out unpublished posts first
   const publishedPosts = posts.filter((post) => post.published);
-  const params = await searchParams;
+  const params = searchParams;
   const pageParam = params?.page;
   const tagParam = params?.tag;
 
