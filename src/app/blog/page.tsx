@@ -1,45 +1,26 @@
 // src/app/blog/page.tsx
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Link from 'next/link';
-import { getAllPosts } from '@/lib/posts';
+import { Metadata } from 'next';
+import { BlogHeader } from '@/components/blog/blog-header';
+import { BlogContent } from '@/components/blog/blog-content';
+import { BlogSidebar } from '@/components/blog/blog-sidebar';
 
-export default async function BlogPage() {
-  const posts = await getAllPosts();
+export const metadata: Metadata = {
+  title: 'Blog | Your Name',
+  description: 'Thoughts, stories and ideas.',
+};
 
+interface BlogPageProps {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="mb-8 text-4xl font-bold">Blog Posts</h1>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
-          <Link href={`/blog/${post.slug}`} key={post.slug}>
-            <Card className="h-full transition-shadow hover:shadow-lg">
-              <CardHeader>
-                <CardTitle className="text-primary">{post.title}</CardTitle>
-                <div className="flex gap-2 text-sm text-muted-foreground">
-                  <span>{new Date(post.date).toLocaleDateString()}</span>
-                  {post.readingTime && <span>·</span>}
-                  {post.readingTime && <span>{post.readingTime}</span>}
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">{post.description}</p>
-                {post.tags && (
-                  <div className="mt-4 flex gap-2">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md bg-secondary px-2 py-1 text-sm text-secondary-foreground"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
+    <section className="container max-w-6xl py-10">
+      <BlogHeader />
+      <div className="grid grid-cols-1 gap-10 mt-8 lg:grid-cols-12">
+        <BlogContent searchParams={searchParams} />
+        <BlogSidebar searchParams={searchParams} />
       </div>
-    </div>
+    </section>
   );
 }

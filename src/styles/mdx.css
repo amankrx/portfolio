@@ -1,0 +1,106 @@
+[data-rehype-pretty-code-figure] pre {
+  @apply px-0;
+}
+
+[data-rehype-pretty-code-figure] code {
+  @apply text-sm !leading-loose md:text-base border-0 p-0;
+}
+
+[data-rehype-pretty-code-figure] code[data-line-numbers] {
+  counter-reset: line;
+}
+
+[data-rehype-pretty-code-figure] code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply mr-4 inline-block w-4 text-right text-gray-500;
+}
+
+[data-rehype-pretty-code-figure] [data-line] {
+  @apply border-l-2 border-l-transparent px-3;
+}
+
+[data-rehype-pretty-code-figure] [data-highlighted-line] {
+  background: rgba(200, 200, 255, 0.1);
+  @apply border-l-blue-400;
+}
+
+[data-rehype-pretty-code-figure] [data-highlighted-chars] {
+  @apply rounded bg-zinc-600/50;
+  box-shadow: 0 0 0 4px rgb(82 82 91 / 0.5);
+}
+
+[data-rehype-pretty-code-figure] [data-chars-id] {
+  @apply border-b-2 p-1 shadow-none;
+}
+
+.subheading-anchor {
+  @apply no-underline hover:underline;
+}
+
+.prose a {
+  @apply text-primary hover:text-primary/80 no-underline;
+}
+
+.prose h2 {
+  @apply text-3xl font-bold tracking-tight mt-10 first:mt-0;
+}
+
+.prose h3 {
+  @apply text-2xl font-bold tracking-tight mt-8;
+}
+
+.prose img {
+  @apply rounded-lg border;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-primary;
+}
+
+.prose ul {
+  @apply my-6 ml-6 list-disc;
+}
+
+.prose ol {
+  @apply my-6 ml-6 list-decimal;
+}
+
+.prose
+  :where(blockquote p:first-of-type):not(
+    :where([class~='not-prose'] *)
+  )::before,
+.prose
+  :where(blockquote p:first-of-type):not(
+    :where([class~='not-prose'] *)
+  )::after {
+  content: '';
+}
+
+.prose p {
+  @apply leading-7 [&:not(:first-child)]:mt-6;
+}
+
+.prose pre {
+  @apply rounded-lg border bg-muted p-4;
+}
+
+.prose h2,
+.prose h3 {
+  scroll-margin-top: 100px;
+}
+
+.prose h2 {
+  @apply mb-4 text-2xl font-bold first:mt-0;
+}
+
+.prose h3 {
+  @apply mb-4 text-xl font-semibold;
+}
+
+@media (max-width: 1280px) {
+  .prose h2,
+  .prose h3 {
+    scroll-margin-top: 80px;
+  }
+}

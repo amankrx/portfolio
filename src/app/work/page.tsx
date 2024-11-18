@@ -1,3 +1,7 @@
-export default function Work() {
-  return <div>Work page</div>;
+import React from 'react';
+
+function Page() {
+  return <div></div>;
 }
+
+export default Page;

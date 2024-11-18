@@ -68,56 +68,6 @@
   }
 }
 
-/* Syntax Highlighting */
-[data-rehype-pretty-code-fragment] {
-  @apply relative;
-}
-
-/* Inline Code */
-code:not(pre > code) {
-  @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm;
-}
-
-/* Block Code */
-pre > code {
-  @apply grid min-w-full break-words border-0 bg-transparent p-0;
-  counter-reset: line;
-  box-decoration-break: clone;
-}
-
-[data-rehype-pretty-code-fragment] code {
-  @apply grid min-w-full break-words rounded-none border-0 bg-transparent p-0;
-  counter-reset: line;
-  box-decoration-break: clone;
-}
-
-[data-rehype-pretty-code-fragment] .line {
-  @apply px-4 py-1;
-}
-
-[data-rehype-pretty-code-fragment] [data-line-numbers] .line {
-  @apply px-2;
-}
-
-[data-rehype-pretty-code-fragment] [data-line-numbers] > .line::before {
-  @apply text-gray-500 mr-4;
-  counter-increment: line;
-  content: counter(line);
-}
-
-[data-rehype-pretty-code-fragment] .line--highlighted {
-  @apply bg-slate-800/50;
-}
-
-[data-rehype-pretty-code-fragment] .word--highlighted {
-  @apply rounded-md bg-slate-800/50 border-slate-800/50;
-}
-
-/* Math Equations */
-.math-display {
-  @apply overflow-x-auto py-2;
-}
-
 /* Utilities */
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar {
