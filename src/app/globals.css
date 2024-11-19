@@ -84,3 +84,26 @@
     scrollbar-width: none;
   }
 }
+
+.select-item {
+  @apply relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 px-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50;
+}
+
+/* Add/update in your global CSS */
+.select-content {
+  @apply max-h-[400px] overflow-y-auto rounded-md border bg-popover p-1 text-popover-foreground shadow-md;
+  scrollbar-width: thin; /* For Firefox */
+}
+
+/* Optional: Custom scrollbar styling for webkit browsers */
+.select-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.select-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.select-content::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-muted;
+}

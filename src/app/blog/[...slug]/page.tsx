@@ -71,7 +71,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <div className="container relative py-6 lg:py-10">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-1 sm:px-6 lg:px-8">
         <PostNavigation className="mb-8" />
 
         <div className="grid grid-cols-1 items-start justify-center gap-8 lg:grid-cols-[minmax(auto,800px)_240px]">
@@ -81,7 +81,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 title={post.title}
                 date={post.date}
                 tags={post.tags}
-                description={post.description}
+                readingTime={post.readingTime}
               />
 
               <Separator className="h-px bg-primary/10" />

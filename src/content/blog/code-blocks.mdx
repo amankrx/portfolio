@@ -71,6 +71,26 @@ Inline ANSI: `> Local: [0;36mhttp://localhost:[0;36;1m3000[0;36m/[0m{:ansi}`
 
 ---
 
+```rs showLineNumbers title="main.rs" caption="This is a sample caption with line numbers. I have added the rust sample code to see how it works"
+struct Point {
+  x: f64,
+  y: f64,
+}
+
+impl Point {
+  fn new(x: f64, y: f64) -> Point {
+    Point { x, y }
+  }
+}
+
+fn main() {
+  let p = Point::new(1.0, 2.0);
+
+  println!("Point: ({}, {})", p.x, p.y);
+}
+
+```
+
 ### Kitchen Sink Meta Strings
 
 ```js showLineNumbers {2-4} title="isEven.js" /console/ caption="Im a caption"

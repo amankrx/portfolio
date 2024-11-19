@@ -2,11 +2,11 @@
 import { Metadata } from 'next';
 import { BlogHeader } from '@/components/blog/blog-header';
 import { BlogContent } from '@/components/blog/blog-content';
-import { BlogSidebar } from '@/components/blog/blog-sidebar';
+import { TagFilter } from '@/components/blog/tag-filter';
 
 export const metadata: Metadata = {
-  title: 'Blog | Your Name',
-  description: 'Thoughts, stories and ideas.',
+  title: 'Blog | Aman Kumar',
+  description: "Aman Kumar's blog",
 };
 
 interface BlogPageProps {
@@ -19,9 +19,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   return (
     <section className="container max-w-6xl py-10">
       <BlogHeader />
-      <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-12">
+      <div className="mt-8 space-y-6">
+        <div className="flex justify-center md:justify-end">
+          <TagFilter searchParams={resolvedSearchParams} />
+        </div>
         <BlogContent searchParams={resolvedSearchParams} />
-        <BlogSidebar searchParams={resolvedSearchParams} />
       </div>
     </section>
   );

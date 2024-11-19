@@ -1,7 +1,7 @@
 // src/components/blog/blog-content.tsx
 import { posts } from '#site/content';
 import { blogConfig } from '@/config/blog';
-import { PostCard } from '@/components/blog/post-card';
+import { BlogCard } from '@/components/blog/blog-card';
 import { QueryPagination } from '@/components/query-pagination';
 import { sortPosts } from '@/lib/utils';
 import { Suspense } from 'react';
@@ -11,7 +11,6 @@ interface BlogContentProps {
 }
 
 export async function BlogContent({ searchParams }: BlogContentProps) {
-  // Filter out unpublished posts first
   const publishedPosts = posts.filter((post) => post.published);
   const params = searchParams;
   const pageParam = params?.page;
@@ -21,14 +20,12 @@ export async function BlogContent({ searchParams }: BlogContentProps) {
   const currentPage = Math.max(1, page);
   const selectedTag = typeof tagParam === 'string' ? tagParam : undefined;
 
-  // Process posts
   const filteredPosts = selectedTag
     ? publishedPosts.filter((post) => post.tags?.includes(selectedTag))
     : publishedPosts;
   const sortedPosts = sortPosts(filteredPosts);
   const totalPages = Math.ceil(sortedPosts.length / blogConfig.postsPerPage);
 
-  // Get current page posts
   const displayPosts = sortedPosts.slice(
     (currentPage - 1) * blogConfig.postsPerPage,
     currentPage * blogConfig.postsPerPage
@@ -36,7 +33,7 @@ export async function BlogContent({ searchParams }: BlogContentProps) {
 
   if (currentPage > totalPages) {
     return (
-      <div className="col-span-12 lg:col-span-8">
+      <div>
         <h2 className="text-2xl font-bold">Page not found</h2>
         <p className="mt-4">This page does not exist.</p>
       </div>
@@ -44,19 +41,22 @@ export async function BlogContent({ searchParams }: BlogContentProps) {
   }
 
   return (
-    <div className="col-span-12 lg:col-span-8">
-      <Suspense fallback={<div>Loading posts...</div>}>
-        {displayPosts.length > 0 ? (
-          <div className="space-y-10">
+    <Suspense fallback={<div>Loading posts...</div>}>
+      {displayPosts.length > 0 ? (
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {displayPosts.map((post) => (
-              <PostCard key={post.slug} post={post} />
+              <BlogCard key={post.slug} post={post} />
             ))}
-            <QueryPagination totalPages={totalPages} className="justify-end" />
           </div>
-        ) : (
-          <p className="text-muted-foreground">No posts found.</p>
-        )}
-      </Suspense>
-    </div>
+          <QueryPagination
+            totalPages={totalPages}
+            className="flex justify-center"
+          />
+        </div>
+      ) : (
+        <p className="text-muted-foreground">No posts found.</p>
+      )}
+    </Suspense>
   );
 }

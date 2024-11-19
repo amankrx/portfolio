@@ -1,4 +1,4 @@
-/* File: globals.css */
+/* MDX styles */
 [data-rehype-pretty-code-figure] pre {
   @apply px-0 border-0 border-none;
 }
@@ -35,7 +35,6 @@
   @apply border-b-2 p-1 shadow-none;
 }
 
-/* Code caption - it should be centered and should take 80% of the width */
 [data-rehype-pretty-code-figure] figcaption {
   @apply text-center w-full;
   max-width: 80%;
@@ -71,81 +70,133 @@ figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title])
   @apply !rounded-t-none;
 }
 
-/*!* Additional prose and styling *!*/
-/*.subheading-anchor {*/
-/*  @apply no-underline hover:underline;*/
-/*}*/
+.prose h1 a,
+.prose h2 a,
+.prose h3 a,
+.prose h4 a {
+  all: unset; /* Reset all styles for anchors inside headings */
+  display: inline; /* Ensure proper inline behavior */
+  @apply text-foreground;
+}
 
-/*.prose a {*/
-/*  @apply text-primary hover:text-primary/80 no-underline;*/
-/*}*/
+/* Cursor on hover */
+.prose h1 a:hover,
+.prose h2 a:hover,
+.prose h3 a:hover,
+.prose h4 a:hover {
+  cursor: pointer;
+  display: inline;
+  @apply text-primary;
+}
 
-/*.prose h2 {*/
-/*  @apply text-3xl font-bold tracking-tight mt-10 first:mt-0;*/
-/*}*/
+.prose img {
+  @apply rounded-lg border;
+}
 
-/*.prose h3 {*/
-/*  @apply text-2xl font-bold tracking-tight mt-8;*/
-/*}*/
+.prose blockquote {
+  @apply border-l-4 border-primary;
+}
 
-/*.prose img {*/
-/*  @apply rounded-lg border;*/
-/*}*/
+.prose ul {
+  @apply my-6 ml-6 list-disc;
+}
 
-/*.prose blockquote {*/
-/*  @apply border-l-4 border-primary;*/
-/*}*/
+.prose ol {
+  @apply my-6 ml-6 list-decimal;
+}
 
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:first-of-type::after {
+  content: '';
+}
+
+.prose p {
+  @apply leading-7 [&:not(:first-child)]:mt-6;
+}
+
+.prose pre {
+  @apply rounded-lg border bg-muted p-4;
+}
+
+.prose h2,
+.prose h3 {
+  scroll-margin-top: 100px;
+}
+
+@media (max-width: 1280px) {
+  .prose h2,
+  .prose h3 {
+    scroll-margin-top: 80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .prose {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+}
+
+/* Base styles for all lists */
+.prose ul,
+.prose ol {
+  margin: 1em 0;
+  padding-left: 2em;
+}
+
+/*!* Unordered lists *!*/
 /*.prose ul {*/
-/*  @apply my-6 ml-6 list-disc;*/
+/*  list-style-type: disc;*/
 /*}*/
 
+/*!* First level of nesting for unordered lists *!*/
+/*.prose ul ul {*/
+/*  list-style-type: circle;*/
+/*  margin: 0.5em 0;*/
+/*}*/
+
+/*!* Second level of nesting for unordered lists *!*/
+/*.prose ul ul ul {*/
+/*  list-style-type: square;*/
+/*}*/
+
+/*!* Ordered lists *!*/
 /*.prose ol {*/
-/*  @apply my-6 ml-6 list-decimal;*/
+/*  list-style-type: decimal;*/
 /*}*/
 
-/*.prose*/
-/*  :where(blockquote p:first-of-type):not(*/
-/*    :where([class~='not-prose'] *)*/
-/*  )::before,*/
-/*.prose*/
-/*  :where(blockquote p:first-of-type):not(*/
-/*    :where([class~='not-prose'] *)*/
-/*  )::after {*/
-/*  content: '';*/
+/*!* First level of nesting for ordered lists *!*/
+/*.prose ol ol {*/
+/*  list-style-type: lower-alpha;*/
+/*  margin: 0.5em 0;*/
 /*}*/
 
-/*.prose p {*/
-/*  @apply leading-7 [&:not(:first-child)]:mt-6;*/
+/*!* Second level of nesting for ordered lists *!*/
+/*.prose ol ol ol {*/
+/*  list-style-type: lower-roman;*/
 /*}*/
 
-/*.prose pre {*/
-/*  @apply rounded-lg border bg-muted p-4;*/
+/*!* Mixed nesting styles *!*/
+/*.prose ul ol,*/
+/*.prose ol ul {*/
+/*  margin: 0.5em 0;*/
 /*}*/
 
-/*.prose h2,*/
-/*.prose h3 {*/
-/*  scroll-margin-top: 100px;*/
+/*!* List items *!*/
+/*.prose li {*/
+/*  margin: 0.5em 0;*/
+/*  line-height: 1.5;*/
 /*}*/
 
-/*.prose h2 {*/
-/*  @apply mb-4 text-2xl font-bold first:mt-0;*/
+/*!* Preserve spacing for nested items *!*/
+/*.prose li > ul,*/
+/*.prose li > ol {*/
+/*  margin-top: 0.25em;*/
+/*  margin-bottom: 0.25em;*/
 /*}*/
 
-/*.prose h3 {*/
-/*  @apply mb-4 text-xl font-semibold;*/
-/*}*/
-
-/*@media (max-width: 1280px) {*/
-/*  .prose h2,*/
-/*  .prose h3 {*/
-/*    scroll-margin-top: 80px;*/
-/*  }*/
-/*}*/
-
-/*@media (max-width: 640px) {*/
-/*  .prose {*/
-/*    font-size: 1rem;*/
-/*    line-height: 1.65;*/
-/*  }*/
+/*!* Optional: Custom indentation for each level *!*/
+/*.prose li > ul,*/
+/*.prose li > ol {*/
+/*  padding-left: 1.5em;*/
 /*}*/

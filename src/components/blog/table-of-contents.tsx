@@ -15,7 +15,7 @@ const TableOfContents = () => {
   const [headings, setHeadings] = useState<Heading[]>([]);
 
   useEffect(() => {
-    const elements = Array.from(document.querySelectorAll('h2, h3'))
+    const elements = Array.from(document.querySelectorAll('h1, h2, h3'))
       .filter((el) => el.id)
       .map((element) => ({
         id: element.id,
@@ -61,7 +61,7 @@ const TableOfContents = () => {
   if (headings.length === 0) return null;
 
   return (
-    <nav className="sticky top-[calc(var(--header-height)+2rem)] hidden max-h-[calc(100vh-var(--header-height)-4rem)] w-56 overflow-y-auto rounded-lg border bg-card p-6 lg:block">
+    <nav className="sticky top-[calc(var(--header-height)+2rem)] mb-4 hidden max-h-[calc(100vh-var(--header-height)-4rem)] w-56 overflow-y-auto rounded-lg border bg-card p-6 lg:block">
       <h2 className="mb-4 font-semibold text-primary">On this page</h2>
       <ul className="space-y-3">
         {headings.map((heading) => (
@@ -69,7 +69,8 @@ const TableOfContents = () => {
             key={heading.id}
             className={cn(
               'text-sm leading-relaxed',
-              heading.level === 'h3' ? 'ml-4' : '',
+              heading.level === 'h2' ? 'ml-4' : '',
+              heading.level === 'h3' ? 'ml-8' : '',
               'transition-colors'
             )}
           >

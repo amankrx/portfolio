@@ -3,9 +3,16 @@ import rehypeSlug from 'rehype-slug';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
-const computedFields = <T extends { slug: string }>(data: T) => ({
+function calculateReadingTime(content: string): string {
+  const words = content.split(/\s+/).length; // Count words
+  const readingTime = Math.ceil(words / 200); // Average 200 WPM
+  return `${readingTime} min read`;
+}
+
+const computedFields = <T extends { slug: string; body: string }>(data: T) => ({
   ...data,
   slugAsParams: data.slug.split('/').slice(1).join('/'),
+  readingTime: calculateReadingTime(data.body), // Add reading time here
 });
 
 const posts = defineCollection({
@@ -37,7 +44,7 @@ export default defineConfig({
   mdx: {
     rehypePlugins: [
       rehypeSlug,
-      [rehypePrettyCode, { theme: 'github-dark' }],
+      [rehypePrettyCode, { theme: 'houston' }],
       [
         rehypeAutolinkHeadings,
         {

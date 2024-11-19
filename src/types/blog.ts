@@ -8,6 +8,7 @@ export interface Post {
   published: boolean;
   tags?: string[];
   body: string;
+  readingTime?: string;
 }
 
 export interface BlogConfig {
