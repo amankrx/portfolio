@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . -c --ext .ts,.tsx",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "sync-posts": "tsx -r dotenv/config src/scripts/sync-posts.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -21,11 +22,12 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.2",
     "@radix-ui/react-visually-hidden": "^1.1.0",
-    "@rehype-pretty/transformers": "^0.13.2",
+    "@supabase/supabase-js": "^2.46.1",
     "@tailwindcss/typography": "^0.5.15",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "1.0.0",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.11.17",
     "github-slugger": "^2.0.0",
     "lucide-react": "^0.456.0",

@@ -10,6 +10,7 @@ import { PostHeader } from '@/components/blog/post-header';
 import { PostNavigation } from '@/components/blog/post-navigation';
 import { PostFooter } from '@/components/blog/post-footer';
 import TableOfContents from '@/components/blog/table-of-contents';
+import PostMetrics from '@/components/blog/post-metrics';
 
 interface PostPageProps {
   params: Promise<{
@@ -91,6 +92,7 @@ export default async function PostPage({ params }: PostPageProps) {
               </div>
 
               <Separator className="h-px bg-primary/10" />
+              <PostMetrics slug={post.slugAsParams} />
 
               <PostFooter title={post.title} slug={post.slugAsParams} />
             </div>
