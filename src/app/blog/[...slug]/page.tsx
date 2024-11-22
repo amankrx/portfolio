@@ -63,7 +63,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+const PostPage = async ({ params }: PostPageProps) => {
   const post = await getPostFromParams(params);
 
   if (!post || !post.published) {
@@ -71,38 +71,64 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <div className="container relative py-6 lg:py-10">
-      <div className="mx-auto max-w-7xl px-1 sm:px-6 lg:px-8">
-        <PostNavigation className="mb-8" />
-
-        <div className="grid grid-cols-1 items-start justify-center gap-8 lg:grid-cols-[minmax(auto,800px)_240px]">
-          <article>
-            <div className="flex flex-col space-y-10">
-              <PostHeader
-                title={post.title}
-                date={post.date}
-                tags={post.tags}
-                readingTime={post.readingTime}
-              />
-
-              <Separator className="h-px bg-primary/10" />
-
-              <div className="prose prose-lg max-w-none dark:prose-invert">
-                <MDXContent code={post.body} />
-              </div>
-
-              <Separator className="h-px bg-primary/10" />
-              <PostMetrics slug={post.slugAsParams} />
-
-              <PostFooter title={post.title} slug={post.slugAsParams} />
+    <div className="relative py-6 lg:py-10">
+      <div className="container mx-auto">
+        <div className="flex flex-col xl:flex-row justify-center relative">
+          {/* Left sidebar - Table of Contents */}
+          <aside className="hidden xl:block w-[240px] shrink-0">
+            <div className="sticky top-[calc(var(--header-height)+4rem)] max-h-[calc(100vh-var(--header-height)-8rem)] overflow-y-auto">
+              <TableOfContents />
             </div>
-          </article>
-
-          <aside className="relative z-0 hidden h-full lg:block">
-            <TableOfContents />
           </aside>
+
+          {/* Center content */}
+          <main className="w-full px-4 sm:px-6 xl:max-w-[800px] min-w-0">
+            <PostNavigation className="mb-8" />
+
+            <article>
+              <div className="flex flex-col space-y-10">
+                <PostHeader
+                  title={post.title}
+                  date={post.date}
+                  tags={post.tags}
+                  readingTime={post.readingTime}
+                />
+
+                <Separator className="h-px bg-primary/10" />
+
+                <div className="prose prose-lg max-w-none dark:prose-invert">
+                  <MDXContent code={post.body} />
+                </div>
+
+                <Separator className="h-px bg-primary/10" />
+
+                {/* Mobile/Tablet likes */}
+                <div className="xl:hidden">
+                  <PostMetrics slug={post.slugAsParams} />
+                </div>
+
+                <PostFooter title={post.title} slug={post.slugAsParams} />
+              </div>
+            </article>
+          </main>
+
+          {/* Right sidebar - Likes */}
+          <aside className="hidden xl:block w-[200px] shrink-0">
+            <div className="sticky top-[calc(var(--header-height)+4rem)] h-[calc(100vh-var(--header-height)-8rem)]">
+              <div className="flex items-center justify-center h-full">
+                <PostMetrics slug={post.slugAsParams} />
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        {/* Mobile Table of Contents */}
+        <div className="xl:hidden mt-8">
+          <TableOfContents />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default PostPage;

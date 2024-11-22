@@ -1,4 +1,3 @@
-import { createHash } from 'crypto';
 import { createClient } from '@supabase/supabase-js';
 
 export const supabase = createClient(

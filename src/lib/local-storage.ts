@@ -2,10 +2,6 @@
 const VIEWS_KEY = 'post-views';
 const LIKES_KEY = 'post-likes';
 
-interface PostInteraction {
-  timestamp: number;
-}
-
 const getStorageKey = (slug: string) => {
   // Get the last part of the path
   return slug.split('/').pop() || slug;

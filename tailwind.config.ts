@@ -86,10 +86,10 @@ const config = {
             maxWidth: '75ch',
             p: {
               marginBottom: '1.5em',
-              fontSize: '1.125rem',
+              fontSize: '1rem',
               lineHeight: '1.75',
               '@screen sm': {
-                fontSize: '1.25rem',
+                fontSize: '1.15rem',
               },
             },
             h1: {

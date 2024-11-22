@@ -32,7 +32,7 @@ export async function getClientHash(
 
   // Create a more robust hash combining multiple factors
   const baseString = Object.entries(factors)
-    .filter(([_, value]) => value !== 'unknown')
+    .filter(([value]) => value !== 'unknown')
     .map(([key, value]) => `${key}:${value}`)
     .join('|');
 

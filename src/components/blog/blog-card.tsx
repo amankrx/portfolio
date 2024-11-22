@@ -58,6 +58,7 @@ export function BlogCard({ post }: PostCardProps) {
               <Calendar className="h-4 w-4" />
               <time dateTime={date}>{formatDate(date)}</time>
             </div>
+            <div className="text-muted-foreground">|</div>
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4" />
               <span>{readingTime}</span>

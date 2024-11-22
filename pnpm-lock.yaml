@@ -91,6 +91,9 @@ importers:
       react-icons:
         specifier: ^5.3.0
         version: 5.3.0(react@19.0.0-rc-66855b96-20241106)
+      react-motion:
+        specifier: ^0.5.2
+        version: 0.5.2(react@19.0.0-rc-66855b96-20241106)
       rehype-autolink-headings:
         specifier: ^7.1.0
         version: 7.1.0
@@ -125,6 +128,9 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.3.1
+      '@types/react-motion':
+        specifier: ^0.0.40
+        version: 0.0.40
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.14.0
         version: 8.14.0(@typescript-eslint/parser@8.14.0(eslint@9.14.0(jiti@1.21.6))(typescript@5.6.3))(eslint@9.14.0(jiti@1.21.6))(typescript@5.6.3)
@@ -1740,6 +1746,12 @@ packages:
     resolution:
       {
         integrity: sha512-qW1Mfv8taImTthu4KoXgDfLuk4bydU6Q/TkADnDWWHwi4NX4BR+LWfTp2sVmTqRrsHvyDDTelgelxJ+SsejKKQ==,
+      }
+
+  '@types/react-motion@0.0.40':
+    resolution:
+      {
+        integrity: sha512-Bp6i9WTvW6QFN2E/XQPm8HPGMx1SVJ7H1DPsvptwWWh1XBymDZ7N7SK4nSZT/4tP4bTGvp1KHSAsswWZKO/WHA==,
       }
 
   '@types/react@18.3.12':
@@ -4045,6 +4057,18 @@ packages:
       }
     engines: { node: '>=16 || 14 >=14.18' }
 
+  performance-now@0.2.0:
+    resolution:
+      {
+        integrity: sha512-YHk5ez1hmMR5LOkb9iJkLKqoBlL7WD5M8ljC75ZfzXriuBIVNuecaXuU7e+hOwyqf24Wxhh7Vxgt7Hnw9288Tg==,
+      }
+
+  performance-now@2.1.0:
+    resolution:
+      {
+        integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==,
+      }
+
   picocolors@1.1.1:
     resolution:
       {
@@ -4202,6 +4226,12 @@ packages:
         integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==,
       }
 
+  raf@3.4.1:
+    resolution:
+      {
+        integrity: sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==,
+      }
+
   react-dom@19.0.0-rc-66855b96-20241106:
     resolution:
       {
@@ -4232,6 +4262,14 @@ packages:
       {
         integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==,
       }
+
+  react-motion@0.5.2:
+    resolution:
+      {
+        integrity: sha512-9q3YAvHoUiWlP3cK0v+w1N5Z23HXMj4IF4YuvjvWegWqNPfLXsOBE/V7UvQGpXxHFKRQQcNcVQE31g9SB/6qgQ==,
+      }
+    peerDependencies:
+      react: ^0.14.9 || ^15.3.0 || ^16.0.0
 
   react-remove-scroll-bar@2.3.6:
     resolution:
@@ -6094,6 +6132,10 @@ snapshots:
     dependencies:
       '@types/react': 18.3.12
 
+  '@types/react-motion@0.0.40':
+    dependencies:
+      '@types/react': 18.3.12
+
   '@types/react@18.3.12':
     dependencies:
       '@types/prop-types': 15.7.13
@@ -7854,6 +7896,10 @@ snapshots:
       lru-cache: 10.4.3
       minipass: 7.1.2
 
+  performance-now@0.2.0: {}
+
+  performance-now@2.1.0: {}
+
   picocolors@1.1.1: {}
 
   picomatch@2.3.1: {}
@@ -7932,6 +7978,10 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
+  raf@3.4.1:
+    dependencies:
+      performance-now: 2.1.0
+
   react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106):
     dependencies:
       react: 19.0.0-rc-66855b96-20241106
@@ -7946,6 +7996,13 @@ snapshots:
       react: 19.0.0-rc-66855b96-20241106
 
   react-is@16.13.1: {}
+
+  react-motion@0.5.2(react@19.0.0-rc-66855b96-20241106):
+    dependencies:
+      performance-now: 0.2.0
+      prop-types: 15.8.1
+      raf: 3.4.1
+      react: 19.0.0-rc-66855b96-20241106
 
   react-remove-scroll-bar@2.3.6(@types/react@18.3.12)(react@19.0.0-rc-66855b96-20241106):
     dependencies:
