@@ -1,4 +1,3 @@
-// src/app/blog/[...slug]/page.tsx
 import { posts } from '#site/content';
 import { MDXContent } from '@/components/mdx-components';
 import { notFound } from 'next/navigation';
@@ -25,8 +24,8 @@ async function getPostFromParams(params: PostPageProps['params']) {
 }
 
 export async function generateMetadata({
-  params,
-}: PostPageProps): Promise<Metadata> {
+                                         params,
+                                       }: PostPageProps): Promise<Metadata> {
   const post = await getPostFromParams(params);
 
   if (!post) {
@@ -121,7 +120,6 @@ const PostPage = async ({ params }: PostPageProps) => {
             </div>
           </aside>
         </div>
-
         {/* Mobile Table of Contents */}
         <div className="xl:hidden mt-8">
           <TableOfContents />
