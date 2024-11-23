@@ -1,5 +1,5 @@
 // src/components/blog/blog-content.tsx
-import { posts } from '#site/content';
+import { blogs, Post } from 'generated/content';
 import { blogConfig } from '@/config/blog';
 import { BlogCard } from '@/components/blog/blog-card';
 import { QueryPagination } from '@/components/query-pagination';
@@ -11,7 +11,7 @@ interface BlogContentProps {
 }
 
 export async function BlogContent({ searchParams }: BlogContentProps) {
-  const publishedPosts = posts.filter((post) => post.published);
+  const publishedPosts = blogs.filter((post: Post) => post.published);
   const params = searchParams;
   const pageParam = params?.page;
   const tagParam = params?.tag;
@@ -44,7 +44,7 @@ export async function BlogContent({ searchParams }: BlogContentProps) {
     <Suspense fallback={<div>Loading posts...</div>}>
       {displayPosts.length > 0 ? (
         <div className="space-y-8">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {displayPosts.map((post) => (
               <BlogCard key={post.slug} post={post} />
             ))}

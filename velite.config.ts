@@ -1,31 +1,78 @@
 import { defineConfig, defineCollection, s } from 'velite';
 import rehypeSlug from 'rehype-slug';
-import rehypePrettyCode from 'rehype-pretty-code';
+import rehypePrettyCode, { LineElement } from 'rehype-pretty-code';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeKatex from 'rehype-katex';
+import remarkMath from 'remark-math';
+import remarkGfm from 'remark-gfm';
 
-function calculateReadingTime(content: string): string {
-  const words = content.split(/\s+/).length; // Count words
-  const readingTime = Math.ceil(words / 200); // Average 200 WPM
-  return `${readingTime} min read`;
-}
+type ComputedFields = {
+  slug: string;
+  body: string;
+};
 
-const computedFields = <T extends { slug: string; body: string }>(data: T) => ({
-  ...data,
-  slugAsParams: data.slug.split('/').slice(1).join('/'),
-  readingTime: calculateReadingTime(data.body), // Add reading time here
-});
+const computedFields = <T extends ComputedFields>(data: T) => {
+  return {
+    ...data,
+    slugAsParams: data.slug.split('/').slice(1).join('/'),
+  };
+};
 
-const posts = defineCollection({
+const blogs = defineCollection({
   name: 'Post',
   pattern: 'blog/**/*.mdx',
   schema: s
     .object({
       slug: s.path(),
-      title: s.string().max(99),
-      description: s.string().max(999).optional(),
+      title: s.string().max(120),
+      description: s.string().max(1000),
       date: s.isodate(),
       published: s.boolean().default(true),
-      tags: s.array(s.string()).optional(),
+      tags: s.array(s.string()),
+      series: s.string().optional(), // For multi-part blog posts
+      lastModified: s.isodate().optional(),
+      metadata: s.metadata(),
+      toc: s.toc(),
+      body: s.mdx(),
+    })
+    .transform(computedFields),
+});
+
+const projects = defineCollection({
+  name: 'Project',
+  pattern: 'projects/**/*.mdx',
+  schema: s
+    .object({
+      slug: s.path(),
+      title: s.string(),
+      description: s.string(),
+      date: s.isodate(),
+      status: s
+        .enum(['complete', 'in-progress', 'planned'])
+        .default('complete'),
+      tech: s.array(s.string()), // Technologies used
+      body: s.mdx(),
+      links: s.array(
+        s.object({
+          name: s.string(),
+          url: s.string().url(),
+          type: s.enum(['github', 'docs', 'demo', 'blog', 'other']),
+        })
+      ),
+    })
+    .transform(computedFields),
+});
+
+const snippets = defineCollection({
+  name: 'Snippet',
+  pattern: 'snippets/**/*.mdx',
+  schema: s
+    .object({
+      slug: s.path(),
+      title: s.string(),
+      description: s.string(),
+      language: s.enum(['rust', 'cpp', 'python', 'typescript', 'other']),
+      tags: s.array(s.string()),
       body: s.mdx(),
     })
     .transform(computedFields),
@@ -37,14 +84,27 @@ export default defineConfig({
     data: '.velite',
     assets: 'public/static',
     base: '/static/',
-    name: '[name]-[hash:6].[ext]',
+    name: '[name]-[hash:8].[ext]',
     clean: true,
   },
-  collections: { posts },
+  collections: { blogs, projects, snippets },
   mdx: {
     rehypePlugins: [
       rehypeSlug,
-      [rehypePrettyCode, { theme: 'houston' }],
+      rehypeKatex,
+      [
+        rehypePrettyCode,
+        {
+          theme: 'github-dark-default',
+          keepBackground: true,
+          onVisitLine(node: LineElement) {
+            // Prevent empty lines from collapsing
+            if (node.children.length === 0) {
+              node.children = [{ type: 'text', value: ' ' }];
+            }
+          },
+        },
+      ],
       [
         rehypeAutolinkHeadings,
         {
@@ -56,6 +116,6 @@ export default defineConfig({
         },
       ],
     ],
-    remarkPlugins: [],
+    remarkPlugins: [remarkMath, remarkGfm],
   },
 });

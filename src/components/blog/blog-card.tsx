@@ -1,5 +1,5 @@
 // src/components/blog/blog-card.tsx
-import { Post } from '@/types/blog';
+import { Post } from 'generated/content';
 import { formatDate } from '@/lib/utils';
 import {
   Card,
@@ -17,7 +17,7 @@ interface PostCardProps {
 }
 
 export function BlogCard({ post }: PostCardProps) {
-  const { slug, title, description, date, tags, readingTime } = post;
+  const { slug, title, description, date, tags, metadata } = post;
 
   const truncatedDescription =
     description && description.length > blogConfig.maxDescriptionLength
@@ -61,7 +61,7 @@ export function BlogCard({ post }: PostCardProps) {
             <div className="text-muted-foreground">|</div>
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4" />
-              <span>{readingTime}</span>
+              <span>{metadata.readingTime} min read</span>
             </div>
           </div>
 

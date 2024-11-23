@@ -3,7 +3,7 @@
 
 import React, { createContext, useContext, ReactNode } from 'react';
 import { Profile } from '@/types/profile';
-import profileData from '@/data/profile.json';
+import profileData from '@/content/data/profile.json';
 
 type ProfileContextType = {
   profile: Profile;

@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { getAllTags, sortTagsByCount } from '@/lib/utils';
-import { posts } from '#site/content';
+import { blogs } from 'generated/content';
 import { useRouter } from 'next/navigation';
 import { Tag } from 'lucide-react';
 
@@ -23,7 +23,7 @@ export function TagFilter({ searchParams }: TagFilterProps) {
   const tagParam = params?.tag;
   const selectedTag = typeof tagParam === 'string' ? tagParam : undefined;
 
-  const tags = getAllTags(posts);
+  const tags = getAllTags(blogs);
   const sortedTags = sortTagsByCount(tags);
 
   const handleValueChange = (value: string) => {

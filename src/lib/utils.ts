@@ -2,7 +2,7 @@
 
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { Post } from '#site/content';
+import { Post } from 'generated/content';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -17,17 +17,17 @@ export function formatDate(input: string | number): string {
   });
 }
 
-export function sortPosts(posts: Post[]): Post[] {
-  return [...posts].sort(
+export function sortPosts(blog_posts: Post[]): Post[] {
+  return [...blog_posts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
 
-export function getAllTags(posts: Post[]): Record<string, number> {
-  return posts.reduce(
-    (acc, post) => {
-      if (post.published && post.tags) {
-        post.tags.forEach((tag) => {
+export function getAllTags(blog_posts: Post[]): Record<string, number> {
+  return blog_posts.reduce(
+    (acc, blog_post) => {
+      if (blog_post.published && blog_post.tags) {
+        blog_post.tags.forEach((tag) => {
           acc[tag] = (acc[tag] || 0) + 1;
         });
       }

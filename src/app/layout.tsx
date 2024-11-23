@@ -27,7 +27,8 @@ export const metadata: Metadata = {
     default: 'Your Website Name | Primary Tagline',
     template: '%s | Your Website Name',
   },
-  description: 'Comprehensive description of your website, its purpose, and key offerings',
+  description:
+    'Comprehensive description of your website, its purpose, and key offerings',
   applicationName: 'Your Website Name',
   keywords: ['key', 'words', 'relevant', 'to', 'your', 'site'],
   authors: [{ name: 'Your Name', url: 'https://your-website-domain.com' }],
@@ -49,7 +50,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://your-website-domain.com',
     title: 'Your Website Name | Primary Tagline',
-    description: 'Comprehensive description of your website, its purpose, and key offerings',
+    description:
+      'Comprehensive description of your website, its purpose, and key offerings',
     siteName: 'Your Website Name',
     images: [
       {
@@ -63,7 +65,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Your Website Name | Primary Tagline',
-    description: 'Comprehensive description of your website, its purpose, and key offerings',
+    description:
+      'Comprehensive description of your website, its purpose, and key offerings',
     creator: '@your_twitter_handle',
     images: ['/images/twitter-image.jpg'], // Create and add a Twitter card image
   },
@@ -89,47 +92,42 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                     children,
-                                   }: Readonly<{
+  children,
+}: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      // Add aria-label for better accessibility
-      aria-label="Main website content"
-    >
-    <body
-      className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
-      // Add aria attributes for improved accessibility
-      aria-describedby="main-content"
-    >
-    <ProfileProvider>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
+        // Add aria attributes for improved accessibility
+        aria-describedby="main-content"
       >
-        <div
-          className="flex min-h-screen flex-col bg-background"
-          id="main-content"
-        >
-          <Navbar />
-          <main
-            className="flex-1"
-            // Add semantic attributes
-            role="main"
-            aria-label="Main page content"
+        <ProfileProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
           >
-            {children}
-          </main>
-          <Footer />
-        </div>
-      </ThemeProvider>
-    </ProfileProvider>
-    </body>
+            <div
+              className="flex min-h-screen flex-col bg-background"
+              id="main-content"
+            >
+              <Navbar />
+              <main
+                className="flex-1"
+                // Add semantic attributes
+                role="main"
+                aria-label="Main page content"
+              >
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </ThemeProvider>
+        </ProfileProvider>
+      </body>
     </html>
   );
 }

@@ -6,7 +6,7 @@ import { Tag } from './tag';
 interface PostHeaderProps {
   title: string;
   date: string;
-  readingTime?: string;
+  readingTime?: number;
   tags?: string[];
   description?: string;
 }
@@ -14,7 +14,7 @@ interface PostHeaderProps {
 export function PostHeader({
   title,
   date,
-  readingTime = '5 min read',
+  readingTime = 0,
   tags,
 }: PostHeaderProps) {
   return (
@@ -37,7 +37,7 @@ export function PostHeader({
           <div className="text-muted-foreground">|</div>
           <div className="flex items-center gap-2 transition-colors hover:text-primary">
             <Clock className="h-4 w-4" />
-            <span>{readingTime}</span>
+            <span>{readingTime} min read</span>
           </div>
         </div>
 

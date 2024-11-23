@@ -1,9 +1,9 @@
-import { posts } from '#site/content';
+import { blogs } from 'generated/content';
 import { supabase } from '@/lib/analytics';
 
 export async function syncPosts() {
   try {
-    for (const post of posts) {
+    for (const post of blogs) {
       // First, ensure post exists
       const { data: existingPost, error: postError } = await supabase
         .from('posts')

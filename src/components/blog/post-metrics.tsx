@@ -24,18 +24,12 @@ export default function PostMetrics({ slug }: { slug: string }) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Memoized function to clean slug
-  const getCleanSlug = useCallback((slugPath: string) => {
-    return slugPath.split('/').pop() || slugPath;
-  }, []);
-
   // Memoized metrics fetching
   const fetchMetrics = useCallback(async () => {
     try {
-      const cleanSlug = getCleanSlug(slug);
-      const response = await fetch(`/api/blog/${cleanSlug}/likes`, {
-        cache: 'no-store', // Ensures fresh data
-        next: { revalidate: 0 } // NextJS 13+ cache control
+      const response = await fetch(`/api/blog/${slug}/likes`, {
+        cache: 'no-store',
+        next: { revalidate: 0 },
       });
 
       if (!response.ok) {
@@ -52,11 +46,11 @@ export default function PostMetrics({ slug }: { slug: string }) {
       console.error('Error fetching metrics:', error);
       setError('Failed to load post metrics');
     }
-  }, [slug, getCleanSlug]);
+  }, [slug]);
 
   // Fetch metrics on component mount or slug change
   useEffect(() => {
-    fetchMetrics();
+    fetchMetrics().then((r) => r);
   }, [fetchMetrics]);
 
   // Optimistic UI update with error handling
@@ -75,8 +69,7 @@ export default function PostMetrics({ slug }: { slug: string }) {
       setMetrics(optimisticUpdate);
       setError(null);
 
-      const cleanSlug = getCleanSlug(slug);
-      const response = await fetch(`/api/blog/${cleanSlug}/likes`, {
+      const response = await fetch(`/api/blog/${slug}/likes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -96,10 +89,10 @@ export default function PostMetrics({ slug }: { slug: string }) {
       });
     } catch (error) {
       // Rollback on error
-      setMetrics(prev => ({
+      setMetrics((prev) => ({
         ...prev,
         userLiked: false,
-        likeCount: prev.likeCount - 1
+        likeCount: prev.likeCount - 1,
       }));
 
       console.error('Error adding like:', error);
@@ -116,14 +109,14 @@ export default function PostMetrics({ slug }: { slug: string }) {
         onClick={handleLike}
         disabled={isLoading || metrics.userLiked}
         className={`
-          relative flex items-center justify-center
-          w-14 h-14 rounded-full 
-          transition-all duration-300 group
+          group relative flex h-14
+          w-14 items-center justify-center 
+          rounded-full transition-all duration-300
           ${
             metrics.userLiked
-            ? 'bg-pink-100 dark:bg-pink-900'
-            : 'bg-gray-100 hover:bg-pink-50 dark:bg-gray-800 dark:hover:bg-pink-900/30'
-        }
+              ? 'bg-pink-100 dark:bg-pink-900'
+              : 'bg-gray-100 hover:bg-pink-50 dark:bg-gray-800 dark:hover:bg-pink-900/30'
+          }
         `}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -132,12 +125,12 @@ export default function PostMetrics({ slug }: { slug: string }) {
       >
         <Heart
           className={`
-            w-7 h-7 transition-all duration-300
+            h-7 w-7 transition-all duration-300
             ${
-            metrics.userLiked
-              ? 'fill-pink-500 stroke-pink-500 scale-110'
-              : 'stroke-gray-500 dark:stroke-gray-400 group-hover:text-pink-500'
-          }
+              metrics.userLiked
+                ? 'scale-110 fill-pink-500 stroke-pink-500'
+                : 'stroke-gray-500 group-hover:text-pink-500 dark:stroke-gray-400'
+            }
           `}
         />
 
@@ -148,7 +141,7 @@ export default function PostMetrics({ slug }: { slug: string }) {
               {[...Array(8)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-1.5 h-1.5 bg-pink-500 rounded-full"
+                  className="absolute h-1.5 w-1.5 rounded-full bg-pink-500"
                   initial={{
                     opacity: 1,
                     scale: 0,
@@ -178,11 +171,7 @@ export default function PostMetrics({ slug }: { slug: string }) {
         >
           {metrics.likeCount}
         </motion.span>
-        {error && (
-          <span className="text-xs text-red-500 mt-1">
-            {error}
-          </span>
-        )}
+        {error && <span className="mt-1 text-xs text-red-500">{error}</span>}
       </div>
     </div>
   );

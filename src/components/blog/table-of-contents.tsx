@@ -1,71 +1,100 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface Heading {
-  id: string;
-  text: string;
-  level: string;
-  offsetTop: number;
+interface TocEntry {
+  items?: TocEntry[];
+  url: string;
+  title: string;
 }
 
-const TableOfContents = () => {
+interface TableOfContentsProps {
+  toc: TocEntry[];
+}
+
+const TableOfContents = ({ toc }: TableOfContentsProps) => {
   const [activeId, setActiveId] = useState<string>('');
-  const [headings, setHeadings] = useState<Heading[]>([]);
   const [showTOC, setShowTOC] = useState(false);
   const [hasSpace, setHasSpace] = useState(true);
+  const tocRef = useRef<HTMLDivElement>(null);
+  const [topOffset, setTopOffset] = useState(50);
+
+  const itemIds = useMemo(() => {
+    if (!toc) return [];
+
+    const extractUrls = (entries: TocEntry[]): string[] => {
+      return entries.flatMap((entry) => [
+        entry.url,
+        ...(entry.items ? extractUrls(entry.items) : []),
+      ]);
+    };
+
+    return extractUrls(toc)
+      .filter(Boolean)
+      .map((url) => url.split('#')[1]);
+  }, [toc]);
 
   useEffect(() => {
+    const updatePosition = () => {
+      if (tocRef.current) {
+        const tocHeight = tocRef.current.offsetHeight;
+        const viewportHeight = window.innerHeight;
+        const newTopOffset = Math.max(0, (viewportHeight - tocHeight) / 2);
+        setTopOffset(newTopOffset);
+      }
+    };
+
     const checkSpace = () => {
-      const minWidth = 1280; // xl breakpoint
+      const minWidth = 1280;
       setHasSpace(window.innerWidth >= minWidth);
     };
 
-    const elements = Array.from(document.querySelectorAll('h2, h3'))
-      .filter((el) => el.id)
-      .map((element) => ({
-        id: element.id,
-        text: element.textContent || '',
-        level: element.tagName.toLowerCase(),
-        offsetTop: element.getBoundingClientRect().top + window.scrollY,
-      }));
-
-    setHeadings(elements);
-
     const handleScroll = () => {
-      if (elements.length === 0) return;
+      if (itemIds.length === 0) return;
 
       const scrollPosition = window.scrollY;
       const viewportHeight = window.innerHeight;
+      const quarterScroll = scrollPosition + viewportHeight / 4;
 
-      // Find the heading closest to the center of the viewport
-      const centerScroll = scrollPosition + viewportHeight / 2;
-      const current = [...elements]
-        .reverse()
-        .find(({ offsetTop }) => centerScroll >= offsetTop);
+      const current = itemIds.findLast((id) => {
+        const element = document.getElementById(id);
+        if (!element) return false;
+        const offsetTop = element.getBoundingClientRect().top + window.scrollY;
+        return quarterScroll >= offsetTop;
+      });
 
       if (current) {
-        setActiveId(current.id);
+        setActiveId(current);
       }
 
-      // Get first and last heading positions
-      const firstHeading = elements[0];
-      const lastHeading = elements[elements.length - 1];
+      const firstElement = document.getElementById(itemIds[0]);
+      const lastElement = document.getElementById(itemIds[itemIds.length - 1]);
 
-      // Show TOC when the first heading reaches the top
-      // and hide when the last heading reaches the bottom
-      const shouldShowTOC =
-        scrollPosition >= firstHeading.offsetTop &&
-        scrollPosition + viewportHeight <=
-          lastHeading.offsetTop + viewportHeight;
+      if (firstElement && lastElement) {
+        const firstElementTop = firstElement.getBoundingClientRect().top;
+        const lastElementBottom = lastElement.getBoundingClientRect().bottom;
 
-      setShowTOC(shouldShowTOC);
+        // Show TOC only when:
+        // 1. First heading has scrolled up to the quarter of the viewport.
+        // 2. Last heading's bottom hasn't reached the last quarter of the viewport.
+        const shouldShowTOC =
+          firstElementTop <= viewportHeight / 4 &&
+          lastElementBottom > (3 * viewportHeight) / 4;
+
+        setShowTOC(shouldShowTOC);
+      }
+
+      updatePosition();
     };
 
     checkSpace();
-    window.addEventListener('resize', checkSpace);
+    updatePosition();
+    window.addEventListener('resize', () => {
+      checkSpace();
+      updatePosition();
+    });
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
@@ -73,10 +102,11 @@ const TableOfContents = () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', checkSpace);
     };
-  }, []);
+  }, [itemIds]);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
     e.preventDefault();
+    const id = url.split('#')[1];
     const element = document.getElementById(id);
     if (element) {
       const offsetTop = element.getBoundingClientRect().top + window.scrollY;
@@ -87,14 +117,61 @@ const TableOfContents = () => {
     }
   };
 
-  if (headings.length === 0 || !hasSpace) return null;
+  const renderTocItems = (items: TocEntry[] = [], depth = 0) => {
+    return items.map((item) => {
+      const id = item.url.split('#')[1];
+      const isActive = activeId === id;
+
+      return (
+        <React.Fragment key={item.url}>
+          <motion.li
+            className="group relative"
+            initial={{ x: -10, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.2 }}
+          >
+            {isActive && (
+              <motion.div
+                className="absolute -left-4 h-full w-[2px] rounded-full bg-primary"
+                layoutId="activeHeading"
+                transition={{ duration: 0.2 }}
+              />
+            )}
+            <a
+              href={item.url}
+              onClick={(e) => handleClick(e, item.url)}
+              className={cn(
+                'inline-block py-1 transition-colors duration-200 hover:translate-x-1',
+                depth === 0 && 'font-medium text-base',
+                depth === 1 && 'pl-4 text-sm',
+                depth === 2 && 'pl-8 text-sm',
+                isActive
+                  ? 'text-primary font-medium'
+                  : 'text-muted-foreground hover:text-primary'
+              )}
+            >
+              {item.title}
+            </a>
+          </motion.li>
+          {item.items && item.items.length > 0 && (
+            <ul className="mt-2 space-y-2">
+              {renderTocItems(item.items, depth + 1)}
+            </ul>
+          )}
+        </React.Fragment>
+      );
+    });
+  };
+
+  if (!toc?.length || !hasSpace) return null;
 
   return (
     <AnimatePresence>
       {showTOC && (
         <motion.nav
-          className="fixed left-0 flex w-[240px] flex-col items-start"
-          style={{ transform: 'translate(0, -50%)' }}
+          ref={tocRef}
+          className="fixed left-0 w-[240px]"
+          style={{ top: topOffset }}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
@@ -107,49 +184,12 @@ const TableOfContents = () => {
             <div
               className={cn(
                 'absolute left-0 top-0 bottom-0 w-[2px]',
-                'bg-gradient-to-b from-primary/5 via-primary/10 to-primary/5'
+                'bg-gradient-to-b from-primary/5 via-primary/40 to-primary/5'
               )}
             />
 
-            <div className="max-h-[calc(100vh_-_4rem)] overflow-y-auto flex flex-col items-start">
-              <ul className="space-y-3 text-sm pr-4">
-                {headings.map((heading) => {
-                  const isActive = activeId === heading.id;
-                  return (
-                    <motion.li
-                      key={heading.id}
-                      className={cn(
-                        'relative group',
-                        heading.level === 'h2' ? 'ml-3' : '',
-                        heading.level === 'h3' ? 'ml-6' : ''
-                      )}
-                      initial={{ x: -10, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {isActive && (
-                        <motion.div
-                          className="absolute -left-4 w-[2px] h-full bg-primary rounded-full"
-                          layoutId="activeHeading"
-                          transition={{ duration: 0.2 }}
-                        />
-                      )}
-                      <a
-                        href={`#${heading.id}`}
-                        onClick={(e) => handleClick(e, heading.id)}
-                        className={cn(
-                          'inline-block transition-colors duration-200',
-                          isActive
-                            ? 'text-primary font-medium'
-                            : 'text-muted-foreground hover:text-primary'
-                        )}
-                      >
-                        {heading.text}
-                      </a>
-                    </motion.li>
-                  );
-                })}
-              </ul>
+            <div className="scrollbar-thin scrollbar-thumb-primary/10 scrollbar-track-transparent hover:scrollbar-thumb-primary/20 pr-4">
+              <ul className="space-y-3 text-sm">{renderTocItems(toc)}</ul>
             </div>
           </div>
         </motion.nav>

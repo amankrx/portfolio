@@ -3,6 +3,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/analytics';
 import { getClientHash } from '@/lib/client-hash';
 
+interface ParamsProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
 async function getPostId(slug: string) {
   const { data: post } = await supabase
     .from('posts')
@@ -13,10 +19,7 @@ async function getPostId(slug: string) {
   return post?.id;
 }
 
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { slug: string } }
-) {
+export async function POST(request: NextRequest, { params }: ParamsProps) {
   try {
     const { slug } = await params;
 
@@ -69,10 +72,7 @@ export async function POST(
   }
 }
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { slug: string } }
-) {
+export async function GET(request: NextRequest, { params }: ParamsProps) {
   try {
     const { slug } = await params;
 

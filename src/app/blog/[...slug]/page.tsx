@@ -1,4 +1,4 @@
-import { posts } from '#site/content';
+import { blogs, Post } from 'generated/content';
 import { MDXContent } from '@/components/mdx-components';
 import { notFound } from 'next/navigation';
 import '@/styles/mdx.css';
@@ -20,12 +20,12 @@ interface PostPageProps {
 async function getPostFromParams(params: PostPageProps['params']) {
   const resolvedParams = await params;
   const slug = resolvedParams?.slug?.join('/');
-  return posts.find((post) => post.slugAsParams === slug);
+  return blogs.find((post: Post) => post.slugAsParams === slug);
 }
 
 export async function generateMetadata({
-                                         params,
-                                       }: PostPageProps): Promise<Metadata> {
+  params,
+}: PostPageProps): Promise<Metadata> {
   const post = await getPostFromParams(params);
 
   if (!post) {
@@ -72,16 +72,16 @@ const PostPage = async ({ params }: PostPageProps) => {
   return (
     <div className="relative py-6 lg:py-10">
       <div className="container mx-auto">
-        <div className="flex flex-col xl:flex-row justify-center relative">
+        <div className="relative flex flex-col justify-center xl:flex-row">
           {/* Left sidebar - Table of Contents */}
-          <aside className="hidden xl:block w-[240px] shrink-0">
+          <aside className="hidden w-[240px] shrink-0 xl:block">
             <div className="sticky top-[calc(var(--header-height)+4rem)] max-h-[calc(100vh-var(--header-height)-8rem)] overflow-y-auto">
-              <TableOfContents />
+              <TableOfContents toc={post.toc} />
             </div>
           </aside>
 
           {/* Center content */}
-          <main className="w-full px-4 sm:px-6 xl:max-w-[800px] min-w-0">
+          <main className="w-full min-w-0 px-4 sm:px-6 xl:max-w-[800px]">
             <PostNavigation className="mb-8" />
 
             <article>
@@ -90,7 +90,7 @@ const PostPage = async ({ params }: PostPageProps) => {
                   title={post.title}
                   date={post.date}
                   tags={post.tags}
-                  readingTime={post.readingTime}
+                  readingTime={post.metadata.readingTime}
                 />
 
                 <Separator className="h-px bg-primary/10" />
@@ -112,17 +112,17 @@ const PostPage = async ({ params }: PostPageProps) => {
           </main>
 
           {/* Right sidebar - Likes */}
-          <aside className="hidden xl:block w-[200px] shrink-0">
+          <aside className="hidden w-[200px] shrink-0 xl:block">
             <div className="sticky top-[calc(var(--header-height)+4rem)] h-[calc(100vh-var(--header-height)-8rem)]">
-              <div className="flex items-center justify-center h-full">
+              <div className="flex h-full items-center justify-center">
                 <PostMetrics slug={post.slugAsParams} />
               </div>
             </div>
           </aside>
         </div>
         {/* Mobile Table of Contents */}
-        <div className="xl:hidden mt-8">
-          <TableOfContents />
+        <div className="mt-8 xl:hidden">
+          <TableOfContents toc={post.toc} />
         </div>
       </div>
     </div>
