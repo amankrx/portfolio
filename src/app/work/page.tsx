@@ -5,7 +5,7 @@ import { WorkExperience } from '@/components/work/work-experience';
 import { ProjectsShowcase } from '@/components/work/projects-showcase';
 
 export const metadata: Metadata = {
-  title: 'Work | Aman Kumar',
+  title: 'Work',
   description: "Aman Kumar's professional work and projects",
 };
 

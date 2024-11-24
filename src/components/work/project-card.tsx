@@ -15,7 +15,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const { slug, title, description, date, tech, status, links } = project;
+  const { slug, title, description, date, status, links } = project;
 
   return (
     <Card className="group flex h-full flex-col transition-colors hover:border-primary/50">
@@ -39,7 +39,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Calendar className="h-4 w-4" />
             <time dateTime={date}>{formatDate(date)}</time>
-            <span className="ml-2 rounded-full bg-primary/10 px-2 py-1 text-xs">
+            <span
+              className={`
+    ml-2 rounded-full px-2 py-1 text-xs text-muted-foreground
+    ${status === 'complete' ? 'bg-green-500/15' : ''}
+    ${status === 'in-progress' ? 'bg-yellow-500/15' : ''}
+    ${status === 'planned' ? 'bg-primary/15' : ''}
+  `}
+            >
               {status}
             </span>
           </div>

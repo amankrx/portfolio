@@ -29,7 +29,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://amankrx.com'),
   title: {
-    default: 'Aman Kumar | Software Engineer & Systems Developer',
+    default: "Aman's Portfolio",
     template: '%s | Aman Kumar',
   },
   description:

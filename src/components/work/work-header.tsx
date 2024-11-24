@@ -6,7 +6,8 @@ export function WorkHeader() {
         Work
       </h1>
       <p className="text-xl text-muted-foreground">
-        Professional experience and personal projects that showcase my journey in tech.
+        Professional experience and personal projects that showcase my journey
+        in tech.
       </p>
     </div>
   );
