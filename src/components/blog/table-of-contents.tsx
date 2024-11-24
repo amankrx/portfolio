@@ -141,10 +141,10 @@ const TableOfContents = ({ toc }: TableOfContentsProps) => {
               href={item.url}
               onClick={(e) => handleClick(e, item.url)}
               className={cn(
-                'inline-block py-1 transition-colors duration-200 hover:translate-x-1',
-                depth === 0 && 'font-medium text-base',
-                depth === 1 && 'pl-4 text-sm',
-                depth === 2 && 'pl-8 text-sm',
+                'inline-block py-1 transition-colors duration-200',
+                depth === 0 && 'font-medium text-sm ',
+                depth === 1 && 'pl-4 font-medium text-sm',
+                depth === 2 && 'pl-8 font-medium text-sm',
                 isActive
                   ? 'text-primary font-medium'
                   : 'text-muted-foreground hover:text-primary'

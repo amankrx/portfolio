@@ -11,15 +11,15 @@ const config = {
     container: {
       center: true,
       padding: {
-        DEFAULT: '1rem', // Increase the default padding slightly
-        sm: '0.5rem',
+        DEFAULT: '0.5rem',
+        sm: '1rem',
         md: '2rem',
         lg: '4rem',
         xl: '5rem',
         '2xl': '6rem',
       },
       screens: {
-        sm: '100%', // Allow the container to take full width on small devices
+        sm: '100%',
         md: '768px',
         lg: '1024px',
         xl: '1280px',
@@ -74,139 +74,267 @@ const config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
-      typography: {
+      typography: () => ({
         DEFAULT: {
           css: {
-            '--tw-prose-body': 'hsl(var(--foreground))',
+            '--tw-prose-body': 'hsl(var(--muted-foreground))',
             '--tw-prose-headings': 'hsl(var(--foreground))',
             '--tw-prose-links': 'hsl(var(--primary))',
+            '--tw-prose-bold': 'hsl(var(--foreground))',
+            '--tw-prose-quotes': 'hsl(var(--foreground))',
+            '--tw-prose-quote-borders': 'hsl(var(--primary))',
+            '--tw-prose-underline': 'hsl(var(--muted))',
             '--tw-prose-code': 'hsl(var(--foreground))',
-            '--tw-prose-quote': 'hsl(var(--muted-foreground))',
+
             color: 'var(--tw-prose-body)',
             maxWidth: '75ch',
+
+            // Paragraphs
             p: {
-              marginBottom: '1.5em',
-              fontSize: '1rem',
+              marginBottom: '1.75em',
+              fontSize: '1.05rem',
               lineHeight: '1.75',
-              '@screen sm': {
-                fontSize: '1.15rem',
+              color: 'var(--tw-prose-body)',
+              '&:not(:first-child)': {
+                marginTop: '1.75em',
               },
             },
-            h1: {
+
+            // Strong/Bold
+            strong: {
+              color: 'var(--tw-prose-bold)',
+              fontWeight: '600',
+            },
+
+            // Underline
+            u: {
+              textDecorationColor: 'hsl(var(--primary))',
+              textDecorationThickness: '0.5px',
+            },
+
+            // Headings
+            'h1, h2, h3, h4': {
+              position: 'relative',
               color: 'var(--tw-prose-headings)',
-              fontSize: '2.5rem',
+              scrollMarginTop: '100px',
+              fontWeight: '600',
+              textDecoration: 'none',
+              '@screen xl': {
+                scrollMarginTop: '80px',
+                '&:hover': {
+                  '&::before': {
+                    content: '"#"',
+                    position: 'absolute',
+                    left: '-1em',
+                    top: '0.1em',
+                    color: 'hsl(var(--primary))',
+                    fontSize: '0.875em',
+                    fontWeight: '400',
+                    opacity: '0.75',
+                    transition: 'opacity 0.4s ease-in-out',
+                  },
+                },
+              },
+              a: {
+                color: 'inherit',
+                textDecoration: 'none',
+                '&:hover': {
+                  color: 'inherit',
+                  textDecoration: 'none',
+                },
+              },
+            },
+
+            h1: {
+              fontSize: '2rem',
               lineHeight: '1.2',
-              fontWeight: '800',
               marginTop: '2em',
               marginBottom: '1em',
               letterSpacing: '-0.025em',
-              a: {
-                textDecoration: 'none', // Disable anchor styles for headings
-                color: 'inherit', // Inherit text color
-              },
             },
+
             h2: {
-              color: 'hsl(var(--tw-prose-headings))',
-              fontSize: '2rem',
+              fontSize: '1.5rem',
               lineHeight: '1.3',
-              fontWeight: '700',
               marginTop: '2.5em',
               marginBottom: '1em',
               letterSpacing: '-0.015em',
-              a: {
-                textDecoration: 'none', // Disable anchor styles for headings
-                color: 'inherit', // Inherit text color
-              },
             },
+
             h3: {
-              color: 'var(--tw-prose-headings)',
-              fontSize: '1.5rem',
+              fontSize: '1.25rem',
               lineHeight: '1.4',
-              fontWeight: '600',
               marginTop: '2em',
               marginBottom: '0.75em',
-              a: {
-                textDecoration: 'none', // Disable anchor styles for headings
-                color: 'inherit', // Inherit text color
-              },
             },
-            'ul, ol': {
-              paddingLeft: '1.5rem',
-              marginTop: '1.25em',
-              marginBottom: '1.25em',
+
+            h4: {
               fontSize: '1.125rem',
-              '@screen sm': {
-                fontSize: '1.25rem',
+              lineHeight: '1.4',
+              marginTop: '1.75em',
+              marginBottom: '0.75em',
+            },
+
+            // Links
+            a: {
+              color: 'hsl(var(--primary))',
+              textDecorationLine: 'underline',
+              textDecorationColor:
+                'color-mix(in srgb, hsl(var(--primary)) 25%, transparent)',
+              textDecorationThickness: '1px',
+              textUnderlineOffset: '3px',
+              transition: 'all 0.2s ease',
+              '&:hover': {
+                color: 'hsl(var(--primary))',
+                textDecorationColor: 'hsl(var(--primary))',
+                textDecorationThickness: '1.5px',
               },
             },
-            li: {
-              marginTop: '0.5em',
-              marginBottom: '0.5em',
-              paddingLeft: '0.375rem',
+            // Lists
+            // Lists
+            'ul, ol': {
+              paddingLeft: '1.625em',
+              marginTop: '1.75em',
+              marginBottom: '1.75em',
+              listStyleType: 'none', // Remove default list styles
             },
+
+            // Unordered lists
+            'ul > li': {
+              position: 'relative',
+              paddingLeft: '0.5em',
+              marginTop: '0.75em',
+              marginBottom: '0.75em',
+              '&::before': {
+                content: '"➔"', // Base-level arrow
+                position: 'absolute',
+                left: '-1.25em',
+                color: 'hsl(var(--primary))',
+                fontSize: '1em',
+                lineHeight: 'inherit',
+              },
+            },
+
+            // Ordered lists
+            ol: {
+              counterReset: 'list-counter',
+            },
+
+            'ol > li': {
+              position: 'relative',
+              paddingLeft: '0.5em',
+              marginTop: '0.75em',
+              marginBottom: '0.75em',
+              counterIncrement: 'list-counter',
+              '&::before': {
+                content: 'counter(list-counter) "."', // Base-level numeric counter
+                position: 'absolute',
+                left: '-1em',
+                color: 'hsl(var(--primary))',
+                fontWeight: '500',
+              },
+            },
+
+            // Nested unordered lists (first level)
+            'li > ul': {
+              marginTop: '0.75em',
+              marginBottom: '0.75em',
+              paddingLeft: '1.75em',
+              '& > li::before': {
+                content: '"•"', // First-level dot
+                position: 'absolute',
+                left: '-1em',
+                color: 'hsl(var(--primary))',
+                fontSize: '1em',
+                lineHeight: 'inherit',
+              },
+            },
+
+            // Nested ordered lists (first level)
+            'li > ol': {
+              marginTop: '0.75em',
+              marginBottom: '0.75em',
+              paddingLeft: '1.75em',
+              counterReset: 'nested-counter', // Reset nested counter
+              '& > li': {
+                counterIncrement: 'nested-counter',
+                '&::before': {
+                  content: 'counter(nested-counter, lower-roman) "."', // Roman numeral
+                  position: 'absolute',
+                  left: '-1.5em',
+                  color: 'hsl(var(--primary))',
+                  fontWeight: '500',
+                },
+              },
+            },
+
+            // Blockquotes
             blockquote: {
               fontStyle: 'italic',
-              borderLeftWidth: '4px',
-              borderLeftColor: 'hsl(var(--primary))',
+              color: 'var(--tw-prose-quotes)',
+              borderLeftWidth: '3px',
+              borderLeftColor: 'var(--tw-prose-quote-borders)',
               paddingLeft: '1.5rem',
-              marginLeft: 0,
-              marginRight: 0,
-              marginTop: '1.5em',
-              marginBottom: '1.5em',
-              fontSize: '1.125rem',
-              '@screen sm': {
-                fontSize: '1.25rem',
+              margin: '2em 0',
+              fontSize: '1.1rem',
+              lineHeight: '1.75',
+              '& p:first-of-type': {
+                marginTop: '0',
+              },
+              '& p:last-of-type': {
+                marginBottom: '0',
               },
             },
+
+            // Code blocks
             code: {
               fontSize: '0.875rem',
               fontFamily: 'var(--font-geist-mono)',
               backgroundColor: 'hsl(var(--muted))',
               padding: '0.2em 0.4em',
               borderRadius: '0.25em',
-              '@screen sm': {
-                fontSize: '0.9375rem',
-              },
             },
+
             pre: {
               backgroundColor: 'hsl(var(--muted))',
               padding: '1.25rem',
               borderRadius: '0.5rem',
               overflow: 'auto',
               fontSize: '0.875rem',
-              '@screen sm': {
-                fontSize: '0.9375rem',
+              border: '1px solid hsl(var(--border))',
+              code: {
+                backgroundColor: 'transparent',
+                padding: '0',
+                borderRadius: '0',
               },
             },
+
+            // Images
             img: {
               marginTop: '2em',
               marginBottom: '2em',
               borderRadius: '0.5rem',
+              border: '1px solid hsl(var(--border))',
             },
-            a: {
-              // color: 'hsl(var(--primary))',
-              textDecoration: 'none',
-              '&:hover': {
-                color: 'hsl(var(--primary))',
-                opacity: 0.8,
-              },
-            },
+
+            // Tables
             table: {
-              fontSize: '1.125rem',
-              '@screen sm': {
-                fontSize: '1.25rem',
-              },
+              fontSize: '0.95rem',
+              lineHeight: '1.5',
             },
+
+            // Horizontal rules
             hr: {
               marginTop: '3em',
               marginBottom: '3em',
+              borderColor: 'hsl(var(--border))',
             },
           },
         },
-      },
+      }),
       fontFamily: {
-        sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-geist-mono)', 'monospace'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-jetbrains-mono)', 'monospace'],
       },
     },
   },

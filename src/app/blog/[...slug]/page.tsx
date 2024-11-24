@@ -70,61 +70,65 @@ const PostPage = async ({ params }: PostPageProps) => {
   }
 
   return (
-    <div className="relative py-6 lg:py-10">
-      <div className="container mx-auto">
-        <div className="relative flex flex-col justify-center xl:flex-row">
-          {/* Left sidebar - Table of Contents */}
-          <aside className="hidden w-[240px] shrink-0 xl:block">
-            <div className="sticky top-[calc(var(--header-height)+4rem)] max-h-[calc(100vh-var(--header-height)-8rem)] overflow-y-auto">
+    <div className="flex min-h-full w-full flex-col">
+      <div className="flex-1">
+        <div className="py-6 lg:py-10">
+          <div className="container mx-auto">
+            <div className="relative flex flex-col justify-center xl:flex-row">
+              {/* Left sidebar - Table of Contents */}
+              <aside className="hidden w-[240px] shrink-0 xl:block">
+                <div className="sticky top-[calc(var(--header-height)+4rem)] max-h-[calc(100vh-var(--header-height)-8rem)] overflow-y-auto">
+                  <TableOfContents toc={post.toc} />
+                </div>
+              </aside>
+
+              {/* Center content */}
+              <main className="w-full min-w-0 px-4 sm:px-6 xl:max-w-[800px]">
+                <PostNavigation className="mb-8" />
+
+                <article>
+                  <div className="flex flex-col space-y-8">
+                    <PostHeader
+                      title={post.title}
+                      date={post.date}
+                      tags={post.tags}
+                      readingTime={post.metadata.readingTime}
+                    />
+
+                    <Separator className="h-px bg-primary/10" />
+
+                    <div className="prose prose-lg max-w-none dark:prose-invert">
+                      <MDXContent code={post.body} />
+                    </div>
+
+                    <Separator className="h-px bg-primary/10" />
+
+                    {/* Mobile/Tablet likes */}
+                    <div className="xl:hidden">
+                      <PostMetrics slug={post.slugAsParams} />
+                    </div>
+                  </div>
+                </article>
+              </main>
+
+              {/* Right sidebar - Likes */}
+              <aside className="hidden w-[200px] shrink-0 xl:block">
+                <div className="sticky top-[calc(var(--header-height)+4rem)] h-[calc(100vh-var(--header-height)-8rem)]">
+                  <div className="flex h-full items-center justify-center">
+                    <PostMetrics slug={post.slugAsParams} />
+                  </div>
+                </div>
+              </aside>
+            </div>
+            {/* Mobile Table of Contents */}
+            <div className="mt-8 xl:hidden">
               <TableOfContents toc={post.toc} />
             </div>
-          </aside>
-
-          {/* Center content */}
-          <main className="w-full min-w-0 px-4 sm:px-6 xl:max-w-[800px]">
-            <PostNavigation className="mb-8" />
-
-            <article>
-              <div className="flex flex-col space-y-10">
-                <PostHeader
-                  title={post.title}
-                  date={post.date}
-                  tags={post.tags}
-                  readingTime={post.metadata.readingTime}
-                />
-
-                <Separator className="h-px bg-primary/10" />
-
-                <div className="prose prose-lg max-w-none dark:prose-invert">
-                  <MDXContent code={post.body} />
-                </div>
-
-                <Separator className="h-px bg-primary/10" />
-
-                {/* Mobile/Tablet likes */}
-                <div className="xl:hidden">
-                  <PostMetrics slug={post.slugAsParams} />
-                </div>
-
-                <PostFooter title={post.title} slug={post.slugAsParams} />
-              </div>
-            </article>
-          </main>
-
-          {/* Right sidebar - Likes */}
-          <aside className="hidden w-[200px] shrink-0 xl:block">
-            <div className="sticky top-[calc(var(--header-height)+4rem)] h-[calc(100vh-var(--header-height)-8rem)]">
-              <div className="flex h-full items-center justify-center">
-                <PostMetrics slug={post.slugAsParams} />
-              </div>
-            </div>
-          </aside>
-        </div>
-        {/* Mobile Table of Contents */}
-        <div className="mt-8 xl:hidden">
-          <TableOfContents toc={post.toc} />
+          </div>
         </div>
       </div>
+
+      <PostFooter title={post.title} slug={post.slugAsParams} />
     </div>
   );
 };

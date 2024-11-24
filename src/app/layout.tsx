@@ -1,39 +1,67 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import './globals.css';
 import ThemeProvider from '@/components/theme-provider';
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import { ProfileProvider } from '@/context/profile-context';
 import React from 'react';
+import Script from 'next/script';
+import { Toaster } from '@/components/ui/toaster';
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-  display: 'swap', // Improves performance and accessibility
+// app/layout.tsx
+import { JetBrains_Mono, Inter } from 'next/font/google';
+
+// JetBrains Mono for code
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-jetbrains-mono',
 });
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-  display: 'swap', // Improves performance and accessibility
+
+// Inter for secondary font
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://your-website-domain.com'), // Add your actual domain
+  metadataBase: new URL('https://amankrx.com'),
   title: {
-    default: 'Your Website Name | Primary Tagline',
-    template: '%s | Your Website Name',
+    default: 'Aman Kumar | Software Engineer & Systems Developer',
+    template: '%s | Aman Kumar',
   },
   description:
-    'Comprehensive description of your website, its purpose, and key offerings',
-  applicationName: 'Your Website Name',
-  keywords: ['key', 'words', 'relevant', 'to', 'your', 'site'],
-  authors: [{ name: 'Your Name', url: 'https://your-website-domain.com' }],
-  creator: 'Your Name',
-  publisher: 'Your Company Name',
+    'Full-stack software engineer specializing in Rust, backend systems, and scalable architectures. Exploring the intersection of performance and reliable system design.',
+  applicationName: 'Aman Kumar Portfolio',
+  keywords: [
+    'Aman Kumar',
+    'Software Engineer',
+    'Rust Developer',
+    'Backend Engineer',
+    'System Design',
+    'Full Stack Developer',
+    'Software Architecture',
+    'Performance Engineering',
+    'Distributed Systems',
+    'Cloud Architecture',
+    'API Design',
+    'Microservices',
+  ],
+  authors: [
+    {
+      name: 'Aman Kumar',
+      url: 'https://amankrx.com',
+    },
+  ],
+  creator: 'Aman Kumar',
+  publisher: 'Aman Kumar',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   robots: {
     index: true,
     follow: true,
@@ -48,47 +76,35 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://your-website-domain.com',
-    title: 'Your Website Name | Primary Tagline',
+    url: 'https://amankrx.com',
+    title: 'Aman Kumar | Software Engineer & Systems Developer',
     description:
-      'Comprehensive description of your website, its purpose, and key offerings',
-    siteName: 'Your Website Name',
+      'Full-stack software engineer specializing in Rust, backend systems, and scalable architectures.',
+    siteName: 'Aman Kumar Portfolio',
     images: [
       {
-        url: '/images/og-image.jpg', // Create and add an Open Graph image
+        url: '/og.png',
         width: 1200,
         height: 630,
-        alt: 'Your website description',
+        alt: 'Aman Kumar - Software Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Your Website Name | Primary Tagline',
+    title: 'Aman Kumar | Software Engineer',
     description:
-      'Comprehensive description of your website, its purpose, and key offerings',
-    creator: '@your_twitter_handle',
-    images: ['/images/twitter-image.jpg'], // Create and add a Twitter card image
+      'Full-stack software engineer specializing in Rust, backend systems, and scalable architectures.',
+    creator: '@amankrx',
+    images: ['/og.png'],
   },
-  icons: {
-    icon: [
-      {
-        media: '(prefers-color-scheme: light)',
-        url: '/images/icon-dark.png',
-        href: '/images/icon-dark.png',
-      },
-      {
-        media: '(prefers-color-scheme: dark)',
-        url: '/images/icon-light.png',
-        href: '/images/icon-light.png',
-      },
-    ],
-    apple: '/images/apple-touch-icon.png', // Add an Apple touch icon
+  alternates: {
+    canonical: 'https://amankrx.com',
+    types: {
+      'application/rss+xml': 'https://amankrx.com/feed.xml',
+    },
   },
-  verification: {
-    google: 'your-google-site-verification-code', // Add your Google Search Console verification code
-    // Add other verification codes as needed
-  },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({
@@ -99,8 +115,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
-        // Add aria attributes for improved accessibility
+        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
         aria-describedby="main-content"
       >
         <ProfileProvider>
@@ -121,7 +136,20 @@ export default function RootLayout({
                 role="main"
                 aria-label="Main page content"
               >
+                <Script
+                  src="https://www.googletagmanager.com/gtag/js?id=G-FGDYH5SZJW"
+                  strategy="afterInteractive"
+                />
+                <Script id="google-analytics" strategy="afterInteractive">
+                  {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', 'G-FGDYH5SZJW');
+                  `}
+                </Script>
                 {children}
+                <Toaster />
               </main>
               <Footer />
             </div>

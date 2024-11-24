@@ -51,14 +51,14 @@ export function BlogCard({ post }: PostCardProps) {
         )}
       </CardContent>
       <CardFooter className="flex-none border-t pt-6">
-        <div className="flex w-full items-center justify-between">
+        <div className="flex w-full flex-wrap items-center justify-between gap-4 md:gap-0">
           {/* Date and Reading Time */}
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
               <time dateTime={date}>{formatDate(date)}</time>
             </div>
-            <div className="text-muted-foreground">|</div>
+            <div className="hidden md:inline">|</div>
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4" />
               <span>{metadata.readingTime} min read</span>
@@ -70,7 +70,7 @@ export function BlogCard({ post }: PostCardProps) {
             href={`/${slug}`}
             className="text-sm font-medium text-primary hover:text-primary/80"
           >
-            Read more →
+            Read more ➔
           </Link>
         </div>
       </CardFooter>

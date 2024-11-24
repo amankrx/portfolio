@@ -1,64 +1,58 @@
-/* MDX styles */
-[data-rehype-pretty-code-figure] pre {
-  @apply px-0 border-0 border-none;
-}
+/* MDX Code Blocks */
+[data-rehype-pretty-code-figure] {
+  pre {
+    @apply px-0 border-0;
+  }
 
-[data-rehype-pretty-code-figure] code {
-  @apply text-sm !leading-loose md:text-base border-0 p-0;
-}
+  code {
+    @apply text-sm !leading-loose md:text-base border-0 p-0;
 
-[data-rehype-pretty-code-figure] code[data-line-numbers] {
-  counter-reset: line;
-}
+    &[data-line-numbers] {
+      counter-reset: line;
 
-[data-rehype-pretty-code-figure] code[data-line-numbers] > [data-line]::before {
-  counter-increment: line;
-  content: counter(line);
-  @apply mr-4 inline-block w-4 text-right text-gray-500;
-}
+      > [data-line]::before {
+        counter-increment: line;
+        content: counter(line);
+        @apply mr-4 inline-block w-4 text-right text-gray-500;
+      }
+    }
+  }
 
-[data-rehype-pretty-code-figure] [data-line] {
-  @apply border-l-2 border-l-transparent px-3;
-}
+  [data-line] {
+    @apply border-l-2 border-l-transparent px-3;
+  }
 
-[data-rehype-pretty-code-figure] [data-highlighted-line] {
-  background: rgba(200, 200, 255, 0.1);
-  @apply border-l-blue-400;
-}
+  [data-highlighted-line] {
+    background: rgba(200, 200, 255, 0.1);
+    @apply border-l-primary;
+  }
 
-[data-rehype-pretty-code-figure] [data-highlighted-chars] {
-  @apply rounded bg-zinc-600/50;
-  box-shadow: 0 0 0 4px rgb(82 82 91 / 0.5);
-}
+  [data-highlighted-chars] {
+    @apply rounded bg-zinc-600/50;
+    box-shadow: 0 0 0 4px rgb(82 82 91 / 0.5);
+  }
 
-[data-rehype-pretty-code-figure] [data-chars-id] {
-  @apply border-b-2 p-1 shadow-none;
-}
+  [data-chars-id] {
+    @apply border-b-2 p-1 shadow-none;
+  }
 
-[data-rehype-pretty-code-figure] figcaption {
-  @apply text-center w-full;
-  max-width: 80%;
-  margin: 0.75em auto;
-  color: #666;
-  font-size: 0.8em;
-}
+  figcaption {
+    @apply text-center w-full mx-auto mt-3 mb-3 text-sm text-muted-foreground;
+    max-width: 80%;
+  }
 
-[data-rehype-pretty-code-figure] > div {
-  position: relative;
-}
+  > div {
+    position: relative;
 
-[data-rehype-pretty-code-figure] > div::before {
-  content: attr(data-language);
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  font-size: 0.75rem;
-  color: #888;
-  text-transform: uppercase;
-}
+    &::before {
+      content: attr(data-language);
+      @apply absolute top-2 right-2 text-xs uppercase text-muted-foreground;
+    }
 
-[data-rehype-pretty-code-figure] > div[data-filename]::before {
-  content: attr(data-filename) ' (' attr(data-language) ')';
+    &[data-filename]::before {
+      content: attr(data-filename) ' (' attr(data-language) ')';
+    }
+  }
 }
 
 [data-rehype-pretty-code-title] {
@@ -69,134 +63,3 @@ figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title])
   pre {
   @apply !rounded-t-none;
 }
-
-.prose h1 a,
-.prose h2 a,
-.prose h3 a,
-.prose h4 a {
-  all: unset; /* Reset all styles for anchors inside headings */
-  display: inline; /* Ensure proper inline behavior */
-  @apply text-foreground;
-}
-
-/* Cursor on hover */
-.prose h1 a:hover,
-.prose h2 a:hover,
-.prose h3 a:hover,
-.prose h4 a:hover {
-  cursor: pointer;
-  display: inline;
-  @apply text-primary;
-}
-
-.prose img {
-  @apply rounded-lg border;
-}
-
-.prose blockquote {
-  @apply border-l-4 border-primary;
-}
-
-.prose ul {
-  @apply my-6 ml-6 list-disc;
-}
-
-.prose ol {
-  @apply my-6 ml-6 list-decimal;
-}
-
-.prose blockquote p:first-of-type::before,
-.prose blockquote p:first-of-type::after {
-  content: '';
-}
-
-.prose p {
-  @apply leading-7 [&:not(:first-child)]:mt-6;
-}
-
-.prose pre {
-  @apply rounded-lg border bg-muted p-4;
-}
-
-.prose h2,
-.prose h3 {
-  scroll-margin-top: 100px;
-}
-
-@media (max-width: 1280px) {
-  .prose h2,
-  .prose h3 {
-    scroll-margin-top: 80px;
-  }
-}
-
-@media (max-width: 640px) {
-  .prose {
-    font-size: 1rem;
-    line-height: 1.65;
-  }
-}
-
-/* Base styles for all lists */
-.prose ul,
-.prose ol {
-  margin: 1em 0;
-  padding-left: 2em;
-}
-
-/*!* Unordered lists *!*/
-/*.prose ul {*/
-/*  list-style-type: disc;*/
-/*}*/
-
-/*!* First level of nesting for unordered lists *!*/
-/*.prose ul ul {*/
-/*  list-style-type: circle;*/
-/*  margin: 0.5em 0;*/
-/*}*/
-
-/*!* Second level of nesting for unordered lists *!*/
-/*.prose ul ul ul {*/
-/*  list-style-type: square;*/
-/*}*/
-
-/*!* Ordered lists *!*/
-/*.prose ol {*/
-/*  list-style-type: decimal;*/
-/*}*/
-
-/*!* First level of nesting for ordered lists *!*/
-/*.prose ol ol {*/
-/*  list-style-type: lower-alpha;*/
-/*  margin: 0.5em 0;*/
-/*}*/
-
-/*!* Second level of nesting for ordered lists *!*/
-/*.prose ol ol ol {*/
-/*  list-style-type: lower-roman;*/
-/*}*/
-
-/*!* Mixed nesting styles *!*/
-/*.prose ul ol,*/
-/*.prose ol ul {*/
-/*  margin: 0.5em 0;*/
-/*}*/
-
-/*!* List items *!*/
-/*.prose li {*/
-/*  margin: 0.5em 0;*/
-/*  line-height: 1.5;*/
-/*}*/
-
-/*!* Preserve spacing for nested items *!*/
-/*.prose li > ul,*/
-/*.prose li > ol {*/
-/*  margin-top: 0.25em;*/
-/*  margin-bottom: 0.25em;*/
-/*}*/
-
-/*!* Optional: Custom indentation for each level *!*/
-/*.prose li > ul,*/
-/*.prose li > ol {*/
-/*  padding-left: 1.5em;*/
-/*}*/
