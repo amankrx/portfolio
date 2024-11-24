@@ -2,7 +2,7 @@
 
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { Post } from 'generated/content';
+import { Post, Project } from 'generated/content';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,6 +19,12 @@ export function formatDate(input: string | number): string {
 
 export function sortPosts(blog_posts: Post[]): Post[] {
   return [...blog_posts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+}
+
+export function sortProjects(projects: Project[]): Project[] {
+  return [...projects].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }

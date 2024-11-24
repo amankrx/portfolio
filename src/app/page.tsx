@@ -10,22 +10,23 @@ import { useProfile } from '@/context/profile-context';
 const featuredProjects = [
   {
     title: 'Encrypted File System',
-    description: 'A secure file system implementation in Rust with zero-knowledge proofs',
+    description:
+      'A secure file system implementation in Rust with zero-knowledge proofs',
     tags: ['Rust', 'Cryptography', 'Systems'],
-    link: '#'
+    link: '#',
   },
   {
     title: 'Game Engine Components',
     description: 'Collection of reusable components for the Bevy game engine',
     tags: ['Rust', 'Bevy', 'GameDev'],
-    link: '#'
+    link: '#',
   },
   {
     title: 'Portfolio Website',
     description: 'Personal website built with Next.js and Typescript',
     tags: ['Next.js', 'TypeScript', 'React'],
-    link: '#'
-  }
+    link: '#',
+  },
 ];
 
 // Recent blog posts (you would typically fetch these)
@@ -34,20 +35,20 @@ const recentPosts = [
     title: 'Understanding Zero-Knowledge Proofs',
     date: '2024-03-15',
     readTime: '5 min read',
-    slug: '/blog/understanding-zkp'
+    slug: '/blog/understanding-zkp',
   },
   {
     title: 'Building Reliable Systems with Rust',
     date: '2024-03-10',
     readTime: '8 min read',
-    slug: '/blog/rust-reliable-systems'
+    slug: '/blog/rust-reliable-systems',
   },
   {
     title: 'Game Development with Bevy',
     date: '2024-03-05',
     readTime: '6 min read',
-    slug: '/blog/bevy-game-dev'
-  }
+    slug: '/blog/bevy-game-dev',
+  },
 ];
 
 export default function HomePage() {
@@ -62,8 +63,8 @@ export default function HomePage() {
             {profile.personal.first_name} {profile.personal.last_name}
           </h1>
           <p className="mx-auto max-w-[700px] text-lg text-muted-foreground sm:text-xl">
-            Systems Engineer crafting reliable solutions with Rust.
-            Passionate about zero-knowledge proofs and open-source development.
+            Systems Engineer crafting reliable solutions with Rust. Passionate
+            about zero-knowledge proofs and open-source development.
           </p>
         </div>
         <div className="flex flex-col gap-4 sm:flex-row">
@@ -84,7 +85,9 @@ export default function HomePage() {
       {/* Featured Projects */}
       <section className="container py-20">
         <div className="mb-8 flex items-center justify-between">
-          <h2 className="text-3xl font-bold tracking-tight">Featured Projects</h2>
+          <h2 className="text-3xl font-bold tracking-tight">
+            Featured Projects
+          </h2>
           <Button variant="ghost" asChild>
             <Link href="https://github.com">
               <Github className="mr-2 h-4 w-4" />

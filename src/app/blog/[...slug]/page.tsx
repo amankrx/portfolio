@@ -1,3 +1,4 @@
+// src/app/blog/[...slug]/page.tsx
 import { blogs, Post } from 'generated/content';
 import { MDXContent } from '@/components/mdx-components';
 import { notFound } from 'next/navigation';
