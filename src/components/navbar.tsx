@@ -1,9 +1,9 @@
+// components/navbar.tsx
 'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -15,11 +15,18 @@ import ThemeSwitcher from '@/components/theme-switcher';
 import { useEffect, useState } from 'react';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { useTheme } from 'next-themes';
+import dynamic from 'next/dynamic';
+
+// Dynamically import the hamburger icon with ssr disabled
+const HamburgerIcon = dynamic(
+  () => import('react-icons/gi').then((mod) => mod.GiHamburgerMenu),
+  { ssr: false }
+);
 
 export default function Navbar() {
   const [currentPath, setCurrentPath] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
-  const [isSidebarOpen, setSidebarOpen] = useState(false); // State for Sheet
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
   const pathName = usePathname();
   const { resolvedTheme } = useTheme();
 
@@ -43,7 +50,17 @@ export default function Navbar() {
 
   const closeSidebar = () => setSidebarOpen(false);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return (
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:px-6">
+          {/* Minimal content for loading state */}
+          <div className="h-8 w-8" />
+          <div className="h-8 w-8" />
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -83,7 +100,7 @@ export default function Navbar() {
               size="icon"
               className="h-9 w-9 shrink-0 md:hidden"
             >
-              <GiHamburgerMenu className="h-5 w-5" />
+              {mounted && <HamburgerIcon className="h-5 w-5" />}
               <span className="sr-only">Menu</span>
             </Button>
           </SheetTrigger>
@@ -97,7 +114,7 @@ export default function Navbar() {
                   key={href}
                   href={href}
                   className={`block px-2 py-1 text-sm ${isActive(href)}`}
-                  onClick={closeSidebar} // Close sidebar when clicked
+                  onClick={closeSidebar}
                 >
                   {label}
                 </Link>
