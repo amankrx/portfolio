@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu } from 'lucide-react';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -19,6 +19,7 @@ import { useTheme } from 'next-themes';
 export default function Navbar() {
   const [currentPath, setCurrentPath] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [isSidebarOpen, setSidebarOpen] = useState(false); // State for Sheet
   const pathName = usePathname();
   const { resolvedTheme } = useTheme();
 
@@ -39,6 +40,8 @@ export default function Navbar() {
     { href: '/contact', label: 'Contact' },
     { href: '/blog', label: 'Blog' },
   ];
+
+  const closeSidebar = () => setSidebarOpen(false);
 
   if (!mounted) return null;
 
@@ -73,14 +76,14 @@ export default function Navbar() {
         </nav>
 
         {/* Mobile Menu */}
-        <Sheet>
+        <Sheet open={isSidebarOpen} onOpenChange={setSidebarOpen}>
           <SheetTrigger asChild>
             <Button
               variant="ghost"
               size="icon"
               className="h-9 w-9 shrink-0 md:hidden"
             >
-              <Menu className="h-5 w-5" />
+              <GiHamburgerMenu className="h-5 w-5" />
               <span className="sr-only">Menu</span>
             </Button>
           </SheetTrigger>
@@ -94,6 +97,7 @@ export default function Navbar() {
                   key={href}
                   href={href}
                   className={`block px-2 py-1 text-sm ${isActive(href)}`}
+                  onClick={closeSidebar} // Close sidebar when clicked
                 >
                   {label}
                 </Link>

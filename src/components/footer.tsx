@@ -2,17 +2,18 @@
 'use client';
 
 import Link from 'next/link';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { Rss, Mail } from 'lucide-react';
+import { FaGithub, FaLinkedin, FaRss } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { IoMdMail } from 'react-icons/io';
 import { useProfile } from '@/context/profile-context';
 
 // Create a map of platform names to icon components
 const SOCIAL_ICONS = {
   FaGithub,
   FaLinkedin,
-  FaTwitter,
-  Mail,
-  Rss,
+  FaXTwitter,
+  IoMdMail,
+  FaRss,
 } as const;
 
 export default function Footer() {
@@ -58,7 +59,7 @@ export default function Footer() {
                 aria-label="RSS Feed"
                 className="text-muted-foreground transition-colors duration-200 hover:scale-110 hover:text-foreground"
               >
-                <Rss className="h-5 w-5" />
+                <FaRss className="h-5 w-5" />
               </Link>
             </div>
           </div>

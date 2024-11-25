@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart } from 'lucide-react';
+import { LuHeart } from 'react-icons/lu';
 
 interface Metrics {
   likeCount: number;
@@ -123,7 +123,7 @@ export default function PostMetrics({ slug }: { slug: string }) {
         aria-label="Like post"
         aria-pressed={metrics.userLiked}
       >
-        <Heart
+        <LuHeart
           className={`
             h-7 w-7 transition-all duration-300
             ${

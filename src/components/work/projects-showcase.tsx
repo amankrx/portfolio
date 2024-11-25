@@ -1,5 +1,5 @@
 // src/components/work/projects-showcase.tsx
-import { projects, Project } from 'generated/content';
+import { projects } from 'generated/content';
 import { ProjectCard } from '@/components/work/project-card';
 import { QueryPagination } from '@/components/query-pagination';
 import { sortProjects } from '@/lib/utils';
@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 import { Button } from '../ui/button';
 import { siteConfig } from '@/config/site';
 import Link from 'next/link';
-import { Github } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa';
 
 interface ProjectsShowcaseProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -68,7 +68,7 @@ export async function ProjectsShowcase({
               rel="noopener noreferrer"
               className="flex items-center gap-2"
             >
-              <Github className="h-5 w-5" />
+              <FaGithub className="h-5 w-5" />
               View on GitHub
             </Link>
           </Button>

@@ -11,7 +11,7 @@ import {
 import { getAllTags, sortTagsByCount } from '@/lib/utils';
 import { blogs } from 'generated/content';
 import { useRouter } from 'next/navigation';
-import { Tag } from 'lucide-react';
+import { FaFilter } from 'react-icons/fa6';
 
 interface TagFilterProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -37,7 +37,7 @@ export function TagFilter({ searchParams }: TagFilterProps) {
   return (
     <div className="flex items-center gap-2">
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Tag className="h-4 w-4" />
+        <FaFilter className="h-4 w-4" />
         Filter:
       </div>
       <Select value={selectedTag || 'all'} onValueChange={handleValueChange}>

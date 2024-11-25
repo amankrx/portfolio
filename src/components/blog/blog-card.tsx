@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
-import { Calendar, Clock } from 'lucide-react';
+import { LuCalendar, LuClock } from 'react-icons/lu';
 import Link from 'next/link';
 import { Tag } from '@/components/blog/tag';
 import { blogConfig } from '@/config/blog';
@@ -55,12 +55,12 @@ export function BlogCard({ post }: PostCardProps) {
           {/* Date and Reading Time */}
           <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4" />
+              <LuCalendar className="h-4 w-4" />
               <time dateTime={date}>{formatDate(date)}</time>
             </div>
             <div className="hidden md:inline">|</div>
             <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
+              <LuClock className="h-4 w-4" />
               <span>{metadata.readingTime} min read</span>
             </div>
           </div>

@@ -23,12 +23,12 @@
     {
       "platform": "Twitter",
       "url": "https://twitter.com/amankrx",
-      "icon": "FaTwitter"
+      "icon": "FaXTwitter"
     },
     {
       "platform": "Mail",
       "url": "mailto:aman@amankrx.com",
-      "icon": "Mail"
+      "icon": "IoMdMail"
     }
   ],
   "skills": [

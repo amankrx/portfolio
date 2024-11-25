@@ -1,7 +1,9 @@
 'use client';
 
-import { ArrowRight, Github, BookOpen, Mail } from 'lucide-react';
+import { FaGithub, FaBookOpen } from 'react-icons/fa';
+import { IoMdArrowForward } from 'react-icons/io';
 import { Button } from '@/components/ui/button';
+import { MdEmail } from 'react-icons/md';
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { useProfile } from '@/context/profile-context';
@@ -70,12 +72,12 @@ export default function HomePage() {
         <div className="flex flex-col gap-4 sm:flex-row">
           <Button size="lg" asChild>
             <Link href="/about">
-              Learn More <ArrowRight className="ml-2 h-4 w-4" />
+              Learn More <IoMdArrowForward className="ml-2 h-4 w-4" />
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
             <Link href="/contact">
-              <Mail className="mr-2 h-4 w-4" />
+              <MdEmail className="mr-2 h-4 w-4" />
               Get in Touch
             </Link>
           </Button>
@@ -90,7 +92,7 @@ export default function HomePage() {
           </h2>
           <Button variant="ghost" asChild>
             <Link href="https://github.com">
-              <Github className="mr-2 h-4 w-4" />
+              <FaGithub className="mr-2 h-4 w-4" />
               View GitHub
             </Link>
           </Button>
@@ -117,7 +119,7 @@ export default function HomePage() {
                   href={project.link}
                   className="inline-flex items-center text-sm font-medium text-primary hover:underline"
                 >
-                  View Project <ArrowRight className="ml-1 h-4 w-4" />
+                  View Project <IoMdArrowForward className="ml-1 h-4 w-4" />
                 </Link>
               </div>
             </Card>
@@ -131,7 +133,7 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold tracking-tight">Recent Posts</h2>
           <Button variant="ghost" asChild>
             <Link href="/blog">
-              <BookOpen className="mr-2 h-4 w-4" />
+              <FaBookOpen className="mr-2 h-4 w-4" />
               View All Posts
             </Link>
           </Button>

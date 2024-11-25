@@ -4,7 +4,14 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { Loader2, Send, User, Mail, MessageSquare } from 'lucide-react';
+import {
+  LuMessageSquare,
+  LuLoader,
+  LuSend,
+  LuMail,
+  LuUser,
+} from 'react-icons/lu';
+
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -76,7 +83,7 @@ export function ContactForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="flex items-center gap-2">
-                <User className="h-4 w-4" />
+                <LuUser className="h-4 w-4" />
                 Name
               </FormLabel>
               <FormControl>
@@ -92,7 +99,7 @@ export function ContactForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="flex items-center gap-2">
-                <Mail className="h-4 w-4" />
+                <LuMail className="h-4 w-4" />
                 Email
               </FormLabel>
               <FormControl>
@@ -108,7 +115,7 @@ export function ContactForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="flex items-center gap-2">
-                <MessageSquare className="h-4 w-4" />
+                <LuMessageSquare className="h-4 w-4" />
                 Message
               </FormLabel>
               <FormControl>
@@ -134,12 +141,12 @@ export function ContactForm() {
         >
           {isSubmitting ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <LuLoader className="mr-2 h-4 w-4 animate-spin" />
               Sending...
             </>
           ) : (
             <>
-              <Send className="mr-2 h-4 w-4" />
+              <LuSend className="mr-2 h-4 w-4" />
               Send Message
             </>
           )}

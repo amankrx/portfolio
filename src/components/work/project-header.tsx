@@ -1,5 +1,5 @@
 // src/components/work/project-header.tsx
-import { Calendar, GitBranch } from 'lucide-react';
+import { LuCalendar, LuGitBranch } from 'react-icons/lu';
 import { formatDate } from '@/lib/utils';
 
 interface ProjectHeaderProps {
@@ -31,12 +31,12 @@ export function ProjectHeader({
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4" />
+            <LuCalendar className="h-4 w-4" />
             <time dateTime={date}>{formatDate(date)}</time>
           </div>
           <div className="text-muted-foreground">|</div>
           <div className="flex items-center gap-2">
-            <GitBranch className="h-4 w-4" />
+            <LuGitBranch className="h-4 w-4" />
             <span className="capitalize">{status}</span>
           </div>
         </div>

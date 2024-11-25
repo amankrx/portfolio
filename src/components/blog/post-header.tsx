@@ -1,5 +1,5 @@
 // src/components/blog/post-header.tsx
-import { Calendar, Clock } from 'lucide-react';
+import { LuCalendar, LuClock } from 'react-icons/lu';
 import { formatDate } from '@/lib/utils';
 import { Tag } from './tag';
 
@@ -30,13 +30,13 @@ export function PostHeader({
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-2 transition-colors hover:text-primary">
-            <Calendar className="h-4 w-4" />
+            <LuCalendar className="h-4 w-4" />
             <time dateTime={date}>{formatDate(date)}</time>
           </div>
           {/* Separator between date and reading time */}
           <div className="text-muted-foreground">|</div>
           <div className="flex items-center gap-2 transition-colors hover:text-primary">
-            <Clock className="h-4 w-4" />
+            <LuClock className="h-4 w-4" />
             <span>{readingTime} min read</span>
           </div>
         </div>

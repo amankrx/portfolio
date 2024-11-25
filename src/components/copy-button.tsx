@@ -1,6 +1,7 @@
 'use client';
 
-import { Check, Clipboard } from 'lucide-react';
+import { FiClipboard } from 'react-icons/fi';
+import { FaCheck } from 'react-icons/fa6';
 import { DetailedHTMLProps, HTMLAttributes, useRef, useState } from 'react';
 
 export default function CopyButton({
@@ -31,9 +32,9 @@ export default function CopyButton({
         className="absolute right-4 top-4 rounded bg-gray-800 p-1 text-white opacity-0 transition-opacity group-hover:opacity-100"
       >
         {isCopied ? (
-          <Check className="h-4 w-4 text-white" />
+          <FaCheck className="h-4 w-4 text-white" />
         ) : (
-          <Clipboard className="h-4 w-4 text-white" />
+          <FiClipboard className="h-4 w-4 text-white" />
         )}
       </button>
       <pre ref={preRef} {...props} className="m-0 overflow-auto">

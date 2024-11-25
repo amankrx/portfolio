@@ -1,7 +1,8 @@
 'use client';
 
 // app/about/page.tsx
-import { Github, Twitter, Linkedin } from 'lucide-react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Link from 'next/link';
@@ -118,19 +119,19 @@ export default function AboutPage() {
           <div className="flex space-x-4">
             <Button variant="outline" size="lg" asChild>
               <Link href="https://github.com" className="space-x-2">
-                <Github className="h-5 w-5" />
+                <FaGithub className="h-5 w-5" />
                 <span>GitHub</span>
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
               <Link href="https://twitter.com" className="space-x-2">
-                <Twitter className="h-5 w-5" />
+                <FaXTwitter className="h-5 w-5" />
                 <span>Twitter</span>
               </Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
               <Link href="https://linkedin.com" className="space-x-2">
-                <Linkedin className="h-5 w-5" />
+                <FaLinkedin className="h-5 w-5" />
                 <span>LinkedIn</span>
               </Link>
             </Button>

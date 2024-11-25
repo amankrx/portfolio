@@ -7,7 +7,8 @@ import {
   CardFooter,
   CardHeader,
 } from '@/components/ui/card';
-import { Github, ExternalLink, Calendar } from 'lucide-react';
+import { LuExternalLink, LuCalendar, LuBookOpen } from 'react-icons/lu';
+import { FaGithub } from 'react-icons/fa';
 import Link from 'next/link';
 
 interface ProjectCardProps {
@@ -16,6 +17,19 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const { slug, title, description, date, status, links } = project;
+
+  const getIcon = (type: Project['links'][0]['type']) => {
+    switch (type) {
+      case 'github':
+        return <FaGithub className="mr-2 h-4 w-4" />;
+      case 'docs':
+        return <LuBookOpen className="mr-2 h-4 w-4" />;
+      case 'blog':
+        return <LuBookOpen className="mr-2 h-4 w-4" />;
+      default:
+        return <LuExternalLink className="mr-2 h-4 w-4" />;
+    }
+  };
 
   return (
     <Card className="group flex h-full flex-col transition-colors hover:border-primary/50">
@@ -37,7 +51,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <CardFooter className="flex-none border-t pt-6">
         <div className="flex w-full flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Calendar className="h-4 w-4" />
+            <LuCalendar className="h-4 w-4" />
             <time dateTime={date}>{formatDate(date)}</time>
             <span
               className={`
@@ -59,11 +73,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary"
               >
-                {link.type === 'github' ? (
-                  <Github className="h-5 w-5" />
-                ) : (
-                  <ExternalLink className="h-5 w-5" />
-                )}
+                {getIcon(link.type)}
               </Link>
             ))}
           </div>

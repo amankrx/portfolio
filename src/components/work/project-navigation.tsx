@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
-import { ChevronLeft } from 'lucide-react';
+import { LuChevronLeft } from 'react-icons/lu';
 
 interface ProjectNavigationProps {
   className?: string;
@@ -17,7 +17,7 @@ export function ProjectNavigation({ className }: ProjectNavigationProps) {
           'gap-2 text-muted-foreground hover:text-primary'
         )}
       >
-        <ChevronLeft className="h-4 w-4" />
+        <LuChevronLeft className="h-4 w-4" />
         See all projects
       </Link>
     </div>

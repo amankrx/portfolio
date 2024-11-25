@@ -1,7 +1,9 @@
 // src/components/work/project-links.tsx
 import { Button } from '@/components/ui/button';
-import { Github, ExternalLink, BookOpen } from 'lucide-react';
+import { Project } from 'generated/content';
 import Link from 'next/link';
+import { FaGithub } from 'react-icons/fa';
+import { LuBookOpen, LuExternalLink } from 'react-icons/lu';
 
 interface ProjectLink {
   name: string;
@@ -16,14 +18,16 @@ interface ProjectLinksProps {
 export function ProjectLinks({ links }: ProjectLinksProps) {
   if (!links?.length) return null;
 
-  const getIcon = (type: ProjectLink['type']) => {
+  const getIcon = (type: Project['links'][0]['type']) => {
     switch (type) {
       case 'github':
-        return <Github className="mr-2 h-4 w-4" />;
+        return <FaGithub className="mr-2 h-4 w-4" />;
       case 'docs':
-        return <BookOpen className="mr-2 h-4 w-4" />;
+        return <LuBookOpen className="mr-2 h-4 w-4" />;
+      case 'blog':
+        return <LuBookOpen className="mr-2 h-4 w-4" />;
       default:
-        return <ExternalLink className="mr-2 h-4 w-4" />;
+        return <LuExternalLink className="mr-2 h-4 w-4" />;
     }
   };
 
