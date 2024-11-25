@@ -9,9 +9,9 @@ interface PostFooterProps {
 
 export function PostFooter({ title, slug }: PostFooterProps) {
   return (
-    <div className="w-full bg-primary/5 overflow-hidden">
+    <div className="w-full overflow-hidden bg-primary/5">
       <div className="relative">
-        <div className="container mx-auto px-4 py-8 max-w-[750px] sm:px-6">
+        <div className="container mx-auto max-w-[750px] px-4 py-8 sm:px-6">
           <div className="space-y-6 text-center sm:text-left">
             <p className="text-lg">
               Enjoyed the read? Help spread the word by sharing this article on{' '}

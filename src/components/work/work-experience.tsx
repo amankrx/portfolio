@@ -48,9 +48,9 @@ export function WorkExperience() {
   return (
     <div className="mt-12">
       <div
-        className="relative space-y-8 md:space-y-12
-  before:absolute before:left-[190px] before:top-[2.5rem] before:h-[calc(100%-5rem)]
-  before:w-[1px] before:bg-border before:hidden md:before:block"
+        className="relative space-y-8 before:absolute
+  before:left-[190px] before:top-[2.5rem] before:hidden before:h-[calc(100%-5rem)]
+  before:w-[1px] before:bg-border md:space-y-12 md:before:block"
       >
         {experiences.map((experience, index) => (
           <ExperienceCard

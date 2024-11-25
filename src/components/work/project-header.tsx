@@ -14,7 +14,6 @@ export function ProjectHeader({
   title,
   date,
   status,
-  tech,
   description,
 }: ProjectHeaderProps) {
   return (

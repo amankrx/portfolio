@@ -1,157 +1,123 @@
 'use client';
 
-// app/about/page.tsx
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import Link from 'next/link';
-import { useProfile } from '@/context/profile-context';
-
-const technologies = [
-  { name: 'Rust', level: 'Advanced' },
-  { name: 'TypeScript', level: 'Intermediate' },
-  { name: 'React', level: 'Intermediate' },
-  { name: 'Node.js', level: 'Intermediate' },
-  { name: 'PostgreSQL', level: 'Intermediate' },
-  { name: 'Docker', level: 'Intermediate' },
-] as const;
-
-const interests = [
-  {
-    icon: '🦀',
-    title: 'Systems Programming',
-    description: 'Building reliable and efficient software systems',
-  },
-  {
-    icon: '🔒',
-    title: 'Zero-Knowledge Proofs',
-    description: 'Exploring privacy-preserving computation',
-  },
-  {
-    icon: '🎮',
-    title: 'Game Development',
-    description: 'Creating games with Rust and Bevy',
-  },
-  {
-    icon: '🌐',
-    title: 'Open Source',
-    description: 'Contributing to community-driven projects',
-  },
-];
+import { FaGithub } from 'react-icons/fa';
+import { IoMdArrowForward } from 'react-icons/io';
+import { MdEmail, MdComputer } from 'react-icons/md';
 
 export default function AboutPage() {
-  const { profile } = useProfile();
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-background py-10">
-      <div className="mx-auto max-w-4xl space-y-12 px-4">
-        {/* Hero Section */}
-        <section className="space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            Hey, I&apos;m{' '}
-            <span className="text-primary">
-              {profile.personal.first_name} {profile.personal.last_name}
-            </span>{' '}
-            👋
-          </h1>
-          <p className="text-xl text-muted-foreground">
-            I craft reliable systems and elegant solutions with Rust.
-          </p>
-        </section>
-
-        {/* Main Content */}
-        <section className="space-y-6">
-          <div className="prose prose-neutral dark:prose-invert lg:prose-lg">
+    <div className="min-h-screen bg-background">
+      <section className="container px-4 py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl space-y-16">
+          {/* Header Section */}
+          <div className="prose prose-lg mx-auto dark:prose-invert">
+            <h1 className="before:hidden">About Me</h1>
             <p>
-              I&#39;m a Software Engineer passionate about building robust,
-              performant systems. My journey in software development has been
-              driven by a fascination with low-level programming and systems
-              architecture.
-            </p>
-            <p>
-              When I&#39;m not coding, you&#39;ll find me exploring new
-              languages, contributing to open-source projects, or diving deep
-              diving deep into technical documentation. I believe in writing
-              only works but is also maintainable, efficient, and a joy to work
-              with.
+              Systems programmer, backend developer, and fingerstyle guitar
+              enthusiast. Welcome to my corner of the web!
             </p>
           </div>
 
-          {/* Tech Stack Section */}
-          <Card className="p-6">
-            <h2 className="mb-4 text-2xl font-semibold">Tech Stack</h2>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-              {technologies.map((tech) => (
-                <div
-                  key={tech.name}
-                  className="flex flex-col space-y-1 rounded-lg border p-4"
-                >
-                  <span className="font-medium">{tech.name}</span>
-                  <span className="text-sm text-muted-foreground">
-                    {tech.level}
-                  </span>
-                </div>
-              ))}
+          {/* Main About Section */}
+          <div className="prose prose-lg mx-auto dark:prose-invert">
+            <p>
+              My journey in technology began at{' '}
+              <strong>
+                Indian Institute of Information Technology, Nagpur
+              </strong>
+              , where I earned a BTech in Computer Science. It was there that I
+              discovered my passion for systems programming and designing
+              efficient software architectures.
+            </p>
+
+            <p>
+              Currently, I&#39;m a Backend Developer at{' '}
+              <strong>Fortanix</strong>, where I specialize in creating secure,
+              scalable distributed systems. My work revolves around pushing the
+              limits of secure computing, exploring innovative ways to enhance
+              system security and performance.
+            </p>
+
+            <p>
+              I&#39;m deeply invested in systems programming, particularly with{' '}
+              <strong>Rust</strong>. Its balance of memory safety and
+              performance captivated me, and it&#39;s now my go-to language for
+              critical systems projects. I actively contribute to the Rust
+              ecosystem, driven by a belief in the power of open-source
+              collaboration.
+            </p>
+          </div>
+
+          {/* Work History and GitHub Links */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <Link href="/work">
+              <Button className="w-full sm:w-auto">
+                View Work History
+                <IoMdArrowForward className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="https://github.com">
+              <Button variant="outline" className="w-full sm:w-auto">
+                <FaGithub className="mr-2 h-4 w-4" />
+                GitHub Profile
+              </Button>
+            </Link>
+          </div>
+
+          {/* Beyond Work Section */}
+          <div className="prose prose-lg mx-auto dark:prose-invert">
+            <h2 className="before:hidden">Beyond the Code</h2>
+            <p>
+              Outside of work, I enjoy exploring the intersection of technology
+              and creativity. Optimizing my development environment is one of my
+              favorite pursuits—whether it&#39;s experimenting with mechanical
+              keyboards or setting up ergonomic monitor configurations. I
+              believe that the right tools elevate both productivity and
+              satisfaction.
+            </p>
+
+            <p>
+              Music is my creative outlet, with fingerstyle guitar as my primary
+              focus. The precision and expressiveness of this playing style
+              resonate deeply with me. In many ways, the discipline required to
+              master fingerstyle techniques mirrors the dedication needed in
+              software development.
+            </p>
+
+            <div className="pt-4">
+              <Link href="/about/setup">
+                <Button variant="outline" className="w-full sm:w-auto">
+                  <MdComputer className="mr-2 h-4 w-4" />
+                  Explore My Setup
+                </Button>
+              </Link>
             </div>
-          </Card>
-
-          {/* Interests Grid */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {interests.map((interest) => (
-              <Card key={interest.title} className="p-6">
-                <div className="flex items-center space-x-4">
-                  <span className="text-3xl">{interest.icon}</span>
-                  <div>
-                    <h3 className="font-semibold">{interest.title}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {interest.description}
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            ))}
           </div>
-        </section>
 
-        {/* Connect Section */}
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Let&#39;s Connect</h2>
-          <div className="flex space-x-4">
-            <Button variant="outline" size="lg" asChild>
-              <Link href="https://github.com" className="space-x-2">
-                <FaGithub className="h-5 w-5" />
-                <span>GitHub</span>
+          {/* Contact Section */}
+          <div className="prose prose-lg mx-auto dark:prose-invert">
+            <h2 className="before:hidden">Let&#39;s Connect</h2>
+            <p>
+              I&#39;m always eager to connect with fellow developers, tech
+              enthusiasts, and musicians. Whether it&#39;s discussing system
+              architecture, debating programming paradigms, sharing guitar tips,
+              or exploring new collaboration opportunities, feel free to reach
+              out.
+            </p>
+
+            <div className="pt-4">
+              <Link href="/contact">
+                <Button className="w-full sm:w-auto">
+                  <MdEmail className="mr-2 h-4 w-4" />
+                  Get in Touch
+                </Button>
               </Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="https://twitter.com" className="space-x-2">
-                <FaXTwitter className="h-5 w-5" />
-                <span>Twitter</span>
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link href="https://linkedin.com" className="space-x-2">
-                <FaLinkedin className="h-5 w-5" />
-                <span>LinkedIn</span>
-              </Link>
-            </Button>
+            </div>
           </div>
-        </section>
-
-        {/* Fun Facts Section */}
-        <section className="rounded-lg bg-muted p-6">
-          <h2 className="mb-4 text-2xl font-semibold">Fun Facts</h2>
-          <ul className="list-inside list-disc space-y-2">
-            <li>
-              I wrote my first line of Rust code while building a CLI tool for
-              file encryption
-            </li>
-            <li>I maintain a collection of mechanical keyboards</li>
-            <li>I contribute to open-source projects during weekends</li>
-            <li>I enjoy writing technical blogs about systems programming</li>
-          </ul>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
