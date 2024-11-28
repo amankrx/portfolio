@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint . -c --ext .ts,.tsx",
     "format": "prettier --write .",
-    "sync-posts": "tsx -r dotenv/config src/scripts/sync-posts.ts"
+    "prebuild": "tsx -r dotenv/config src/scripts/sync-posts.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -25,6 +25,7 @@
     "@radix-ui/react-visually-hidden": "^1.1.0",
     "@supabase/supabase-js": "^2.46.1",
     "@tailwindcss/typography": "^0.5.15",
+    "@vercel/speed-insights": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "1.0.0",

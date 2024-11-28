@@ -1,0 +1,104 @@
+---
+title: 'Matching Engine'
+description: 'An attempt to implement a matching engine with Rust'
+date: '2023-10-15'
+status: 'complete'
+tech: ['Rust', 'Limit Order Book', 'Matching Engine']
+links:
+  - name: 'Project Repository'
+    url: 'https://github.com/amankrx/matching-engine-rs'
+    type: 'github'
+---
+
+## Project Structure
+These project consists of two libraries:
+- **[itch-parser](https://github.com/amankrx/matching-engine-rs/itch-parser)**: This library is responsible for managing the processing of *NASDAQ ITCH 5.0* protocol data. It parses the useful fields that will be required for the Limit Order Book. The remaining fields are skipped using placeholders. Check out the folder's [README](https://github.com/amankrx/matching-engine-rs/itch-parser/README.md) for more information.
+- **[optimized-lob](https://github.com/amankrx/matching-engine-rs/optimized-lob)**: This library contains a streamlined and efficient implementation of a Limit Order Book (LOB). It is worth noting that the LOB simply stores a few useful fields that will be required for creating a LOB. It just keeps an aggregate quantities at each level. Check out the folder's [README](https://github.com/amankrx/matching-engine-rs/optimized-lob/README.md) for more information.
+
+Apart from that, there is a testing suite for both libraries that can be found in the "[tests](https://github.com/amankrx/matching-engine-rs/tests)" directory.
+
+## Build, Run, and Test
+Make sure you have Rust installed. Also, you must download the NASDAQ ITCH 5.0 data whose instructions are available in the [ITCH Specifications](#ITCH-Specifications).
+All of these operations are performed in the `tests` directory.
+```bash
+cd tests
+```
+### Build
+```bash
+cargo build
+```
+or
+```bash
+cargo build --release
+```
+
+### Running the LOB
+```bash
+ITCH_DATA=PATH_TO_ITCH_DATA_FILE cargo run
+```
+or
+```bash
+ITCH_DATA=PATH_TO_ITCH_DATA_FILE cargo run --release
+```
+
+### Running the ITCH parser
+```bash
+ITCH_DATA=PATH_TO_ITCH_DATA_FILE cargo run -- --itch-parser
+```
+or
+```bash
+ITCH_DATA=PATH_TO_ITCH_DATA_FILE cargo run --release -- --itch-parser
+```
+
+### Testing
+```bash
+cargo test
+```
+
+
+## Device Specifications
+At the time of testing:
+```text
+Device: MacBook Air M2
+CPU architecture: Apple M2
+CPU logical cores: 8
+CPU physical cores: 8
+RAM total: 16 GB
+RAM free: 11.5 GB
+```
+## Performance
+
+### ITCH Processing
+
+```text
+ITCH Parser Processing...
+
+Success...
+
+ITCH Parsing Statistics:
+Total Messages: 268744780
+Total Time: 6.082 seconds
+Speed: 44189583 msg/second
+Latency: 22 ns
+```
+
+### LOB Performance
+
+```text
+LOB Processing...
+
+Success...
+
+Performance Metrics:
+Total Messages: 268744780
+ITCH Latency: 88 ns
+Total Time: 23.660 seconds
+Speed: 11358746 msg/second
+
+Orderbook Statistics:
+Total Add Orders: 118631456
+Total Execute Orders: 5822741
+Total Cancel Orders: 2787676
+Total Delete Orders: 114360997
+Total Replace Orders: 21639067
+```

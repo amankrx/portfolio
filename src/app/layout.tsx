@@ -7,6 +7,7 @@ import Navbar from '@/components/navbar';
 import React from 'react';
 import Script from 'next/script';
 import { Toaster } from '@/components/ui/toaster';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 // app/layout.tsx
 import { JetBrains_Mono, Inter } from 'next/font/google';
@@ -157,6 +158,7 @@ export default function RootLayout({
               </Script>
               {children}
               <Toaster />
+              <SpeedInsights />
             </main>
             <Footer />
           </div>

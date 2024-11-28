@@ -17,6 +17,7 @@ export async function syncPosts() {
           .from('posts')
           .insert({
             slug: post.slugAsParams,
+            title: post.title,
           })
           .select()
           .single();
