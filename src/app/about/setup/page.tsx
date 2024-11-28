@@ -30,13 +30,8 @@ const setupCategories = [
     title: 'Main Workstation',
     items: [
       {
-        name: 'Custom Built PC',
-        specs: [
-          'AMD Ryzen 9 5950X',
-          '32GB DDR4 RAM',
-          'NVIDIA RTX 3080',
-          '2TB NVMe SSD',
-        ],
+        name: 'MacBook Air M2',
+        specs: ['16GB RAM', '256GB SSD', 'Apple M2 8-core CPU'],
       },
       {
         name: 'Displays',
@@ -53,14 +48,11 @@ const setupCategories = [
     items: [
       {
         name: 'Keyboards',
-        specs: [
-          'Custom mechanical keyboard with Zealios V2 switches',
-          'Keychron K2 (backup)',
-        ],
+        specs: ['Keychron K8 Pro', 'Keychron Silicone Palm Rest'],
       },
       {
         name: 'Mouse',
-        specs: ['Logitech MX Master 3'],
+        specs: ['Logitech MX Master 3S'],
       },
     ],
   },
@@ -71,8 +63,8 @@ const setupCategories = [
       {
         name: 'Software',
         specs: [
-          'NeoVim as primary editor',
-          'tmux for terminal multiplexing',
+          'RustRover as primary editor',
+          'iTerm for terminal multiplexing',
           'zsh with custom configuration',
         ],
       },
@@ -92,7 +84,7 @@ const setupCategories = [
       },
       {
         name: 'Microphone',
-        specs: ['Shure SM7B', 'Boom arm with shock mount'],
+        specs: ['Blue Yeti', 'Boom arm with shock mount'],
       },
       {
         name: 'Headphones',
@@ -106,11 +98,11 @@ const setupCategories = [
     items: [
       {
         name: 'Desk',
-        specs: ['Standing desk (electric)', 'Cable management system'],
+        specs: ['Custom Built Desk'],
       },
       {
         name: 'Chair',
-        specs: ['Herman Miller Aeron'],
+        specs: ['Green Soul Monster Ultimate'],
       },
     ],
   },

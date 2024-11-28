@@ -23,8 +23,8 @@ export default function HomePage() {
             {siteConfig.name}
           </h1>
           <p className="mx-auto max-w-[700px] text-lg text-muted-foreground sm:text-xl">
-            Systems Engineer crafting reliable solutions with Rust. Passionate
-            about zero-knowledge proofs and open-source development.
+            Software Developer with a passion for building scalable and reliable
+            systems.
           </p>
         </div>
         <div className="flex flex-col gap-4 sm:flex-row">

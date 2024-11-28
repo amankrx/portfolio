@@ -48,7 +48,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.description,
       type: 'article',
-      url: post.slugAsParams,
+      url: `${siteConfig.url}/${post.slug}`,
       images: [
         {
           url: `/api/og?${ogSearchParams.toString()}`,

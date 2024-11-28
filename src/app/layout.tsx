@@ -33,9 +33,8 @@ export const metadata: Metadata = {
     default: `${siteConfig.first_name}'s Portfolio`,
     template: '%s | Aman Kumar',
   },
-  description:
-    'Full-stack software engineer specializing in Rust, backend systems, and scalable architectures. Exploring the intersection of performance and reliable system design.',
-  applicationName: 'Aman Kumar Portfolio',
+  description: siteConfig.description,
+  applicationName: `${siteConfig.name}'s Portfolio`,
   keywords: [
     'Aman Kumar',
     'Software Engineer',
@@ -78,13 +77,12 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteConfig.url,
-    title: 'Aman Kumar | Software Engineer & Systems Developer',
-    description:
-      'Full-stack software engineer specializing in Rust, backend systems, and scalable architectures.',
-    siteName: 'Aman Kumar Portfolio',
+    title: `${siteConfig.first_name}'s Portfolio`,
+    description: siteConfig.description,
+    siteName: `${siteConfig.first_name}'s Portfolio`,
     images: [
       {
-        url: '/og.png',
+        url: `/api/og?title=${encodeURIComponent(siteConfig.name)}`,
         width: 1200,
         height: 630,
         alt: 'Aman Kumar - Software Engineer',
@@ -93,16 +91,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aman Kumar | Software Engineer',
-    description:
-      'Full-stack software engineer specializing in Rust, backend systems, and scalable architectures.',
+    title: `${siteConfig.first_name}'s Portfolio`,
+    description: siteConfig.description,
     creator: '@amankrx',
-    images: ['/og.png'],
+    images: [`/api/og?title=${encodeURIComponent(siteConfig.name)}`],
   },
   alternates: {
-    canonical: 'https://amankrx.com',
+    canonical: siteConfig.url,
     types: {
-      'application/rss+xml': 'https://amankrx.com/feed.xml',
+      'application/rss+xml': '/rss.xml',
     },
   },
   manifest: '/site.webmanifest',

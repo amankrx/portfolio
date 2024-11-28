@@ -15,10 +15,6 @@ export default function AboutPage() {
           {/* Header Section */}
           <div className="prose prose-lg mx-auto dark:prose-invert">
             <h1 className="before:hidden">About Me</h1>
-            <p>
-              Systems programmer, backend developer, and fingerstyle guitar
-              enthusiast. Welcome to my corner of the web!
-            </p>
           </div>
 
           {/* Main About Section */}
