@@ -12,7 +12,6 @@ export async function GET(request: Request) {
     const description =
       searchParams.get('description') ?? siteConfig.description;
     const type = searchParams.get('type') ?? 'website';
-    const theme = searchParams.get('theme') ?? 'light';
 
     // Since we're using white background, we'll use the light logo (black text)
     const logoUrl = new URL('/logo/light.png', siteConfig.url).toString();
