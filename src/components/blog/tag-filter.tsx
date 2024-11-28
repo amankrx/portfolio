@@ -37,11 +37,18 @@ export function TagFilter({ searchParams }: TagFilterProps) {
   return (
     <div className="flex items-center gap-2">
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <FaFilter className="h-4 w-4" />
-        Filter:
+        <FaFilter className="h-4 w-4" aria-hidden="true" />
+        <span>Filter:</span>
       </div>
-      <Select value={selectedTag || 'all'} onValueChange={handleValueChange}>
-        <SelectTrigger className="w-[180px] border-none bg-transparent px-2 shadow-none hover:bg-accent focus:ring-0 focus:ring-offset-0">
+      <Select
+        value={selectedTag || 'all'}
+        onValueChange={handleValueChange}
+        aria-label="Filter blog posts by tag"
+      >
+        <SelectTrigger
+          className="w-[180px] border-none bg-transparent px-2 shadow-none hover:bg-accent focus:ring-0 focus:ring-offset-0"
+          aria-label="Select tag to filter posts"
+        >
           <SelectValue placeholder="All Tags" />
         </SelectTrigger>
         <SelectContent align="end" className="max-h-[200px]">

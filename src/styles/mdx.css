@@ -63,3 +63,9 @@ figure[data-rehype-pretty-code-figure]:has(> [data-rehype-pretty-code-title])
   pre {
   @apply !rounded-t-none;
 }
+
+article ul .task-list-item {
+  ::before {
+    display: none;
+  }
+}

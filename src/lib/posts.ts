@@ -1,5 +1,5 @@
 import { blogs } from 'generated/content';
-import { supabase } from '@/lib/analytics';
+import { supabase } from '@/lib/utils';
 
 export async function syncPosts() {
   try {

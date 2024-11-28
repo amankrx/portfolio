@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@/components/ui/button';
 
 import {
@@ -18,6 +16,13 @@ import {
   MdChair,
   MdEmail,
 } from 'react-icons/md';
+
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'My Setup',
+  description: "Aman Kumar's setup",
+};
 
 const setupCategories = [
   {

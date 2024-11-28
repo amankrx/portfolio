@@ -18,6 +18,10 @@ interface PostPageProps {
   }>;
 }
 
+export async function generateStaticParams() {
+  return blogs.map((post) => ({ slug: post.slugAsParams.split('/') }));
+}
+
 async function getPostFromParams(params: PostPageProps['params']) {
   const resolvedParams = await params;
   const slug = resolvedParams?.slug?.join('/');
@@ -39,12 +43,12 @@ export async function generateMetadata({
   return {
     title: `${post.title}`,
     description: post.description,
-    authors: { name: siteConfig.author },
+    authors: { name: siteConfig.author.name },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
-      url: post.slug,
+      url: post.slugAsParams,
       images: [
         {
           url: `/api/og?${ogSearchParams.toString()}`,

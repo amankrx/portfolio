@@ -13,7 +13,7 @@ export function PostFooter({ title, slug }: PostFooterProps) {
       <div className="relative">
         <div className="container mx-auto max-w-[750px] px-4 py-8 sm:px-6">
           <div className="space-y-6 text-center sm:text-left">
-            <p className="text-lg">
+            <p className="text-md">
               Enjoyed the read? Help spread the word by sharing this article on{' '}
               <Link
                 href={`https://twitter.com/intent/tweet?text=Check out this insightful post: ${title}&url=${encodeURIComponent(
@@ -28,7 +28,7 @@ export function PostFooter({ title, slug }: PostFooterProps) {
               .
             </p>
 
-            <p className="text-lg">
+            <p className="text-md">
               Found value in this content?{' '}
               <Link
                 href="/support"
@@ -39,7 +39,7 @@ export function PostFooter({ title, slug }: PostFooterProps) {
               to fuel more in-depth articles and projects.
             </p>
 
-            <p className="text-lg">
+            <p className="text-md">
               Have thoughts or questions?{' '}
               <Link
                 href="/contact"
@@ -54,8 +54,8 @@ export function PostFooter({ title, slug }: PostFooterProps) {
               Keep exploring, keep learning!
             </p>
 
-            <p className="text-lg font-semibold text-primary">
-              – {siteConfig.author}
+            <p className="text-md font-semibold text-primary">
+              – {siteConfig.author.name}
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">

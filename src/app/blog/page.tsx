@@ -3,10 +3,11 @@ import { Metadata } from 'next';
 import { BlogHeader } from '@/components/blog/blog-header';
 import { BlogContent } from '@/components/blog/blog-content';
 import { TagFilter } from '@/components/blog/tag-filter';
+import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: 'Blog | Aman Kumar',
-  description: "Aman Kumar's blog",
+  title: 'Blog',
+  description: `${siteConfig.name}'s blog`,
 };
 
 interface BlogPageProps {

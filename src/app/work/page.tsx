@@ -3,10 +3,11 @@ import { Metadata } from 'next';
 import { WorkHeader } from '@/components/work/work-header';
 import { WorkExperience } from '@/components/work/work-experience';
 import { ProjectsShowcase } from '@/components/work/projects-showcase';
+import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
-  title: 'Work',
-  description: "Aman Kumar's professional work and projects",
+  title: 'Work Experience and Projects',
+  description: `${siteConfig.name}'s work experience and projects`,
 };
 
 interface WorkPageProps {

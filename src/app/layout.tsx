@@ -4,13 +4,13 @@ import './globals.css';
 import ThemeProvider from '@/components/theme-provider';
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
-import { ProfileProvider } from '@/context/profile-context';
 import React from 'react';
 import Script from 'next/script';
 import { Toaster } from '@/components/ui/toaster';
 
 // app/layout.tsx
 import { JetBrains_Mono, Inter } from 'next/font/google';
+import { siteConfig } from '@/config/site';
 
 // JetBrains Mono for code
 const jetbrainsMono = JetBrains_Mono({
@@ -27,9 +27,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://amankrx.com'),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Aman's Portfolio",
+    default: `${siteConfig.first_name}'s Portfolio`,
     template: '%s | Aman Kumar',
   },
   description:
@@ -51,12 +51,12 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: 'Aman Kumar',
-      url: 'https://amankrx.com',
+      name: siteConfig.author.name,
+      url: siteConfig.url,
     },
   ],
-  creator: 'Aman Kumar',
-  publisher: 'Aman Kumar',
+  creator: siteConfig.author.name,
+  publisher: siteConfig.author.name,
   formatDetection: {
     email: false,
     address: false,
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://amankrx.com',
+    url: siteConfig.url,
     title: 'Aman Kumar | Software Engineer & Systems Developer',
     description:
       'Full-stack software engineer specializing in Rust, backend systems, and scalable architectures.',
@@ -114,47 +114,53 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={`RSS Feed for ${siteConfig.name}`}
+          href="/rss.xml"
+        />
+      </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
         aria-describedby="main-content"
       >
-        <ProfileProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div
+            className="flex min-h-screen flex-col bg-background"
+            id="main-content"
           >
-            <div
-              className="flex min-h-screen flex-col bg-background"
-              id="main-content"
+            <Navbar />
+            <main
+              className="flex-1"
+              // Add semantic attributes
+              role="main"
+              aria-label="Main page content"
             >
-              <Navbar />
-              <main
-                className="flex-1"
-                // Add semantic attributes
-                role="main"
-                aria-label="Main page content"
-              >
-                <Script
-                  src="https://www.googletagmanager.com/gtag/js?id=G-FGDYH5SZJW"
-                  strategy="afterInteractive"
-                />
-                <Script id="google-analytics" strategy="afterInteractive">
-                  {`
+              <Script
+                src="https://www.googletagmanager.com/gtag/js?id=G-FGDYH5SZJW"
+                strategy="afterInteractive"
+              />
+              <Script id="google-analytics" strategy="afterInteractive">
+                {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
                     gtag('config', 'G-FGDYH5SZJW');
                   `}
-                </Script>
-                {children}
-                <Toaster />
-              </main>
-              <Footer />
-            </div>
-          </ThemeProvider>
-        </ProfileProvider>
+              </Script>
+              {children}
+              <Toaster />
+            </main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

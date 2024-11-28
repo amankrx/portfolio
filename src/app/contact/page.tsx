@@ -1,5 +1,13 @@
 // app/contact/page.tsx
 import { ContactForm } from '@/components/contact-form';
+import { siteConfig } from '@/config/site';
+import { Metadata } from 'next';
+import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: `Contact ${siteConfig.name}`,
+};
 
 export default function ContactPage() {
   return (
@@ -7,10 +15,13 @@ export default function ContactPage() {
       <div className="w-full max-w-2xl space-y-8">
         <div className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight">Get in Touch</h1>
-          <p className="text-lg text-muted-foreground">
-            Have a question or want to work together? Fill out the form below
-            and I&apos;ll get back to you as soon as possible.
-          </p>
+          <div className="prose prose-lg dark:prose-invert">
+            Have a question or want to work together? You can reach out to me
+            via <Link href={siteConfig.links.email.url}>email</Link>,{' '}
+            <Link href={siteConfig.links.linkedin.url}>LinkedIn</Link>, or{' '}
+            <Link href={siteConfig.links.x.url}>X</Link>. Or fill out the form
+            below and I&apos;ll get back to you as soon as possible.
+          </div>
         </div>
         <ContactForm />
       </div>

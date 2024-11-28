@@ -4,10 +4,8 @@ import { ProjectCard } from '@/components/work/project-card';
 import { QueryPagination } from '@/components/query-pagination';
 import { sortProjects } from '@/lib/utils';
 import { Suspense } from 'react';
-import { Button } from '../ui/button';
 import { siteConfig } from '@/config/site';
-import Link from 'next/link';
-import { FaGithub } from 'react-icons/fa';
+import { LinkButton } from '../ui/link-button';
 
 interface ProjectsShowcaseProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -61,17 +59,11 @@ export async function ProjectsShowcase({
           <p className="mt-2 text-muted-foreground">
             Check out my GitHub profile for more projects and contributions.
           </p>
-          <Button variant="default" size="lg" asChild className="mt-6">
-            <Link
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2"
-            >
-              <FaGithub className="h-5 w-5" />
-              View on GitHub
-            </Link>
-          </Button>
+          <LinkButton
+            link={siteConfig.links.github}
+            ariaLabel="View on GitHub"
+            size="lg"
+          />
         </div>
       </div>
     </Suspense>

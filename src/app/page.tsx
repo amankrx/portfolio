@@ -6,55 +6,13 @@ import { Button } from '@/components/ui/button';
 import { MdEmail } from 'react-icons/md';
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
-import { useProfile } from '@/context/profile-context';
-
-// Featured projects to showcase
-const featuredProjects = [
-  {
-    title: 'Encrypted File System',
-    description:
-      'A secure file system implementation in Rust with zero-knowledge proofs',
-    tags: ['Rust', 'Cryptography', 'Systems'],
-    link: '#',
-  },
-  {
-    title: 'Game Engine Components',
-    description: 'Collection of reusable components for the Bevy game engine',
-    tags: ['Rust', 'Bevy', 'GameDev'],
-    link: '#',
-  },
-  {
-    title: 'Portfolio Website',
-    description: 'Personal website built with Next.js and Typescript',
-    tags: ['Next.js', 'TypeScript', 'React'],
-    link: '#',
-  },
-];
-
-// Recent blog posts (you would typically fetch these)
-const recentPosts = [
-  {
-    title: 'Understanding Zero-Knowledge Proofs',
-    date: '2024-03-15',
-    readTime: '5 min read',
-    slug: '/blog/understanding-zkp',
-  },
-  {
-    title: 'Building Reliable Systems with Rust',
-    date: '2024-03-10',
-    readTime: '8 min read',
-    slug: '/blog/rust-reliable-systems',
-  },
-  {
-    title: 'Game Development with Bevy',
-    date: '2024-03-05',
-    readTime: '6 min read',
-    slug: '/blog/bevy-game-dev',
-  },
-];
+import { siteConfig } from '@/config/site';
+import { sortBlogPostsByFeatured, sortProjectsByFeatured } from '@/lib/utils';
+import { blogs, projects } from 'generated/content';
 
 export default function HomePage() {
-  const { profile } = useProfile();
+  const featuredProjects = sortProjectsByFeatured(projects).slice(0, 3);
+  const recentPosts = sortBlogPostsByFeatured(blogs).slice(0, 3);
 
   return (
     <div className="min-h-[calc(100vh-4rem)] bg-background">
@@ -62,7 +20,7 @@ export default function HomePage() {
       <section className="container flex min-h-[calc(100vh-16rem)] flex-col items-center justify-center space-y-8 text-center">
         <div className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-            {profile.personal.first_name} {profile.personal.last_name}
+            {siteConfig.name}
           </h1>
           <p className="mx-auto max-w-[700px] text-lg text-muted-foreground sm:text-xl">
             Systems Engineer crafting reliable solutions with Rust. Passionate
@@ -72,7 +30,7 @@ export default function HomePage() {
         <div className="flex flex-col gap-4 sm:flex-row">
           <Button size="lg" asChild>
             <Link href="/about">
-              Learn More <IoMdArrowForward className="ml-2 h-4 w-4" />
+              About Me <IoMdArrowForward className="ml-2 h-4 w-4" />
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
@@ -99,27 +57,24 @@ export default function HomePage() {
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {featuredProjects.map((project) => (
-            <Card key={project.title} className="flex flex-col p-6">
-              <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
+            <Card key={project.slug} className="flex flex-col p-6">
+              <h3 className="mb-2 text-xl font-semibold">
+                <Link
+                  href={`/work/${project.slug}`}
+                  className="hover:text-primary"
+                >
+                  {project.title}
+                </Link>
+              </h3>
               <p className="mb-4 flex-grow text-muted-foreground">
                 {project.description}
               </p>
               <div className="space-y-4">
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
                 <Link
-                  href={project.link}
-                  className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+                  href={`/work/${project.slug}`}
+                  className="text-sm font-medium text-primary hover:text-primary/80"
                 >
-                  View Project <IoMdArrowForward className="ml-1 h-4 w-4" />
+                  View Project ➔
                 </Link>
               </div>
             </Card>
@@ -140,23 +95,22 @@ export default function HomePage() {
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {recentPosts.map((post) => (
-            <Card key={post.title} className="flex flex-col p-6">
-              <div className="mb-4 flex items-center space-x-2 text-sm text-muted-foreground">
-                <time dateTime={post.date}>
-                  {new Date(post.date).toLocaleDateString('en-US', {
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric',
-                  })}
-                </time>
-                <span>•</span>
-                <span>{post.readTime}</span>
-              </div>
+            <Card key={post.slug} className="flex flex-col p-6">
               <h3 className="mb-2 text-xl font-semibold">
                 <Link href={post.slug} className="hover:text-primary">
                   {post.title}
                 </Link>
               </h3>
+              <p className="mb-4 flex-grow text-muted-foreground">
+                {post.description}
+              </p>
+              {/* Read More Link */}
+              <Link
+                href={`/${post.slug}`}
+                className="text-sm font-medium text-primary hover:text-primary/80"
+              >
+                Read more ➔
+              </Link>
             </Card>
           ))}
         </div>

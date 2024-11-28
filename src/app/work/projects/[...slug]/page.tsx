@@ -35,9 +35,9 @@ export async function generateMetadata({
   ogSearchParams.set('title', project.title);
 
   return {
-    title: `${project.title} | ${siteConfig.name}`,
+    title: `${project.title}`,
     description: project.description,
-    authors: { name: siteConfig.author },
+    authors: { name: siteConfig.author.name },
     openGraph: {
       title: project.title,
       description: project.description,
@@ -74,8 +74,6 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
         <div className="py-6 lg:py-10">
           <div className="container mx-auto">
             <div className="relative flex flex-col justify-center xl:flex-row">
-              {/* Left sidebar - Table of Contents */}
-
               {/* Center content */}
               <main className="w-full min-w-0 px-4 sm:px-6 xl:max-w-[800px]">
                 <ProjectNavigation className="mb-8" />
@@ -100,8 +98,6 @@ const ProjectPage = async ({ params }: ProjectPageProps) => {
                   </div>
                 </article>
               </main>
-
-              {/* Right sidebar - Preview/Demo if available */}
             </div>
           </div>
         </div>

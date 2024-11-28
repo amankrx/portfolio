@@ -1,4 +1,6 @@
 import type { Config } from 'tailwindcss';
+import tailwindAnimate from 'tailwindcss-animate';
+import tailwindTypography from '@tailwindcss/typography';
 
 const config = {
   darkMode: ['class'],
@@ -11,7 +13,7 @@ const config = {
     container: {
       center: true,
       padding: {
-        DEFAULT: '0.5rem',
+        DEFAULT: '1rem',
         sm: '1rem',
         md: '2rem',
         lg: '4rem',
@@ -205,7 +207,6 @@ const config = {
               },
             },
             // Lists
-            // Lists
             'ul, ol': {
               paddingLeft: '1.625em',
               marginTop: '1.75em',
@@ -282,6 +283,92 @@ const config = {
               },
             },
 
+            // Suppress arrow for task list items
+            'ul > li > input[type="checkbox"]': {
+              position: 'relative',
+              marginLeft: '-1.25em', // Align checkbox
+            },
+
+            'ul > li input[type="checkbox"] + span': {
+              display: 'inline-block',
+              marginLeft: '0.5rem', // Space between checkbox and text
+            },
+
+            'ul > li input[type="checkbox"] + span::before': {
+              content: 'l', // Remove arrow for checkbox list items
+            },
+
+            'ul.todo li:before': {
+              display: 'none',
+            },
+            // Form Input Styles
+            'input[type="radio"]': {
+              appearance: 'none',
+              width: '1.25rem',
+              height: '1.25rem',
+              borderRadius: '50%',
+              border: '2px solid hsl(var(--primary))',
+              marginRight: '0.5rem',
+              verticalAlign: 'middle',
+              cursor: 'pointer',
+              position: 'relative',
+              transition: 'all 0.2s ease',
+
+              '&:checked': {
+                backgroundColor: 'hsl(var(--primary))',
+                boxShadow: 'inset 0 0 0 4px hsl(var(--background))',
+              },
+
+              '&:focus': {
+                outline: '2px solid hsl(var(--ring))',
+                outlineOffset: '2px',
+              },
+
+              '&:disabled': {
+                opacity: 0.5,
+                cursor: 'not-allowed',
+              },
+            },
+
+            'input[type="checkbox"]': {
+              appearance: 'none',
+              width: '1.25rem',
+              height: '1.25rem',
+              borderRadius: '0.25rem',
+              border: '2px solid hsl(var(--primary))',
+              marginRight: '0.5rem',
+              verticalAlign: 'middle',
+              cursor: 'pointer',
+              position: 'relative',
+              transition: 'all 0.2s ease',
+
+              '&:checked': {
+                backgroundColor: 'hsl(var(--primary))',
+                borderColor: 'hsl(var(--primary))',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  width: '0.5rem',
+                  height: '0.75rem',
+                  borderRight: '2px solid hsl(var(--background))',
+                  borderBottom: '2px solid hsl(var(--background))',
+                  transform: 'translate(-50%, -50%) rotate(45deg)',
+                },
+              },
+
+              '&:focus': {
+                outline: '2px solid hsl(var(--ring))',
+                outlineOffset: '2px',
+              },
+
+              '&:disabled': {
+                opacity: 0.5,
+                cursor: 'not-allowed',
+              },
+            },
+
             // Blockquotes
             blockquote: {
               fontStyle: 'italic',
@@ -352,7 +439,7 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [tailwindAnimate, tailwindTypography],
 } satisfies Config;
 
 export default config;

@@ -2,7 +2,13 @@
 
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { Post, Project } from 'generated/content';
+import { Post, Project, WorkExperience } from 'generated/content';
+import { createClient } from '@supabase/supabase-js';
+
+export const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -47,4 +53,30 @@ export function sortTagsByCount(tags: Record<string, number>): string[] {
   return Object.entries(tags)
     .sort(([, a], [, b]) => b - a)
     .map(([tag]) => tag);
+}
+
+// Get duration string based on start and end date. For example: 2022-05-19 to 2022-09-24 returns May 2022 - Sep 2022
+export function getDuration(startDate: string, endDate?: string): string {
+  const start = new Date(startDate);
+  const end = endDate ? new Date(endDate) : new Date();
+  return `${start.toLocaleDateString('en-US', { month: 'short' })} ${start.getFullYear()} - ${end.toLocaleDateString('en-US', { month: 'short' })} ${end.getFullYear()}`;
+}
+
+// Sort work experience by start date in descending order
+export function sortWorkExperience(
+  workExperience: WorkExperience[]
+): WorkExperience[] {
+  return [...workExperience].sort(
+    (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+  );
+}
+
+// Sort blog posts by featured first, then by date in descending order
+export function sortBlogPostsByFeatured(blogPosts: Post[]): Post[] {
+  return [...blogPosts].sort((a, b) => Number(b.featured) - Number(a.featured));
+}
+
+// Sort projects by featured first, then by date in descending order
+export function sortProjectsByFeatured(projects: Project[]): Project[] {
+  return [...projects].sort((a, b) => Number(b.featured) - Number(a.featured));
 }

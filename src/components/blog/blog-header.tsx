@@ -6,7 +6,8 @@ export function BlogHeader() {
         Blog
       </h1>
       <p className="text-xl text-muted-foreground">
-        Thoughts, stories and ideas.
+        Insights on Rust, backend development, system design, and algorithms,
+        written to be helpful and approachable.
       </p>
     </div>
   );

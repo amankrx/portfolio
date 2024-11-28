@@ -71,6 +71,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={link.type}
                 className="text-muted-foreground hover:text-primary"
               >
                 {getIcon(link.type)}

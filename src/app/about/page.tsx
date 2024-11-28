@@ -1,10 +1,11 @@
-'use client';
+import { Metadata } from 'next';
+import { LinkButton } from '@/components/ui/link-button';
+import { siteConfig } from '@/config/site';
 
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { FaGithub } from 'react-icons/fa';
-import { IoMdArrowForward } from 'react-icons/io';
-import { MdEmail, MdComputer } from 'react-icons/md';
+export const metadata: Metadata = {
+  title: 'About Me',
+  description: `${siteConfig.name}'s personal and professional journey`,
+};
 
 export default function AboutPage() {
   return (
@@ -52,18 +53,17 @@ export default function AboutPage() {
 
           {/* Work History and GitHub Links */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-            <Link href="/work">
-              <Button className="w-full sm:w-auto">
-                View Work History
-                <IoMdArrowForward className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Link href="https://github.com">
-              <Button variant="outline" className="w-full sm:w-auto">
-                <FaGithub className="mr-2 h-4 w-4" />
-                GitHub Profile
-              </Button>
-            </Link>
+            <LinkButton
+              link={siteConfig.links.work}
+              ariaLabel="View work history"
+              size="lg"
+            />
+            <LinkButton
+              link={siteConfig.links.github}
+              ariaLabel="View GitHub profile"
+              variant="outline"
+              size="lg"
+            />
           </div>
 
           {/* Beyond Work Section */}
@@ -85,16 +85,14 @@ export default function AboutPage() {
               master fingerstyle techniques mirrors the dedication needed in
               software development.
             </p>
-
-            <div className="pt-4">
-              <Link href="/about/setup">
-                <Button variant="outline" className="w-full sm:w-auto">
-                  <MdComputer className="mr-2 h-4 w-4" />
-                  Explore My Setup
-                </Button>
-              </Link>
-            </div>
           </div>
+
+          <LinkButton
+            link={siteConfig.links.setup}
+            ariaLabel="Explore my setup"
+            variant="outline"
+            size="lg"
+          />
 
           {/* Contact Section */}
           <div className="prose prose-lg mx-auto dark:prose-invert">
@@ -106,16 +104,12 @@ export default function AboutPage() {
               or exploring new collaboration opportunities, feel free to reach
               out.
             </p>
-
-            <div className="pt-4">
-              <Link href="/contact">
-                <Button className="w-full sm:w-auto">
-                  <MdEmail className="mr-2 h-4 w-4" />
-                  Get in Touch
-                </Button>
-              </Link>
-            </div>
           </div>
+          <LinkButton
+            link={siteConfig.links.contact}
+            ariaLabel="Get in touch"
+            size="lg"
+          />
         </div>
       </section>
     </div>

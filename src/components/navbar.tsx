@@ -16,6 +16,8 @@ import { useEffect, useState } from 'react';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { useTheme } from 'next-themes';
 import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
+import { siteConfig } from '@/config/site';
 
 // Dynamically import the hamburger icon with ssr disabled
 const HamburgerIcon = dynamic(
@@ -55,8 +57,7 @@ export default function Navbar() {
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:px-6">
           {/* Minimal content for loading state */}
-          <div className="h-8 w-8" />
-          <div className="h-8 w-8" />
+          <Skeleton className="h-8 w-24" />
         </div>
       </header>
     );
@@ -71,12 +72,12 @@ export default function Navbar() {
             src={
               resolvedTheme === 'light' ? '/logo/light.png' : '/logo/dark.png'
             }
-            alt="Aman Kumar Logo"
+            alt={`${siteConfig.name}'s Logo`}
             className="h-8"
             width={32}
             height={32}
           />
-          <span className="sr-only">Aman Kumar</span>
+          <span className="sr-only">{siteConfig.name}</span>
         </Link>
 
         {/* Navigation */}

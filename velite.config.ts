@@ -28,6 +28,7 @@ const blogs = defineCollection({
       description: s.string().max(1000),
       date: s.isodate(),
       published: s.boolean().default(true),
+      featured: s.boolean().default(false),
       tags: s.array(s.string()),
       series: s.string().optional(), // For multi-part blog posts
       lastModified: s.isodate().optional(),
@@ -51,6 +52,7 @@ const projects = defineCollection({
         .enum(['complete', 'in-progress', 'planned'])
         .default('complete'),
       tech: s.array(s.string()), // Technologies used
+      featured: s.boolean().default(false),
       body: s.mdx(),
       links: s.array(
         s.object({
@@ -78,6 +80,23 @@ const snippets = defineCollection({
     .transform(computedFields),
 });
 
+const work_experience = defineCollection({
+  name: 'WorkExperience',
+  pattern: 'work/**/*.mdx',
+  schema: s
+    .object({
+      slug: s.path(),
+      title: s.string(),
+      company: s.string(),
+      startDate: s.isodate(),
+      endDate: s.isodate().optional(),
+      description: s.string(),
+      skills: s.array(s.string()),
+      body: s.mdx(),
+    })
+    .transform(computedFields),
+});
+
 export default defineConfig({
   root: 'src/content',
   output: {
@@ -87,7 +106,7 @@ export default defineConfig({
     name: '[name]-[hash:8].[ext]',
     clean: true,
   },
-  collections: { blogs, projects, snippets },
+  collections: { blogs, projects, snippets, work_experience },
   mdx: {
     rehypePlugins: [
       rehypeSlug,

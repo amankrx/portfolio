@@ -1,6 +1,6 @@
 // app/api/blog/[slug]/likes/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { supabase } from '@/lib/analytics';
+import { supabase } from '@/lib/utils';
 import { getClientHash } from '@/lib/client-hash';
 
 interface ParamsProps {
