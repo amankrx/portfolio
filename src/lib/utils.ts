@@ -7,7 +7,7 @@ import { createClient } from '@supabase/supabase-js';
 
 export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
 );
 
 export function cn(...inputs: ClassValue[]) {
@@ -25,13 +25,13 @@ export function formatDate(input: string | number): string {
 
 export function sortPosts(blog_posts: Post[]): Post[] {
   return [...blog_posts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 }
 
 export function sortProjects(projects: Project[]): Project[] {
   return [...projects].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 }
 
@@ -45,7 +45,7 @@ export function getAllTags(blog_posts: Post[]): Record<string, number> {
       }
       return acc;
     },
-    {} as Record<string, number>
+    {} as Record<string, number>,
   );
 }
 
@@ -64,10 +64,10 @@ export function getDuration(startDate: string, endDate?: string): string {
 
 // Sort work experience by start date in descending order
 export function sortWorkExperience(
-  workExperience: WorkExperience[]
+  workExperience: WorkExperience[],
 ): WorkExperience[] {
   return [...workExperience].sort(
-    (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+    (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime(),
   );
 }
 

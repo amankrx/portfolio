@@ -31,7 +31,7 @@ export async function ProjectsShowcase({
 
   const displayProjects = sortedProjects.slice(
     (currentPage - 1) * projectsPerPage,
-    currentPage * projectsPerPage
+    currentPage * projectsPerPage,
   );
 
   return (

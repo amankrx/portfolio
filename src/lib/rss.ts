@@ -26,7 +26,7 @@ export function generateRssFeed() {
       <link>${baseUrl}/blog/${post.slugAsParams}</link>
       <guid>${baseUrl}/blog/${post.slugAsParams}</guid>
       ${post.tags.map((tag) => `<category>${tag}</category>`).join('')}
-    </item>`
+    </item>`,
       )
       .join('')}
   </channel>

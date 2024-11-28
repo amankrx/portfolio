@@ -14,7 +14,7 @@ export function ProjectNavigation({ className }: ProjectNavigationProps) {
         href="/work"
         className={cn(
           buttonVariants({ variant: 'ghost' }),
-          'gap-2 text-muted-foreground hover:text-primary'
+          'gap-2 text-muted-foreground hover:text-primary',
         )}
       >
         <LuChevronLeft className="h-4 w-4" />

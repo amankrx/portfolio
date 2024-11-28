@@ -16,13 +16,13 @@ export async function POST(request: Request) {
     if (!result.success) {
       return NextResponse.json(
         { error: 'Failed to send email' },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     return NextResponse.json(
       { message: 'Email sent successfully' },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { error: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

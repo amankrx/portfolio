@@ -25,7 +25,7 @@ export async function syncPosts() {
         if (insertError) {
           console.error(
             `Error creating post ${post.slugAsParams}:`,
-            insertError
+            insertError,
           );
         }
       }

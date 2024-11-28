@@ -24,7 +24,7 @@ type GTagCommand = 'config' | 'event' | 'js' | 'set';
 type GTagFunction = (
   command: GTagCommand,
   targetId: string | Date,
-  params?: PageviewParams | EventParams
+  params?: PageviewParams | EventParams,
 ) => void;
 
 declare global {

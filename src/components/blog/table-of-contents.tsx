@@ -147,7 +147,7 @@ const TableOfContents = ({ toc }: TableOfContentsProps) => {
                 depth === 2 && 'pl-8 font-medium text-sm',
                 isActive
                   ? 'text-primary font-medium'
-                  : 'text-muted-foreground hover:text-primary'
+                  : 'text-muted-foreground hover:text-primary',
               )}
             >
               {item.title}
@@ -184,7 +184,7 @@ const TableOfContents = ({ toc }: TableOfContentsProps) => {
             <div
               className={cn(
                 'absolute left-0 top-0 bottom-0 w-[2px]',
-                'bg-gradient-to-b from-primary/5 via-primary/40 to-primary/5'
+                'bg-gradient-to-b from-primary/5 via-primary/40 to-primary/5',
               )}
             />
 

@@ -22,7 +22,7 @@ import { siteConfig } from '@/config/site';
 // Dynamically import the hamburger icon with ssr disabled
 const HamburgerIcon = dynamic(
   () => import('react-icons/gi').then((mod) => mod.GiHamburgerMenu),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function Navbar() {

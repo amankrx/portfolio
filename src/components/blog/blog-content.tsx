@@ -28,7 +28,7 @@ export async function BlogContent({ searchParams }: BlogContentProps) {
 
   const displayPosts = sortedPosts.slice(
     (currentPage - 1) * blogConfig.postsPerPage,
-    currentPage * blogConfig.postsPerPage
+    currentPage * blogConfig.postsPerPage,
   );
 
   if (currentPage > totalPages) {

@@ -20,7 +20,7 @@ export function Tag({ tag, current, count }: TagProps) {
         badgeVariants({
           variant: current ? 'default' : 'secondary',
         }),
-        'no-underline rounded-md hover:opacity-80 transition-all'
+        'no-underline rounded-md hover:opacity-80 transition-all',
       )}
       href={href}
     >

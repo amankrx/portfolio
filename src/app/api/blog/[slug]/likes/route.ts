@@ -67,7 +67,7 @@ export async function POST(request: NextRequest, { params }: ParamsProps) {
     console.error('Error in likes handler:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -109,7 +109,7 @@ export async function GET(request: NextRequest, { params }: ParamsProps) {
     console.error('Error fetching likes:', error);
     return NextResponse.json(
       { message: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

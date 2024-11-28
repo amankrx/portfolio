@@ -59,7 +59,7 @@ const projects = defineCollection({
           name: s.string(),
           url: s.string().url(),
           type: s.enum(['github', 'docs', 'demo', 'blog', 'other']),
-        })
+        }),
       ),
     })
     .transform(computedFields),

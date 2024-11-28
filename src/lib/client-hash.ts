@@ -13,7 +13,7 @@ interface ClientIdentificationFactors {
 export async function getClientHash(
   options: {
     length?: number;
-  } = {}
+  } = {},
 ): Promise<string> {
   const { length = 32 } = options;
 

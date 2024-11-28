@@ -17,7 +17,7 @@ export function PostFooter({ title, slug }: PostFooterProps) {
               Enjoyed the read? Help spread the word by sharing this article on{' '}
               <Link
                 href={`https://twitter.com/intent/tweet?text=Check out this insightful post: ${title}&url=${encodeURIComponent(
-                  `${siteConfig.url}/blog/${slug}`
+                  `${siteConfig.url}/blog/${slug}`,
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -65,7 +65,7 @@ export function PostFooter({ title, slug }: PostFooterProps) {
               <Button variant="default" asChild className="rounded-lg">
                 <Link
                   href={`https://twitter.com/intent/tweet?text=Check out this insightful post: ${title}&url=${encodeURIComponent(
-                    `${siteConfig.url}/blog/${slug}`
+                    `${siteConfig.url}/blog/${slug}`,
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
