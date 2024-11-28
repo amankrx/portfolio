@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint . -c --ext .ts,.tsx",
     "format": "prettier --write .",
-    "postinstall": "tsx -r dotenv/config src/scripts/sync-posts.ts"
+    "sync-posts": "tsx -r dotenv/config src/scripts/sync-posts.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
