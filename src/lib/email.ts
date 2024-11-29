@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: parseInt(process.env.SMTP_PORT || '587', 10),
-  secure: process.env.SMTP_SECURE === 'true', // Use TLS if true
+  secure: process.env.SMTP_SECURE === 'true',
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASSWORD,
@@ -22,9 +22,9 @@ export async function sendEmail({
 }) {
   try {
     const mailOptions = {
-      from: `"${name}" <${email}>`, // Use the sender's email address
-      to: process.env.CONTACT_EMAIL, // Receiver's email address (your portfolio email)
-      subject: `Portfolio Contact by ${name}`, // Subject line
+      from: `"${name}" <${email}>`,
+      to: process.env.CONTACT_EMAIL,
+      subject: `Portfolio Contact by ${name}`,
       text: `
 You have received a new message via your portfolio contact form:
 

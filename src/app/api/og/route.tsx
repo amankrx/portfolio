@@ -3,18 +3,10 @@ import { siteConfig } from '@/config/site';
 
 export const runtime = 'edge';
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    const { searchParams } = new URL(request.url);
-
-    // Dynamic params
-    const title = searchParams.get('title') ?? siteConfig.name;
-    const description =
-      searchParams.get('description') ?? siteConfig.description;
-    const type = searchParams.get('type') ?? 'website';
-
-    // Since we're using white background, we'll use the light logo (black text)
-    const logoUrl = new URL('/logo/light.png', siteConfig.url).toString();
+    // Using dark logo (white text) for dark background
+    const logoUrl = new URL('/logo/dark.png', siteConfig.url).toString();
 
     return new ImageResponse(
       (
@@ -23,78 +15,21 @@ export async function GET(request: Request) {
             height: '100%',
             width: '100%',
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
+            alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'white',
-            padding: '80px',
+            backgroundColor: '#141414',
+            padding: '40px',
           }}
         >
-          <div
+          <img
+            src={logoUrl}
+            alt={siteConfig.name}
+            width="600" // Adjust size as needed
+            height="200" // Adjust size as needed
             style={{
-              display: 'flex',
-              fontSize: 60,
-              fontWeight: 800,
-              letterSpacing: '-0.025em',
-              color: 'black',
-              marginBottom: 24,
-              whiteSpace: 'pre-wrap',
+              objectFit: 'contain',
             }}
-          >
-            {title}
-          </div>
-          {description && (
-            <div
-              style={{
-                display: 'flex',
-                fontSize: 30,
-                color: 'gray',
-                whiteSpace: 'pre-wrap',
-              }}
-            >
-              {description}
-            </div>
-          )}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              width: '100%',
-              marginTop: 'auto',
-              borderTop: '1px solid rgba(0,0,0,0.1)',
-              paddingTop: 24,
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 16,
-              }}
-            >
-              <img
-                src={logoUrl}
-                alt={siteConfig.name}
-                width="120"
-                height="40"
-                style={{
-                  objectFit: 'contain',
-                }}
-              />
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 4,
-                }}
-              >
-                <div style={{ fontSize: 16, color: 'gray' }}>
-                  {type === 'article' ? 'Blog Post' : 'Portfolio'}
-                </div>
-              </div>
-            </div>
-          </div>
+          />
         </div>
       ),
       {
@@ -104,7 +39,7 @@ export async function GET(request: Request) {
     );
   } catch (e: unknown) {
     if (e instanceof Error) {
-      console.log(`${e.message}`);
+      console.log(e.message);
     } else {
       console.log('An unknown error occurred');
     }

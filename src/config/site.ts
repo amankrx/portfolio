@@ -90,8 +90,6 @@ export const siteConfig = {
   },
 };
 
-export type SiteConfig = typeof siteConfig;
-
 // Type for the links
 export type SiteConfigLink = {
   url: string;

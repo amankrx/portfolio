@@ -221,7 +221,7 @@ const config = {
               marginTop: '0.75em',
               marginBottom: '0.75em',
               '&::before': {
-                content: '"➔"', // Base-level arrow
+                content: '"➔"',
                 position: 'absolute',
                 left: '-1.25em',
                 color: 'hsl(var(--primary))',
@@ -242,7 +242,7 @@ const config = {
               marginBottom: '0.75em',
               counterIncrement: 'list-counter',
               '&::before': {
-                content: 'counter(list-counter) "."', // Base-level numeric counter
+                content: 'counter(list-counter) "."',
                 position: 'absolute',
                 left: '-1em',
                 color: 'hsl(var(--primary))',
@@ -256,7 +256,7 @@ const config = {
               marginBottom: '0.75em',
               paddingLeft: '1.75em',
               '& > li::before': {
-                content: '"•"', // First-level dot
+                content: '"•"',
                 position: 'absolute',
                 left: '-1em',
                 color: 'hsl(var(--primary))',
@@ -270,11 +270,11 @@ const config = {
               marginTop: '0.75em',
               marginBottom: '0.75em',
               paddingLeft: '1.75em',
-              counterReset: 'nested-counter', // Reset nested counter
+              counterReset: 'nested-counter',
               '& > li': {
                 counterIncrement: 'nested-counter',
                 '&::before': {
-                  content: 'counter(nested-counter, lower-roman) "."', // Roman numeral
+                  content: 'counter(nested-counter, lower-roman) "."',
                   position: 'absolute',
                   left: '-1.5em',
                   color: 'hsl(var(--primary))',
@@ -291,11 +291,11 @@ const config = {
 
             'ul > li input[type="checkbox"] + span': {
               display: 'inline-block',
-              marginLeft: '0.5rem', // Space between checkbox and text
+              marginLeft: '0.5rem',
             },
 
             'ul > li input[type="checkbox"] + span::before': {
-              content: 'l', // Remove arrow for checkbox list items
+              content: 'none',
             },
 
             'ul.todo li:before': {

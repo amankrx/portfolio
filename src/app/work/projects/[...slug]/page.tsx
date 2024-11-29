@@ -45,7 +45,7 @@ export async function generateMetadata({
       url: project.slug,
       images: [
         {
-          url: `/api/og?${ogSearchParams.toString()}`,
+          url: '/api/og',
           width: 1200,
           height: 630,
           alt: project.title,
@@ -56,7 +56,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: project.title,
       description: project.description,
-      images: [`/api/og?${ogSearchParams.toString()}`],
+      images: ['/api/og'],
     },
   };
 }

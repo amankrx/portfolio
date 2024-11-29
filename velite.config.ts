@@ -65,6 +65,7 @@ const projects = defineCollection({
     .transform(computedFields),
 });
 
+// Will add it to the page later on
 const snippets = defineCollection({
   name: 'Snippet',
   pattern: 'snippets/**/*.mdx',

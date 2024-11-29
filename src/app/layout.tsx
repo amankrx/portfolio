@@ -8,8 +8,6 @@ import React from 'react';
 import Script from 'next/script';
 import { Toaster } from '@/components/ui/toaster';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-
-// app/layout.tsx
 import { JetBrains_Mono, Inter } from 'next/font/google';
 import { siteConfig } from '@/config/site';
 
@@ -20,7 +18,7 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
 });
 
-// Inter for secondary font
+// Inter for primary font
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
@@ -31,7 +29,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: `${siteConfig.first_name}'s Portfolio`,
-    template: '%s | Aman Kumar',
+    template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
   applicationName: `${siteConfig.name}'s Portfolio`,
@@ -82,7 +80,7 @@ export const metadata: Metadata = {
     siteName: `${siteConfig.first_name}'s Portfolio`,
     images: [
       {
-        url: `/api/og?title=${encodeURIComponent(siteConfig.name)}`,
+        url: '/api/og',
         width: 1200,
         height: 630,
         alt: 'Aman Kumar - Software Engineer',
@@ -94,7 +92,7 @@ export const metadata: Metadata = {
     title: `${siteConfig.first_name}'s Portfolio`,
     description: siteConfig.description,
     creator: '@amankrx',
-    images: [`/api/og?title=${encodeURIComponent(siteConfig.name)}`],
+    images: ['/api/og'],
   },
   alternates: {
     canonical: siteConfig.url,

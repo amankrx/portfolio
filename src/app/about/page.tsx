@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: `${siteConfig.name}'s personal and professional journey`,
 };
 
+// TODO: Handle this page with MDX. Also, this
+//  page should be a bit more dynamic. MDX should handle it anyway.
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-background">

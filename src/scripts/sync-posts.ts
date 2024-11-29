@@ -3,7 +3,6 @@ import { syncPosts } from '@/lib/posts';
 import 'dotenv/config';
 
 async function main() {
-  // Validate environment variables
   if (
     !process.env.NEXT_PUBLIC_SUPABASE_URL ||
     !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY

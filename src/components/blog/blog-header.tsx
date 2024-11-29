@@ -5,7 +5,7 @@ export function BlogHeader() {
       <h1 className="font-sans text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl">
         Blog
       </h1>
-      <p className="text-xl text-muted-foreground">
+      <p className="text-lg text-muted-foreground">
         Insights on Rust, backend development, system design, and algorithms,
         written to be helpful and approachable.
       </p>

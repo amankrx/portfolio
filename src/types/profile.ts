@@ -3,7 +3,7 @@
 export type SocialLink = {
   platform: string;
   url: string;
-  icon: string; // Literal union type of available icons
+  icon: string;
 };
 
 export type WorkExperience = {

@@ -55,14 +55,12 @@ export function sortTagsByCount(tags: Record<string, number>): string[] {
     .map(([tag]) => tag);
 }
 
-// Get duration string based on start and end date. For example: 2022-05-19 to 2022-09-24 returns May 2022 - Sep 2022
 export function getDuration(startDate: string, endDate?: string): string {
   const start = new Date(startDate);
   const end = endDate ? new Date(endDate) : new Date();
   return `${start.toLocaleDateString('en-US', { month: 'short' })} ${start.getFullYear()} - ${end.toLocaleDateString('en-US', { month: 'short' })} ${end.getFullYear()}`;
 }
 
-// Sort work experience by start date in descending order
 export function sortWorkExperience(
   workExperience: WorkExperience[],
 ): WorkExperience[] {
@@ -71,12 +69,10 @@ export function sortWorkExperience(
   );
 }
 
-// Sort blog posts by featured first, then by date in descending order
 export function sortBlogPostsByFeatured(blogPosts: Post[]): Post[] {
   return [...blogPosts].sort((a, b) => Number(b.featured) - Number(a.featured));
 }
 
-// Sort projects by featured first, then by date in descending order
 export function sortProjectsByFeatured(projects: Project[]): Project[] {
   return [...projects].sort((a, b) => Number(b.featured) - Number(a.featured));
 }

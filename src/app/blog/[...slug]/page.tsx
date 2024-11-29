@@ -51,7 +51,7 @@ export async function generateMetadata({
       url: `${siteConfig.url}/${post.slug}`,
       images: [
         {
-          url: `/api/og?${ogSearchParams.toString()}`,
+          url: `/api/og}`,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -62,7 +62,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: [`/api/og?${ogSearchParams.toString()}`],
+      images: [`/api/og}`],
     },
   };
 }
@@ -125,7 +125,8 @@ const PostPage = async ({ params }: PostPageProps) => {
                 </div>
               </aside>
             </div>
-            {/* Mobile Table of Contents */}
+
+            {/* Mobile Table of Contents - Hidden on Mobile */}
             <div className="mt-8 xl:hidden">
               <TableOfContents toc={post.toc} />
             </div>

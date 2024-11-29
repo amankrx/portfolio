@@ -23,7 +23,7 @@ const nextConfig = {
         ],
       },
       {
-        // Prevent indexing for specific paths if needed
+        // Prevent indexing for API routes
         source: '/api/:path*',
         headers: [
           {
