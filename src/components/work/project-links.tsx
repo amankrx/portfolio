@@ -1,14 +1,11 @@
-// src/components/work/project-links.tsx
 import { Button } from '@/components/ui/button';
-import { Project } from 'generated/content';
-import Link from 'next/link';
 import { FaGithub } from 'react-icons/fa';
-import { LuBookOpen, LuExternalLink } from 'react-icons/lu';
+import { LuExternalLink, LuBookOpen } from 'react-icons/lu';
+import Link from 'next/link';
 
 interface ProjectLink {
-  name: string;
+  type: string;
   url: string;
-  type: 'github' | 'demo' | 'docs' | 'blog' | 'other';
 }
 
 interface ProjectLinksProps {
@@ -16,28 +13,66 @@ interface ProjectLinksProps {
 }
 
 export function ProjectLinks({ links }: ProjectLinksProps) {
-  if (!links?.length) return null;
+  if (!links || links.length === 0) {
+    return null;
+  }
 
-  const getIcon = (type: Project['links'][0]['type']) => {
+  const getIcon = (type: string) => {
     switch (type) {
       case 'github':
-        return <FaGithub className="mr-2 h-4 w-4" />;
+        return <FaGithub className="h-4 w-4" />;
       case 'docs':
-        return <LuBookOpen className="mr-2 h-4 w-4" />;
+        return <LuBookOpen className="h-4 w-4" />;
       case 'blog':
-        return <LuBookOpen className="mr-2 h-4 w-4" />;
+        return <LuBookOpen className="h-4 w-4" />;
       default:
-        return <LuExternalLink className="mr-2 h-4 w-4" />;
+        return <LuExternalLink className="h-4 w-4" />;
+    }
+  };
+
+  const getLabel = (type: string) => {
+    switch (type) {
+      case 'github':
+        return 'View on GitHub';
+      case 'docs':
+        return 'Documentation';
+      case 'blog':
+        return 'Blog Post';
+      case 'demo':
+        return 'Live Demo';
+      default:
+        return 'Visit';
     }
   };
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-3">
       {links.map((link) => (
-        <Button key={link.url} variant="outline" asChild className="gap-2">
+        <Button
+          key={link.url}
+          asChild
+          variant={link.type === 'github' ? 'default' : 'outline'}
+          size="default"
+          className={
+            link.type === 'github'
+              ? 'group relative overflow-hidden bg-gradient-to-r from-primary to-primary/80 transition-all hover:shadow-lg hover:shadow-primary/25'
+              : 'group border-primary/20 transition-all hover:border-primary/40 hover:bg-primary/5'
+          }
+        >
           <Link href={link.url} target="_blank" rel="noopener noreferrer">
-            {getIcon(link.type)}
-            {link.name}
+            {link.type === 'github' && (
+              <>
+                <span className="relative z-10 mr-2">{getIcon(link.type)}</span>
+                <span className="relative z-10">{getLabel(link.type)}</span>
+                <span className="absolute inset-0 -z-0 bg-gradient-to-r from-primary/80 to-primary opacity-0 transition-opacity group-hover:opacity-100" />
+              </>
+            )}
+            {link.type !== 'github' && (
+              <>
+                <span className="mr-2">{getIcon(link.type)}</span>
+                {getLabel(link.type)}
+              </>
+            )}
           </Link>
         </Button>
       ))}

@@ -8,6 +8,7 @@ import {
   CardHeader,
 } from '@/components/ui/card';
 import { LuCalendar, LuClock } from 'react-icons/lu';
+import { IoMdArrowForward } from 'react-icons/io';
 import Link from 'next/link';
 import { Tag } from '@/components/blog/tag';
 import { blogConfig } from '@/config/blog';
@@ -25,9 +26,11 @@ export function BlogCard({ post }: PostCardProps) {
       : description;
 
   return (
-    <Card className="group flex h-full flex-col transition-colors hover:border-primary/50">
-      <CardHeader className="flex-none space-y-4">
-        <div>
+    <Card className="group flex h-full flex-col overflow-hidden border-primary/10 transition-all duration-500 hover:-translate-y-2 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10">
+      <div className="via-primary/3 pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+      <CardHeader className="relative flex-none space-y-4">
+        <div className="space-y-3">
           <Link
             href={`/${slug}`}
             className="inline-block text-xl font-bold tracking-tight transition-colors group-hover:text-primary md:text-2xl"
@@ -35,7 +38,7 @@ export function BlogCard({ post }: PostCardProps) {
             {title}
           </Link>
           {tags && tags.length > 0 && (
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2">
               {tags.map((tag) => (
                 <Tag key={tag} tag={tag} />
               ))}
@@ -43,34 +46,35 @@ export function BlogCard({ post }: PostCardProps) {
           )}
         </div>
       </CardHeader>
-      <CardContent className="flex-grow">
+
+      <CardContent className="relative flex-grow">
         {truncatedDescription && (
           <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground md:text-base">
             {truncatedDescription}
           </p>
         )}
       </CardContent>
-      <CardFooter className="flex-none border-t pt-6">
-        <div className="flex w-full flex-wrap items-center justify-between gap-4 md:gap-0">
-          {/* Date and Reading Time */}
-          <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
+
+      <CardFooter className="relative flex-none border-t border-primary/10 pt-6">
+        <div className="flex w-full flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+            <div className="flex items-center gap-1.5">
               <LuCalendar className="h-4 w-4" />
               <time dateTime={date}>{formatDate(date)}</time>
             </div>
-            <div className="hidden md:inline">|</div>
-            <div className="flex items-center gap-2">
+            <span className="hidden text-muted-foreground/50 md:inline">•</span>
+            <div className="flex items-center gap-1.5">
               <LuClock className="h-4 w-4" />
-              <span>{metadata.readingTime} min read</span>
+              <span>{metadata.readingTime} min</span>
             </div>
           </div>
 
-          {/* Read More Link */}
           <Link
             href={`/${slug}`}
-            className="text-sm font-medium text-primary hover:text-primary/80"
+            className="group/link inline-flex items-center gap-1 text-sm font-medium text-primary transition-all hover:gap-2"
           >
-            Read more ➔
+            Read more
+            <IoMdArrowForward className="h-4 w-4 transition-transform group-hover/link:translate-x-1" />
           </Link>
         </div>
       </CardFooter>

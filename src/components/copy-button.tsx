@@ -29,12 +29,13 @@ export default function CopyButton({
       <button
         disabled={isCopied}
         onClick={handleClickCopy}
-        className="absolute right-4 top-4 rounded bg-gray-800 p-1 text-white opacity-0 transition-opacity group-hover:opacity-100"
+        className="absolute right-3 top-3 z-10 rounded-lg border border-primary/20 bg-background/90 p-2 text-foreground opacity-0 backdrop-blur-sm transition-all hover:bg-primary/10 group-hover:opacity-100"
+        aria-label={isCopied ? 'Copied!' : 'Copy code'}
       >
         {isCopied ? (
-          <FaCheck className="h-4 w-4 text-white" />
+          <FaCheck className="h-4 w-4 text-green-500" />
         ) : (
-          <FiClipboard className="h-4 w-4 text-white" />
+          <FiClipboard className="h-4 w-4" />
         )}
       </button>
       <pre ref={preRef} {...props} className="m-0 overflow-auto">

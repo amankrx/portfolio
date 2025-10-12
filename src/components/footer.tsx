@@ -10,6 +10,7 @@ export default function Footer() {
     siteConfig.links.x,
     siteConfig.links.linkedin,
     siteConfig.links.email,
+    siteConfig.links.buymeacoffee,
   ];
 
   return (

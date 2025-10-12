@@ -1,11 +1,14 @@
 // src/components/blog/blog-header.tsx
 export function BlogHeader() {
   return (
-    <div className="space-y-4">
-      <h1 className="font-sans text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-        Blog
-      </h1>
-      <p className="text-lg text-muted-foreground">
+    <div className="animate-fade-in-up animation-delay-0 space-y-6 opacity-0">
+      <div className="space-y-4">
+        <h1 className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text pb-2 text-4xl font-bold tracking-tight text-transparent md:text-5xl">
+          Blog
+        </h1>
+        <div className="h-1 w-20 rounded-full bg-gradient-to-r from-primary to-primary/60" />
+      </div>
+      <p className="max-w-3xl text-base text-muted-foreground md:text-lg">
         Insights on Rust, backend development, system design, and algorithms,
         written to be helpful and approachable.
       </p>

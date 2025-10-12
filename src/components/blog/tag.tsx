@@ -1,7 +1,7 @@
 // src/components/blog/tag.tsx
 import Link from 'next/link';
 import { slug } from 'github-slugger';
-import { badgeVariants } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
 interface TagProps {
@@ -16,15 +16,20 @@ export function Tag({ tag, current, count }: TagProps) {
 
   return (
     <Link
-      className={cn(
-        badgeVariants({
-          variant: current ? 'default' : 'secondary',
-        }),
-        'no-underline rounded-md hover:opacity-80 transition-all',
-      )}
+      className={cn('inline-flex items-center transition-all hover:scale-105')}
       href={href}
     >
-      {tag} {count ? `(${count})` : null}
+      <Badge
+        variant={current ? 'default' : 'secondary'}
+        className={cn(
+          'rounded-md transition-colors',
+          current
+            ? 'bg-primary hover:bg-primary/90'
+            : 'bg-primary/10 hover:bg-primary/20',
+        )}
+      >
+        {tag} {count ? `(${count})` : null}
+      </Badge>
     </Link>
   );
 }
