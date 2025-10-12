@@ -43,7 +43,7 @@ export const siteConfig = {
       icon: FaLinkedin,
     },
     email: {
-      url: 'mailto:hello@amankrx.com',
+      url: 'mailto:aman@amankrx.com',
       label: 'Email',
       icon: IoMdMail,
     },

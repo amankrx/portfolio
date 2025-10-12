@@ -11,7 +11,7 @@ import {
 import { getAllTags, sortTagsByCount } from '@/lib/utils';
 import { blogs } from 'generated/content';
 import { useRouter } from 'next/navigation';
-import { FaFilter } from 'react-icons/fa6';
+import { LuFilter } from 'react-icons/lu';
 
 interface TagFilterProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -35,10 +35,10 @@ export function TagFilter({ searchParams }: TagFilterProps) {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3 rounded-lg border border-primary/10 bg-card/50 px-4 py-2 backdrop-blur-sm">
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <FaFilter className="h-4 w-4" aria-hidden="true" />
-        <span>Filter:</span>
+        <LuFilter className="h-4 w-4" aria-hidden="true" />
+        <span className="font-medium">Filter:</span>
       </div>
       <Select
         value={selectedTag || 'all'}
@@ -51,7 +51,7 @@ export function TagFilter({ searchParams }: TagFilterProps) {
         >
           <SelectValue placeholder="All Tags" />
         </SelectTrigger>
-        <SelectContent align="end" className="max-h-[200px]">
+        <SelectContent align="end" className="max-h-[300px]">
           <SelectItem value="all" className="font-medium">
             All Tags
           </SelectItem>
@@ -61,10 +61,12 @@ export function TagFilter({ searchParams }: TagFilterProps) {
               value={tag}
               className="flex items-center justify-between"
             >
-              <span>{tag}</span>
-              <span className="ml-2 text-xs text-muted-foreground">
-                ({tags[tag]})
-              </span>
+              <div className="flex w-full items-center justify-between">
+                <span>{tag}</span>
+                <span className="ml-4 text-xs text-muted-foreground">
+                  {tags[tag]}
+                </span>
+              </div>
             </SelectItem>
           ))}
         </SelectContent>

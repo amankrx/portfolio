@@ -1,4 +1,3 @@
-// components/contact-form.tsx
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -76,18 +75,22 @@ export function ContactForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="flex items-center gap-2">
-                <LuUser className="h-4 w-4" />
+              <FormLabel className="flex items-center gap-2 text-sm">
+                <LuUser className="h-3.5 w-3.5" />
                 Name
               </FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} />
+                <Input
+                  placeholder="John Doe"
+                  {...field}
+                  className="h-9 transition-all focus:border-primary/50"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -98,12 +101,17 @@ export function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="flex items-center gap-2">
-                <LuMail className="h-4 w-4" />
+              <FormLabel className="flex items-center gap-2 text-sm">
+                <LuMail className="h-3.5 w-3.5" />
                 Email
               </FormLabel>
               <FormControl>
-                <Input placeholder="john@example.com" type="email" {...field} />
+                <Input
+                  placeholder="john@example.com"
+                  type="email"
+                  {...field}
+                  className="h-9 transition-all focus:border-primary/50"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -114,14 +122,15 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="flex items-center gap-2">
-                <LuMessageSquare className="h-4 w-4" />
+              <FormLabel className="flex items-center gap-2 text-sm">
+                <LuMessageSquare className="h-3.5 w-3.5" />
                 Message
               </FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Your message..."
-                  className="min-h-[150px] resize-none"
+                  className="min-h-[80px] resize-y transition-all focus:border-primary/50"
+                  maxLength={300}
                   {...field}
                 />
               </FormControl>
@@ -136,20 +145,22 @@ export function ContactForm() {
         />
         <Button
           type="submit"
-          className="w-full sm:w-auto"
+          size="default"
+          className="group relative w-full overflow-hidden bg-gradient-to-r from-primary to-primary/80 transition-all hover:shadow-lg hover:shadow-primary/25 sm:w-auto"
           disabled={isSubmitting}
         >
           {isSubmitting ? (
             <>
-              <LuLoader className="mr-2 h-4 w-4 animate-spin" />
-              Sending...
+              <LuLoader className="relative z-10 mr-2 h-4 w-4 animate-spin" />
+              <span className="relative z-10">Sending...</span>
             </>
           ) : (
             <>
-              <LuSend className="mr-2 h-4 w-4" />
-              Send Message
+              <LuSend className="relative z-10 mr-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              <span className="relative z-10">Send Message</span>
             </>
           )}
+          <span className="absolute inset-0 -z-0 bg-gradient-to-r from-primary/80 to-primary opacity-0 transition-opacity group-hover:opacity-100" />
         </Button>
       </form>
     </Form>

@@ -1,7 +1,8 @@
+// src/components/blog/post-navigation.tsx
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
-import { LuChevronLeft } from 'react-icons/lu';
+import { Button } from '@/components/ui/button';
+import { IoMdArrowBack } from 'react-icons/io';
 
 interface PostNavigationProps {
   className?: string;
@@ -9,17 +10,17 @@ interface PostNavigationProps {
 
 export function PostNavigation({ className }: PostNavigationProps) {
   return (
-    <div className={cn('flex justify-start w-full', className)}>
-      <Link
-        href="/blog"
-        className={cn(
-          buttonVariants({ variant: 'ghost' }),
-          'gap-2 text-muted-foreground hover:text-primary',
-        )}
+    <div className={cn('flex w-full justify-start', className)}>
+      <Button
+        variant="ghost"
+        asChild
+        className="group -ml-2 hover:bg-primary/5"
       >
-        <LuChevronLeft className="h-4 w-4" />
-        See all posts
-      </Link>
+        <Link href="/blog">
+          <IoMdArrowBack className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+          See all posts
+        </Link>
+      </Button>
     </div>
   );
 }

@@ -54,6 +54,7 @@ const projects = defineCollection({
       tech: s.array(s.string()), // Technologies used
       featured: s.boolean().default(false),
       body: s.mdx(),
+      toc: s.toc(),
       links: s.array(
         s.object({
           name: s.string(),
