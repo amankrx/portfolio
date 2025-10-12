@@ -34,7 +34,7 @@ export default function NotFound() {
           <div className="animate-fade-in-up animation-delay-200 opacity-0">
             <p className="mx-auto max-w-md text-lg text-muted-foreground">
               The page you&#39;re looking for doesn&#39;t exist or has been
-              moved. get you back on track.
+              moved.
             </p>
           </div>
 

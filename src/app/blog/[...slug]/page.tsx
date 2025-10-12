@@ -10,6 +10,7 @@ import { PostHeader } from '@/components/blog/post-header';
 import { PostNavigation } from '@/components/blog/post-navigation';
 import { PostFooter } from '@/components/blog/post-footer';
 import TableOfContents from '@/components/table-of-contents';
+import Script from 'next/script';
 
 interface PostPageProps {
   params: Promise<{
@@ -36,20 +37,47 @@ export async function generateMetadata({
     return {};
   }
 
+  const postUrl = `${siteConfig.url}/blog/${post.slugAsParams}`;
+  const ogImageUrl = `${siteConfig.url}/api/og?title=${encodeURIComponent(post.title)}`;
+
   return {
-    title: `${post.title}`,
+    title: post.title,
     description: post.description,
-    authors: { name: siteConfig.author.name },
+    authors: [{ name: siteConfig.author.name, url: siteConfig.url }],
+    keywords: post.tags,
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
-      url: `${siteConfig.url}/${post.slug}`,
+      url: postUrl,
+      publishedTime: post.date,
+      modifiedTime: post.date,
+      authors: [siteConfig.author.name],
+      tags: post.tags,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
+      creator: '@amankrx',
+      images: [ogImageUrl],
+    },
+    alternates: {
+      canonical: postUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   };
 }
@@ -61,64 +89,132 @@ const PostPage = async ({ params }: PostPageProps) => {
     notFound();
   }
 
+  const postUrl = `${siteConfig.url}/blog/${post.slugAsParams}`;
+
+  // Article structured data
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    image: `${siteConfig.url}/api/og?title=${encodeURIComponent(post.title)}`,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      '@type': 'Person',
+      name: siteConfig.author.name,
+      url: siteConfig.url,
+    },
+    publisher: {
+      '@type': 'Person',
+      name: siteConfig.author.name,
+      url: siteConfig.url,
+    },
+    url: postUrl,
+    keywords: post.tags.join(', '),
+    articleSection: 'Technology',
+    wordCount: post.metadata.readingTime * 200, // Rough estimate
+    timeRequired: `PT${post.metadata.readingTime}M`,
+  };
+
+  // Breadcrumb structured data
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteConfig.url,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: `${siteConfig.url}/blog`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: postUrl,
+      },
+    ],
+  };
+
   return (
-    <div className="relative flex min-h-full w-full flex-col bg-background">
-      {/* Background elements */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/4 top-40 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute bottom-40 right-1/4 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
-      </div>
+    <>
+      {/* JSON-LD structured data */}
+      <Script
+        id="article-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
 
-      <div className="relative flex-1">
-        <div className="py-8 lg:py-12">
-          <div className="container mx-auto">
-            <div className="relative flex justify-center">
-              <div className="flex w-full max-w-[1280px] flex-col xl:flex-row xl:gap-8">
-                {/* Left sidebar - Table of Contents */}
-                <aside className="hidden w-[240px] shrink-0 xl:block">
-                  <div className="sticky top-[calc(var(--header-height)+4rem)] max-h-[calc(100vh-var(--header-height)-8rem)] overflow-y-auto">
-                    <TableOfContents toc={post.toc} />
-                  </div>
-                </aside>
+      <div className="relative flex min-h-full w-full flex-col bg-background">
+        {/* Background elements */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-1/4 top-40 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
+          <div className="absolute bottom-40 right-1/4 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
+        </div>
 
-                {/* Center content */}
-                <main className="w-full min-w-0 px-4 sm:px-6 xl:max-w-[800px] xl:px-0">
-                  <div className="animate-fade-in-up animation-delay-0 opacity-0">
-                    <PostNavigation className="mb-8" />
-                  </div>
-
-                  <article className="animate-fade-in-up animation-delay-100 opacity-0">
-                    <div className="flex flex-col space-y-8">
-                      <PostHeader
-                        title={post.title}
-                        date={post.date}
-                        tags={post.tags}
-                        readingTime={post.metadata.readingTime}
-                      />
-
-                      <Separator className="h-px bg-primary/10" />
-
-                      <div className="prose prose-lg max-w-none dark:prose-invert">
-                        <MDXContent code={post.body} />
-                      </div>
-
-                      <Separator className="h-px bg-primary/10" />
+        <div className="relative flex-1">
+          <div className="py-8 lg:py-12">
+            <div className="container mx-auto">
+              <div className="relative flex justify-center">
+                <div className="flex w-full max-w-[1280px] flex-col xl:flex-row xl:gap-8">
+                  {/* Left sidebar - Table of Contents */}
+                  <aside className="hidden w-[240px] shrink-0 xl:block">
+                    <div className="sticky top-[calc(var(--header-height)+4rem)] max-h-[calc(100vh-var(--header-height)-8rem)] overflow-y-auto">
+                      <TableOfContents toc={post.toc} />
                     </div>
-                  </article>
-                </main>
-              </div>
-            </div>
+                  </aside>
 
-            {/* Mobile Table of Contents */}
-            <div className="mt-8 xl:hidden">
-              <TableOfContents toc={post.toc} />
+                  {/* Center content */}
+                  <main className="w-full min-w-0 px-4 sm:px-6 xl:max-w-[800px] xl:px-0">
+                    <div className="animate-fade-in-up animation-delay-0 opacity-0">
+                      <PostNavigation className="mb-8" />
+                    </div>
+
+                    <article className="animate-fade-in-up animation-delay-100 opacity-0">
+                      <div className="flex flex-col space-y-8">
+                        <PostHeader
+                          title={post.title}
+                          date={post.date}
+                          tags={post.tags}
+                          readingTime={post.metadata.readingTime}
+                        />
+
+                        <Separator className="h-px bg-primary/10" />
+
+                        <div className="prose prose-lg max-w-none dark:prose-invert">
+                          <MDXContent code={post.body} />
+                        </div>
+
+                        <Separator className="h-px bg-primary/10" />
+                      </div>
+                    </article>
+                  </main>
+                </div>
+              </div>
+
+              {/* Mobile Table of Contents */}
+              <div className="mt-8 xl:hidden">
+                <TableOfContents toc={post.toc} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <PostFooter title={post.title} slug={post.slugAsParams} />
-    </div>
+        <PostFooter title={post.title} slug={post.slugAsParams} />
+      </div>
+    </>
   );
 };
 

@@ -151,7 +151,7 @@ export const setupCategories: SetupCategory[] = [
       {
         name: 'Beyerdynamic DT 770 Pro',
         description: 'Closed-back studio headphones',
-        link: 'https://www.beyerdynamic.com/dt-770-pro.html',
+        link: 'https://global.beyerdynamic.com/p/dt-770-pro',
         features: [
           'Accurate monitoring for mixing',
           'Excellent isolation from ambient noise',
@@ -191,7 +191,7 @@ export const setupCategories: SetupCategory[] = [
       {
         name: 'Tamron 28-75mm f/2.8',
         description: 'Versatile standard zoom lens',
-        link: 'https://www.tamron-usa.com/product/lenses/a036.html',
+        link: 'https://tamron-americas.com/product/28-75mm-f-2-8-di-iii-vxd-g2/',
         features: [
           'Perfect all-around focal range',
           'Fast f/2.8 aperture throughout zoom',
@@ -213,7 +213,7 @@ export const setupCategories: SetupCategory[] = [
       {
         name: 'Ulanzi Zero F38 Tripod',
         description: 'Portable carbon fiber tripod',
-        link: 'https://www.ulanzi.com/products/ulanzi-zero-f38-quick-release-tripod',
+        link: 'https://www.ulanzi.com/products/ulanzi-f38-quick-release-travel-tripod-3131',
         features: [
           'Lightweight carbon fiber construction',
           'Quick-release plate for fast mounting',

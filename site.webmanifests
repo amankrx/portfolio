@@ -1,0 +1,9 @@
+{
+  "name": "Aman Kumar Portfolio",
+  "short_name": "Aman Kumar",
+  "description": "Software Developer Portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#141414",
+  "theme_color": "#ffffff"
+}

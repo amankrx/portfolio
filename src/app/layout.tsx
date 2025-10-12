@@ -28,7 +28,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.first_name}'s Portfolio`,
+    default: `${siteConfig.name} - Software Engineer & Backend Developer`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -36,8 +36,9 @@ export const metadata: Metadata = {
   keywords: [
     'Aman Kumar',
     'Software Engineer',
+    'Backend Developer',
     'Rust Developer',
-    'Backend Engineer',
+    'Distributed Systems Engineer',
     'System Design',
     'Full Stack Developer',
     'Software Architecture',
@@ -46,6 +47,16 @@ export const metadata: Metadata = {
     'Cloud Architecture',
     'API Design',
     'Microservices',
+    'NativeLink',
+    'Remote Build Execution',
+    'Bazel',
+    'Kubernetes',
+    'DevOps',
+    'Systems Programming',
+    'Low-Level Engineering',
+    'Cloud Infrastructure',
+    'Python Developer',
+    'Open Source Contributor',
   ],
   authors: [
     {
@@ -63,6 +74,7 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -75,32 +87,88 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteConfig.url,
-    title: `${siteConfig.first_name}'s Portfolio`,
+    title: `${siteConfig.name} - Software Engineer & Backend Developer`,
     description: siteConfig.description,
-    siteName: `${siteConfig.first_name}'s Portfolio`,
+    siteName: `${siteConfig.name}'s Portfolio`,
     images: [
       {
         url: '/api/og',
         width: 1200,
         height: 630,
-        alt: 'Aman Kumar - Software Engineer',
+        alt: `${siteConfig.name} - Software Engineer specializing in Rust, Distributed Systems, and Backend Development`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.first_name}'s Portfolio`,
+    title: `${siteConfig.name} - Software Engineer & Backend Developer`,
     description: siteConfig.description,
     creator: '@amankrx',
+    site: '@amankrx',
     images: ['/api/og'],
   },
   alternates: {
     canonical: siteConfig.url,
     types: {
-      'application/rss+xml': '/rss.xml',
+      'application/rss+xml': `${siteConfig.url}/rss.xml`,
     },
   },
   manifest: '/site.webmanifest',
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
+  category: 'technology',
+};
+
+// JSON-LD structured data
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: siteConfig.name,
+  url: siteConfig.url,
+  image: `${siteConfig.url}/api/og`,
+  jobTitle: 'Backend Developer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'NativeLink',
+  },
+  alumniOf: {
+    '@type': 'EducationalOrganization',
+    name: 'IIIT Nagpur',
+  },
+  sameAs: [
+    siteConfig.author.github,
+    siteConfig.author.linkedin,
+    siteConfig.author.x,
+  ],
+  knowsAbout: [
+    'Rust Programming',
+    'Backend Development',
+    'Distributed Systems',
+    'Cloud Infrastructure',
+    'Kubernetes',
+    'Bazel',
+    'Remote Build Execution',
+    'Systems Programming',
+  ],
+  email: siteConfig.author.email,
+};
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: `${siteConfig.name}'s Portfolio`,
+  url: siteConfig.url,
+  description: siteConfig.description,
+  author: {
+    '@type': 'Person',
+    name: siteConfig.name,
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${siteConfig.url}/blog?search={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
 };
 
 export default function RootLayout({
@@ -116,6 +184,17 @@ export default function RootLayout({
           type="application/rss+xml"
           title={`RSS Feed for ${siteConfig.name}`}
           href="/rss.xml"
+        />
+        <link rel="canonical" href={siteConfig.url} />
+
+        {/* JSON-LD structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body
@@ -133,12 +212,7 @@ export default function RootLayout({
             id="main-content"
           >
             <Navbar />
-            <main
-              className="flex-1"
-              // Add semantic attributes
-              role="main"
-              aria-label="Main page content"
-            >
+            <main className="flex-1" role="main" aria-label="Main page content">
               <Script
                 src="https://www.googletagmanager.com/gtag/js?id=G-FGDYH5SZJW"
                 strategy="afterInteractive"
