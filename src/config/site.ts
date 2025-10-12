@@ -1,6 +1,7 @@
 // src/config/site.ts
 import { FaGithub, FaLinkedin, FaRss } from 'react-icons/fa';
 import { FaDownload, FaXTwitter } from 'react-icons/fa6';
+import { SiBuymeacoffee } from 'react-icons/si';
 import { MdComputer } from 'react-icons/md';
 import { IoMdArrowForward, IoMdMail } from 'react-icons/io';
 import { IconType } from 'react-icons';
@@ -41,6 +42,11 @@ export const siteConfig = {
       url: 'https://linkedin.com/in/amankrx',
       label: 'LinkedIn',
       icon: FaLinkedin,
+    },
+    buymeacoffee: {
+      url: 'https://buymeacoffee.com/amankrx',
+      label: 'Buy me a coffee',
+      icon: SiBuymeacoffee,
     },
     email: {
       url: 'mailto:aman@amankrx.com',

@@ -77,7 +77,7 @@ export default function HomePage() {
 
         <div className="animate-fade-in-up animation-delay-0 space-y-6 opacity-0">
           <div className="inline-block rounded-full border border-primary/20 bg-gradient-to-r from-primary/10 to-primary/5 px-4 py-2 text-sm font-medium backdrop-blur-sm">
-            ✨ Building the future, one commit at a time
+            ✨ Building systems that scale, perform, and endure
           </div>
           <h1 className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl">
             Hi, I&#39;m{' '}
@@ -86,8 +86,8 @@ export default function HomePage() {
             </span>
           </h1>
           <p className="mx-auto max-w-[700px] text-xl text-muted-foreground sm:text-2xl">
-            DevOps Engineer & Software Developer specializing in distributed
-            systems, Rust, and cloud infrastructure
+            Software Engineer specializing in distributed systems, Rust, and
+            cloud infrastructure.
           </p>
         </div>
 
@@ -132,8 +132,7 @@ export default function HomePage() {
             Featured Projects
           </h2>
           <p className="mx-auto max-w-[600px] text-lg text-muted-foreground">
-            Check out some of my recent work in distributed systems and cloud
-            infrastructure
+            A glimpse into what I’ve been building lately
           </p>
         </div>
 
@@ -191,7 +190,7 @@ export default function HomePage() {
             Latest Posts
           </h2>
           <p className="mx-auto max-w-[600px] text-lg text-muted-foreground">
-            Thoughts on software engineering, DevOps, and technology
+            Notes and reflections from my journey in software engineering
           </p>
         </div>
 
